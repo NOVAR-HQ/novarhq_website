@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
+/* Global Theme Variables */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --box-bg: #0b4a6f; /* Lighter blue for better contrast */
+
+  /* Novar Theme Colors */
+  --novar-blue: #055075; /* Main background color */
+  --novar-blue-light: #03405f; /* Slightly lighter blue for boxes */
+  --novar-yellow: #ffc30e; /* Brand yellow */
+  --navbar-bg: #021f30; /* Navbar color */
 }
 
 @theme inline {
@@ -12,6 +20,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,16 +28,37 @@
   }
 }
 
+/* Apply Global Background and Text Colors */
 body {
-  background-color: #03405f; /* Novar Blue */
+  background-color: var(--novar-blue); /* Novar Blue */
   color: white;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-:root {
-  --novar-yellow: #ffc30e; /* Setter standard gul */
+/* Navbar Styling */
+nav {
+  background-color: var(--navbar-bg); /* Independent navbar color */
+  color: inherit;
+  padding: 4px 12px; /* Reduce padding for a thinner navbar */
+  height: 45px; /* Thinner navbar */
 }
 
+/* Footer Styling */
+footer {
+  background-color: inherit;
+  color: inherit;
+  padding: 12px 16px;
+}
+
+/* Apply Lighter Blue to All Boxes */
+.box {
+  background-color: var(--novar-blue-light);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Brand Yellow Styling */
 .text-yellow-500 {
   color: var(--novar-yellow) !important;
 }
@@ -44,4 +74,3 @@ body {
 .hover\:bg-yellow-500:hover {
   background-color: var(--novar-yellow) !important;
 }
-

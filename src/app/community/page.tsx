@@ -7,9 +7,9 @@ export default function CommunityPage() {
   const [projects] = useState([
     { 
       id: 1, 
-      title: "The Last Hope| A The Last of Us inspired short film", 
+      title: "The Last Hope | A The Last of Us Inspired Short Film", 
       creator: "Yousef Mirza", 
-      description: "An original short film based on the hit game series The Last of Us. Written by Yousef Mirza, Produced by Yousef Mirza and GFF. Made by fans, for fans", 
+      description: "An original short film based on the hit game series The Last of Us. Written by Yousef Mirza, Produced by Yousef Mirza and GFF. Made by fans, for fans.", 
       image: "/projecttlh1.jpg",
       link: "https://www.youtube.com/watch?v=H1lN3PLcokQ"
     },
@@ -24,7 +24,8 @@ export default function CommunityPage() {
   ]);
 
   return (
-    <div className="min-h-screen py-20 px-6">      <div className="max-w-4xl mx-auto text-center">
+    <div className="min-h-screen py-20 px-6">
+      <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6">Novar Community</h1>
         <p className="text-lg text-gray-300">
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
@@ -48,7 +49,7 @@ export default function CommunityPage() {
         <h2 className="text-4xl font-semibold mb-6 text-center">Your Featured Projects:</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <div key={project.id} className="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div key={project.id} className="box">
               <a href={project.link} target="_blank" rel="noopener noreferrer">
                 <Image 
                   src={project.image} 

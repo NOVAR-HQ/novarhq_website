@@ -29,7 +29,8 @@ export default function PortfolioPage() {
   ]);
 
   return (
-    <div className="min-h-screen py-20 px-6">      <div className="max-w-5xl mx-auto text-center">
+    <div className="min-h-screen py-20 px-6">
+      <div className="max-w-5xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6">Portfolio</h1>
         <p className="text-lg text-gray-300">
           Explore our projects across cosplay, filmmaking, 3D printing, and more.
@@ -39,7 +40,7 @@ export default function PortfolioPage() {
       {/* Portfolio Projects */}
       <div className="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
-          <div key={project.id} className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div key={project.id} className="box">
             <a href={project.link} target="_blank" rel="noopener noreferrer">
               <Image 
                 src={project.image} 
