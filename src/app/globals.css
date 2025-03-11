@@ -95,7 +95,7 @@ footer {
 }
 
 /* Headings - Apply Novar Yellow */
-h1, h3 {
+h1 {
   color: var(--novar-yellow);
   font-family: var(--font-primary);
 }
