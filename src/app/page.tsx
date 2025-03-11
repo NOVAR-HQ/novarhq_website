@@ -1,11 +1,32 @@
+import { FaInstagram, FaYoutube, FaTiktok, FaFacebook, FaLinkedin } from "react-icons/fa";
+
 export default function Home() {
   return (
     <div className="bg-gray-900 text-white">
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center">
         <img src="/novar-icon.png" alt="Novar Icon" className="w-24 h-24 mb-4" />
-        <h1 className="text-5xl font-bold">NOVAR</h1>
+        <h1 className="text-5xl font-bold">Novar HQ</h1>
         <p className="text-2xl mt-4">Technology meets creativity</p>
+
+        {/* Sosiale medier ikoner */}
+        <div className="mt-6 flex space-x-6">
+          <a href="https://instagram.com/novarhq" target="_blank" rel="noopener noreferrer">
+            <FaInstagram className="text-white hover:text-yellow-500 text-3xl" />
+          </a>
+          <a href="https://youtube.com/novarhq" target="_blank" rel="noopener noreferrer">
+            <FaYoutube className="text-white hover:text-yellow-500 text-3xl" />
+          </a>
+          <a href="https://tiktok.com/@novarhq" target="_blank" rel="noopener noreferrer">
+            <FaTiktok className="text-white hover:text-yellow-500 text-3xl" />
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61572770470991" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="text-white hover:text-yellow-500 text-3xl" />
+          </a>
+          <a href="https://www.linkedin.com/company/novar-hq" target="_blank" rel="noopener noreferrer">
+            <FaLinkedin className="text-white hover:text-yellow-500 text-3xl" />
+          </a>
+        </div>
       </section>
 
       {/* About Section */}
