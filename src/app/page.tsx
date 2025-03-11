@@ -14,7 +14,7 @@ export default function Home() {
           <a href="https://instagram.com/novarhq" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="text-white hover:text-yellow-500 text-3xl" />
           </a>
-          <a href="https://youtube.com/novarhq" target="_blank" rel="noopener noreferrer">
+          <a href="https://youtube.com/@novarhq" target="_blank" rel="noopener noreferrer">
             <FaYoutube className="text-white hover:text-yellow-500 text-3xl" />
           </a>
           <a href="https://tiktok.com/@novarhq" target="_blank" rel="noopener noreferrer">
@@ -59,7 +59,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h2 className="text-4xl font-semibold">Join the Community</h2>
         <p className="mt-4 max-w-3xl mx-auto">Share your projects and connect with other creators.</p>
-        <a href="/community" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-400 px-6 py-3 text-lg rounded-lg text-white font-bold">
+        <a href="/community" className="mt-6 inline-block bg-yellow-500 hover:bg-red-400 px-6 py-3 text-lg rounded-lg text-white font-bold">
           Join Now
         </a>
       </section>
