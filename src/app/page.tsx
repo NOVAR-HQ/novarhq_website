@@ -6,8 +6,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center">
         <img src="/novar-icon.png" alt="Novar Icon" className="w-24 h-24 mb-4" />
-        <h1 className="text-5xl font-bold">Novar HQ</h1>
-        <p className="text-2xl mt-4">Technology meets creativity</p>
+        <h1 className="text-5xl font-bold">Novar</h1>
+        <p className="text-2xl mt-4"> Creativity meets technology</p>
 
         {/* Sosiale medier ikoner */}
         <div className="mt-6 flex space-x-6">
@@ -35,12 +35,16 @@ export default function Home() {
         <p className="mt-4 max-w-3xl mx-auto">
           Novar blends art and technology to create groundbreaking projects. We inspire young creators and innovate across industries.
         </p>
+        <a href="/about" className="mt-6 inline-block bg-[var(--novar-yellow)] hover:brightness-110 px-6 py-3 text-lg rounded-lg text-white font-bold">
+          Learn More
+        </a>
       </section>
 
       {/* Portfolio Preview */}
       <section className="py-20 px-6 text-center">
         <h2 className="text-4xl font-semibold">Portfolio</h2>
-        <p className="mt-4 max-w-3xl mx-auto">Explore our past, present, and future projects.</p>
+        <p className="mt-4 max-w-3xl mx-auto">
+          Explore our past, present, and future projects.</p>
         <a href="/portfolio" className="mt-6 inline-block bg-[var(--novar-yellow)] hover:brightness-110 px-6 py-3 text-lg rounded-lg text-white font-bold">
           View More
         </a>
