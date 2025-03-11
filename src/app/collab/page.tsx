@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function CollabPage() {
   const [formType, setFormType] = useState("collaboration");
+  const [commissionType, setCommissionType] = useState("Advertisement"); // Default verdi
 
   return (
     <div className="bg-gray-900 text-white min-h-screen py-20 px-6">
@@ -65,12 +66,16 @@ export default function CollabPage() {
             <input type="email" className="w-full p-2 rounded-md bg-gray-700 text-white mb-4" placeholder="Enter your email" />
             
             <label className="block mb-2 text-lg">Type of Commission</label>
-            <select className="w-full p-2 rounded-md bg-gray-700 text-white mb-4">
-              <option>Advertisement</option>
-              <option>Photoshoot</option>
-              <option>Short Film</option>
-              <option>3D Printing</option>
-              <option>Prop Making</option>
+            <select 
+              className="w-full p-2 rounded-md bg-gray-700 text-white mb-4"
+              value={commissionType} 
+              onChange={(e) => setCommissionType(e.target.value)}
+            >
+              <option value="Advertisement">Advertisement</option>
+              <option value="Photoshoot">Photoshoot</option>
+              <option value="Short Film">Short Film</option>
+              <option value="3D Printing">3D Printing</option>
+              <option value="Prop Making">Prop Making</option>
             </select>
             
             <label className="block mb-2 text-lg">Details</label>
