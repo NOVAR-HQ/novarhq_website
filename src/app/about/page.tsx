@@ -11,14 +11,14 @@ export default function AboutPage() {
           What started as creating costumes evolved into finding ways to enhance them with technology and showcase them through film, ultimately leading me to create Novar—a space where creativity has no limits.
         </p>
 
-        <p className="text-lg text-secondary text-justify mt-4">
+        <p className="text-lg text-secondary text-center mt-4">
           Novar is more than just a brand; it&apos;s a vision. Novar is a place where dreamers come together to push the boundaries of what is possible. 
           Whether it&apos;s a 3D-printed gadget, a new pair of jeans, or even a robot, Novar is about pushing creative and technological boundaries to make ambitious ideas a reality. 
           At its core, Novar is about innovation, collaboration, and education. It&apos;s a platform for innovation, a hub for learning, and a community where people with ideas can bring them to life. 
           I want Novar to be the space I wished I had growing up—a place that encourages experimentation, embraces failure, and celebrates creation.
         </p>
 
-        <p className="text-lg text-secondary text-justify mt-4">
+        <p className="text-lg text-secondary text-center mt-4">
           Join me as we build a future where creativity and technology fuel each other, shaping new possibilities with every project.
         </p>
       </div>
