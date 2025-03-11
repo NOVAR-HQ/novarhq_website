@@ -37,8 +37,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h2 className="text-4xl font-semibold">About Novar</h2>
         <p className="mt-4 max-w-3xl mx-auto">
-          Novar blends art and technology to create groundbreaking projects. We inspire young creators and innovate across industries.
-        </p>
+        Novar is a place where dreamers come together to push the boundaries of what is possible.         </p>
         <a href="/about" className="mt-6 inline-block bg-[var(--novar-yellow)] hover:brightness-110 px-6 py-3 text-lg rounded-lg text-white font-bold">
           Learn More
         </a>
