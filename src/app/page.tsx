@@ -20,7 +20,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h2 className="text-4xl font-semibold">Portfolio</h2>
         <p className="mt-4 max-w-3xl mx-auto">Explore our past, present, and future projects.</p>
-        <a href="/portfolio" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-600 px-6 py-3 text-lg rounded-lg text-white font-bold">
+        <a href="/portfolio" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-400 px-6 py-3 text-lg rounded-lg text-white font-bold">
           View More
         </a>
       </section>
@@ -29,7 +29,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h2 className="text-4xl font-semibold">Collab & Mentoring</h2>
         <p className="mt-4 max-w-3xl mx-auto">Want to work with us or learn from our experience? Let’s create together!</p>
-        <a href="/collab" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-600 px-6 py-3 text-lg rounded-lg text-white font-bold">
+        <a href="/collab" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-400 px-6 py-3 text-lg rounded-lg text-white font-bold">
           Get Involved
         </a>
       </section>
@@ -38,7 +38,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h2 className="text-4xl font-semibold">Join the Community</h2>
         <p className="mt-4 max-w-3xl mx-auto">Share your projects and connect with other creators.</p>
-        <a href="/community" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-600 px-6 py-3 text-lg rounded-lg text-white font-bold">
+        <a href="/community" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-400 px-6 py-3 text-lg rounded-lg text-white font-bold">
           Join Now
         </a>
       </section>
@@ -47,7 +47,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h2 className="text-4xl font-semibold">Contact Us</h2>
         <p className="mt-4 max-w-3xl mx-auto">Have questions or ideas? Let’s talk!</p>
-        <a href="mailto:contact@novarhq.com" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-600 px-6 py-3 text-lg rounded-lg text-white font-bold">
+        <a href="mailto:contact@novarhq.com" className="mt-6 inline-block bg-yellow-500 hover:bg-yellow-400 px-6 py-3 text-lg rounded-lg text-white font-bold">
           Email Us
         </a>
       </section>
