@@ -4,8 +4,22 @@ import { useState } from "react";
 export default function CommunityPage() {
   // Midlertidig state for prosjekter
   const [projects, setProjects] = useState([
-    { id: 1, title: "Spider-Man suit", creator: "Yousef Mirza", description: "A photorealistic version of Spider-man's costume created from scratch.", image: "/projectspidey1.jpg" },
-    { id: 2, title: "Katroa- A Star Wars Fan Film", creator: "Sam Kesch and Yousef Mirza", description: "A collaboration between actors, cosplayers and Star Wars fans.", image: "/projectkatroa1.jpg" }
+    { 
+      id: 1, 
+      title: "Spider-Man suit", 
+      creator: "Yousef Mirza", 
+      description: "A photorealistic version of Spider-man's costume created from scratch.", 
+      image: "/projectspidey1.jpg",
+      link: "https://www.instagram.com/p/your-spiderman-post/"
+    },
+    { 
+      id: 2, 
+      title: "Katroa - A Star Wars Fan Film", 
+      creator: "Sam Kesch and Yousef Mirza", 
+      description: "A collaboration between actors, cosplayers and Star Wars fans.", 
+      image: "/projectkatroa1.jpg",
+      link: "https://www.youtube.com/watch?v=your-katroa-video"
+    }
   ]);
 
   return (
@@ -13,7 +27,7 @@ export default function CommunityPage() {
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6">Novar Community</h1>
         <p className="text-lg text-gray-300">
-          Join our community to share your projects, collaborate, inspire others and get inspired by others!
+          Join our community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
 
         {/* Discord Link */}
@@ -35,7 +49,9 @@ export default function CommunityPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <div key={project.id} className="bg-gray-800 p-6 rounded-lg shadow-lg">
-              <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-lg mb-4" />
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-lg mb-4 hover:opacity-80 transition-opacity" />
+              </a>
               <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
               <p className="text-gray-300">By {project.creator}</p>
               <p className="mt-2">{project.description}</p>
