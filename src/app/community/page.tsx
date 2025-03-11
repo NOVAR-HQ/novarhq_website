@@ -26,27 +26,28 @@ export default function CommunityPage() {
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-5xl font-bold mb-6">Novar Community</h1>
+        <h1 className="text-5xl font-bold mb-6 text-[var(--novar-yellow)]">Novar Community</h1>
         <p className="text-lg text-secondary">
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
 
-        {/* Discord Link */}
-        <div className="mt-6">
-          <a 
+        {/* Discord Link - Now Styled with Discord Blue */}
+        <div className="mt-6 flex justify-center">
+        <a 
             href="https://discord.gg/gGufQ9p7Ak"
             target="_blank" 
             rel="noopener noreferrer"
-            className="bg-accent hover:brightness-110 px-6 py-3 rounded-lg text-primary font-bold"
-          >
-            Join Our Discord
-          </a>
+            className="bg-[var(--discord-blue)] hover:brightness-110 px-4 py-2 rounded-lg text-white font-bold flex items-center space-x-2 w-fit">
+            <Image src="/discord-icon.png" alt="Discord" width={20} height={20} />
+            <span>Join Our Discord</span>
+        </a>
         </div>
+
       </div>
 
       {/* Project Section */}
       <div className="mt-16 max-w-5xl mx-auto">
-        <h2 className="text-4xl font-semibold mb-6 text-center">Your Featured Projects</h2>
+        <h2 className="text-4xl font-semibold mb-6 text-center text-[var(--novar-yellow)]">Your Featured Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <div key={project.id} className="box">

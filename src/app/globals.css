@@ -5,9 +5,11 @@
   --background: #ffffff;
   --foreground: #171717;
   --box-bg: #0b4a6f; /* Lighter blue for better contrast */
+  --discord-blue: #5865F2; /* Official Discord Color */
+
 
   /* Novar Theme Colors */
-  --novar-blue: #055075; /* Main background color */
+  --novar-blue: #163f57; /* Main background color */
   --novar-blue-light: #03405f; /* Slightly lighter blue for boxes */
   --novar-yellow: #ffc30e; /* Brand yellow */
   --navbar-bg: #021f30; /* Navbar color */
@@ -15,13 +17,16 @@
   /* Input & Button Colors */
   --input-bg: #022c43; /* Dark Blue Input Fields */
   --button-inactive: #021d30; /* Darker Inactive Button */
+
+  /* Font Family */
+  --font-primary: "Bahnschrift Light", "DIN", "Rajdhani", "Titillium Web", sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-primary);
 }
 
 /* Dark Mode */
@@ -32,11 +37,11 @@
   }
 }
 
-/* Apply Global Background and Text Colors */
+/* Apply Global Background, Text Colors, and Font */
 body {
-  background-color: var(--novar-blue); /* Novar Blue */
+  background-color: var(--novar-blue);
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary);
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Ensures full height */
@@ -49,29 +54,32 @@ main {
 
 /* Navbar Styling */
 nav {
-  background-color: var(--navbar-bg); /* Independent navbar color */
+  background-color: var(--navbar-bg);
   color: inherit;
-  padding: 4px 12px; /* Reduce padding for a thinner navbar */
+  padding: 4px 12px;
   height: 45px; /* Thinner navbar */
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 100;
+  font-family: var(--font-primary);
 }
 
-/* Footer Styling */
+/* Footer Styling - Now Same as Background */
 footer {
-  background-color: inherit;
+  background-color: var(--novar-blue); /* Matches page background */
   color: inherit;
   padding: 12px 16px;
   width: 100%;
   text-align: center;
   margin-top: auto; /* Ensures footer stays at bottom */
+  font-family: var(--font-primary);
 }
 
 /* Headings - Apply Novar Yellow */
 h1, h2, h3 {
   color: var(--novar-yellow);
+  font-family: var(--font-primary);
 }
 
 /* Input Field Styling */
@@ -92,6 +100,7 @@ h1, h2, h3 {
   border-radius: 6px;
   font-weight: bold;
   transition: 0.3s ease-in-out;
+  font-family: var(--font-primary);
 }
 
 .btn-primary:hover {
@@ -105,6 +114,7 @@ h1, h2, h3 {
   border-radius: 6px;
   font-weight: bold;
   transition: 0.3s ease-in-out;
+  font-family: var(--font-primary);
 }
 
 .btn-inactive:hover {
@@ -117,6 +127,7 @@ h1, h2, h3 {
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: var(--font-primary);
 }
 
 /* Brand Yellow Styling */
