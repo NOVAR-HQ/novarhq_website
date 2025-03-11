@@ -15,11 +15,11 @@ export default function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-6">
-        <Link href="/" className="text-white hover:text-yellow-500">Home</Link>
-        <Link href="/portfolio" className="text-white hover:text-yellow-500">Portfolio</Link>
-        <Link href="/collab" className="text-white hover:text-yellow-500">Collab & Commission</Link>
-        <Link href="/about" className="text-white hover:text-yellow-500">About</Link>
-        <Link href="/community" className="text-white hover:text-yellow-500">Community</Link>
+        <Link href="/" className="text-white hover:text-[var(--novar-yellow)]">Home</Link>
+        <Link href="/portfolio" className="text-white hover:text-[var(--novar-yellow)]">Portfolio</Link>
+        <Link href="/collab" className="text-white hover:text-[var(--novar-yellow)]">Collab & Commission</Link>
+        <Link href="/about" className="text-white hover:text-[var(--novar-yellow)]">About</Link>
+        <Link href="/community" className="text-white hover:text-[var(--novar-yellow)]">Community</Link>
       </div>
 
       {/* Mobile Menu Button */}
@@ -29,11 +29,11 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-gray-700 p-4 shadow-md">
-          <Link href="/" className="block py-2 text-white hover:text-yellow-500" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link href="/portfolio" className="block py-2 text-white hover:text-yellow-500" onClick={() => setIsOpen(false)}>Portfolio</Link>
-          <Link href="/collab" className="block py-2 text-white hover:text-yellow-500" onClick={() => setIsOpen(false)}>Collab & Commission</Link>
-          <Link href="/about" className="block py-2 text-white hover:text-yellow-500" onClick={() => setIsOpen(false)}>About</Link>
-          <Link href="/community" className="block py-2 text-white hover:text-yellow-500" onClick={() => setIsOpen(false)}>Community</Link>
+          <Link href="/" className="block py-2 text-white hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link href="/portfolio" className="block py-2 text-white hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>Portfolio</Link>
+          <Link href="/collab" className="block py-2 text-white hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>Collab & Commission</Link>
+          <Link href="/about" className="block py-2 text-white hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>About</Link>
+          <Link href="/community" className="block py-2 text-white hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>Community</Link>
         </div>
       )}
     </nav>
