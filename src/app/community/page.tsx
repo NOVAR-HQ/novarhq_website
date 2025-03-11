@@ -9,7 +9,7 @@ export default function CommunityPage() {
       id: 1, 
       title: "Spider-Man suit", 
       creator: "Yousef Mirza", 
-      description: "A photorealistic version of Spider-man's costume created from scratch.", 
+      description: "A photorealistic Spider-Man costume created from scratch.", 
       image: "/projectspidey1.jpg",
       link: "https://www.instagram.com/p/C38WfTTL7UA/"
     },
