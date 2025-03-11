@@ -2,8 +2,7 @@ import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <div className="bg-gray-900 text-white min-h-screen py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen py-20 px-6">      <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl font-bold text-center mb-6">About Novar</h1>
         <p className="text-lg text-gray-300">
         Hi, I&apos;m Yousef, the founder of Novar. Ever since I was a kid, I&apos;ve been passionate about creating—whether it was drawing, origami, building props, or making short films. 

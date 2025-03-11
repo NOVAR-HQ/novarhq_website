@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="bg-gray-900 text-white">
-      {/* Hero Section */}
+<div className="bg-[#03405f] text-white">
+{/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center">
       <Image src="/novar-icon.png" alt="Novar Icon" width={96} height={96} className="mb-4" />
       <h1 className="text-5xl font-bold">Novar</h1>

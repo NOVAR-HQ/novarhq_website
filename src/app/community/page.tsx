@@ -24,8 +24,7 @@ export default function CommunityPage() {
   ]);
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen py-20 px-6">
-      <div className="max-w-4xl mx-auto text-center">
+    <div className="min-h-screen py-20 px-6">      <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6">Novar Community</h1>
         <p className="text-lg text-gray-300">
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
