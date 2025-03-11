@@ -1,24 +1,25 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function CommunityPage() {
-  // Midlertidig state for prosjekter
-  const [projects, setProjects] = useState([
+  // Prosjekt-data
+  const [projects] = useState([
     { 
       id: 1, 
       title: "Spider-Man suit", 
       creator: "Yousef Mirza", 
       description: "A photorealistic version of Spider-man's costume created from scratch.", 
       image: "/projectspidey1.jpg",
-      link: "https://www.instagram.com/p/your-spiderman-post/"
+      link: "https://www.instagram.com/p/C38WfTTL7UA/"
     },
     { 
       id: 2, 
       title: "Katroa - A Star Wars Fan Film", 
       creator: "Sam Kesch and Yousef Mirza", 
-      description: "A collaboration between actors, cosplayers and Star Wars fans.", 
+      description: "A collaboration between actors, cosplayers, and Star Wars fans.", 
       image: "/projectkatroa1.jpg",
-      link: "https://www.youtube.com/watch?v=your-katroa-video"
+      link: "https://www.youtube.com/watch?v=yOVVl54MuhM"
     }
   ]);
 
@@ -50,7 +51,13 @@ export default function CommunityPage() {
           {projects.map((project) => (
             <div key={project.id} className="bg-gray-800 p-6 rounded-lg shadow-lg">
               <a href={project.link} target="_blank" rel="noopener noreferrer">
-                <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-lg mb-4 hover:opacity-80 transition-opacity" />
+                <Image 
+                  src={project.image} 
+                  alt={project.title} 
+                  width={600} 
+                  height={400} 
+                  className="w-full h-48 object-cover rounded-lg mb-4 hover:opacity-80 transition-opacity"
+                />
               </a>
               <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
               <p className="text-gray-300">By {project.creator}</p>
