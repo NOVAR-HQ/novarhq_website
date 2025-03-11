@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-800 px-4 py-2 fixed w-full top-0 shadow-md z-50 flex justify-between items-center">
+    <nav className="bg-gray-800 px-4 py-0 fixed w-full top-0 shadow-md z-50 flex justify-between items-center">
       {/* Novar Banner */}
       <Link href="/">
         <Image src="/novar-banner.png" alt="Novar Banner" width={120} height={40} priority />
