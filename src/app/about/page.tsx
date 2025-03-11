@@ -7,14 +7,14 @@ export default function AboutPage() {
         <h1 className="text-5xl font-bold text-center mb-6">About Novar</h1>
         <p className="text-lg text-gray-300">
         Hi, I'm Yousef, the founder of Novar. Ever since I was a kid, I've been passionate about creating—whether it was drawing, origami, building props, or making short films. 
-        What started as a personal hobby evolved into something much bigger. I’ve always believed that art and technology go hand in hand, and over the years, I’ve explored the balance between storytelling, craftsmanship, and innovation. 
+        What started as a personal hobby evolved into something much bigger. I have always believed that art and technology go hand in hand, and over the years, I have explored the balance between storytelling, craftsmanship, and innovation. 
         What started as creating costumes evolved into finding ways to enhance them with technology and showcase them through film, ultimately leading me to create Novar—a space where creativity has no limits.. 
         </p>
 
         <p className="text-lg text-gray-300 mt-4">
-        Novar is more than just a brand; it's a vision. It’s a place where dreamers come together to push the boundaries of what’s possible. 
-        Whether it's a 3D-printed gadget, a new pair of jeans, or even a robot, Novar is about pushing creative and technological boundaries to make ambitious ideas a reality. 
-        At its core, Novar is about innovation, collaboration, and education. It’s a platform for innovation, a hub for learning, and a community where people with ideas can bring them to life. 
+        Novar is more than just a brand; it&apos;s a vision. Novar is a place where dreamers come together to push the boundaries of what is possible. 
+        Whether it&apos;s a 3D-printed gadget, a new pair of jeans, or even a robot, Novar is about pushing creative and technological boundaries to make ambitious ideas a reality. 
+        At its core, Novar is about innovation, collaboration, and education. It&apos;s a platform for innovation, a hub for learning, and a community where people with ideas can bring them to life. 
         I want Novar to be the space I wished I had growing up—a place that encourages experimentation, embraces failure, and celebrates creation. 
         </p>
 

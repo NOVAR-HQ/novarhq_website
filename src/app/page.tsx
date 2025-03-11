@@ -1,12 +1,13 @@
-import { FaInstagram, FaYoutube, FaTiktok, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaTiktok, FaFacebook, FaLinkedin, FaDiscord } from "react-icons/fa";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="bg-gray-900 text-white">
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center">
-        <img src="/novar-icon.png" alt="Novar Icon" className="w-24 h-24 mb-4" />
-        <h1 className="text-5xl font-bold">Novar</h1>
+      <Image src="/novar-icon.png" alt="Novar Icon" width={96} height={96} className="mb-4" />
+      <h1 className="text-5xl font-bold">Novar</h1>
         <p className="text-2xl mt-4"> Creativity meets technology</p>
 
         {/* Sosiale medier ikoner */}
@@ -19,6 +20,9 @@ export default function Home() {
           </a>
           <a href="https://tiktok.com/@novarhq" target="_blank" rel="noopener noreferrer">
             <FaTiktok className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
+          </a>
+          <a href="https://discord.gg/gGufQ9p7Ak" target="_blank" rel="noopener noreferrer">
+            <FaDiscord className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
           </a>
           <a href="https://www.facebook.com/profile.php?id=61572770470991" target="_blank" rel="noopener noreferrer">
             <FaFacebook className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
