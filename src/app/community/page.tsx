@@ -1,0 +1,48 @@
+"use client";
+import { useState } from "react";
+
+export default function CommunityPage() {
+  // Midlertidig state for prosjekter
+  const [projects, setProjects] = useState([
+    { id: 1, title: "Spider-Man suit", creator: "Yousef Mirza", description: "A photorealistic version of Spider-man's costume created from scratch.", image: "/projectspidey1.jpg" },
+    { id: 2, title: "Katroa- A Star Wars Fan Film", creator: "Sam Kesch and Yousef Mirza", description: "A collaboration between actors, cosplayers and Star Wars fans.", image: "/projectkatroa1.jpg" }
+  ]);
+
+  return (
+    <div className="bg-gray-900 text-white min-h-screen py-20 px-6">
+      <div className="max-w-4xl mx-auto text-center">
+        <h1 className="text-5xl font-bold mb-6">Novar Community</h1>
+        <p className="text-lg text-gray-300">
+          Join our community to share your projects, collaborate, inspire others and get inspired by others!
+        </p>
+
+        {/* Discord Link */}
+        <div className="mt-6">
+          <a 
+            href="https://discord.gg/gGufQ9p7Ak"
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="bg-[var(--novar-yellow)] hover:brightness-110 px-6 py-3 rounded-lg text-white font-bold"
+          >
+            Join Our Discord
+          </a>
+        </div>
+      </div>
+
+      {/* Prosjektseksjon */}
+      <div className="mt-16 max-w-5xl mx-auto">
+        <h2 className="text-4xl font-semibold mb-6 text-center">Featured Community Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((project) => (
+            <div key={project.id} className="bg-gray-800 p-6 rounded-lg shadow-lg">
+              <img src={project.image} alt={project.title} className="w-full h-48 object-cover rounded-lg mb-4" />
+              <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
+              <p className="text-gray-300">By {project.creator}</p>
+              <p className="mt-2">{project.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
