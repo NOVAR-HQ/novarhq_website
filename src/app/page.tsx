@@ -8,7 +8,7 @@ export default function Home() {
       <section className="h-screen flex flex-col items-center justify-center text-center">
       <Image src="/novar-icon.png" alt="Novar Icon" width={96} height={96} className="mb-4" />
       <h1 className="text-5xl font-bold">Novar</h1>
-        <p className="text-2xl mt-4"> Creativity meets technology</p>
+        <p className="text-2xl mt-4"> Where creativity meets technology</p>
 
         {/* Sosiale medier ikoner */}
         <div className="mt-6 flex space-x-6">

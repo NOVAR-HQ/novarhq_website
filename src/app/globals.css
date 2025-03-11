@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss";  
 
 /* Global Theme Variables */
 :root {
@@ -11,6 +11,10 @@
   --novar-blue-light: #03405f; /* Slightly lighter blue for boxes */
   --novar-yellow: #ffc30e; /* Brand yellow */
   --navbar-bg: #021f30; /* Navbar color */
+
+  /* Input & Button Colors */
+  --input-bg: #022c43; /* Dark Blue Input Fields */
+  --button-inactive: #021d30; /* Darker Inactive Button */
 }
 
 @theme inline {
@@ -33,6 +37,14 @@ body {
   background-color: var(--novar-blue); /* Novar Blue */
   color: white;
   font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures full height */
+}
+
+/* Main Content Wrapper */
+main {
+  flex: 1; /* Pushes footer to the bottom */
 }
 
 /* Navbar Styling */
@@ -41,6 +53,10 @@ nav {
   color: inherit;
   padding: 4px 12px; /* Reduce padding for a thinner navbar */
   height: 45px; /* Thinner navbar */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 /* Footer Styling */
@@ -48,6 +64,51 @@ footer {
   background-color: inherit;
   color: inherit;
   padding: 12px 16px;
+  width: 100%;
+  text-align: center;
+  margin-top: auto; /* Ensures footer stays at bottom */
+}
+
+/* Headings - Apply Novar Yellow */
+h1, h2, h3 {
+  color: var(--novar-yellow);
+}
+
+/* Input Field Styling */
+.input-field {
+  background-color: var(--input-bg);
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  width: 100%;
+}
+
+/* Button Styling */
+.btn-primary {
+  background-color: var(--novar-yellow);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-inactive {
+  background-color: var(--button-inactive);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-inactive:hover {
+  filter: brightness(1.1);
 }
 
 /* Apply Lighter Blue to All Boxes */

@@ -29,11 +29,11 @@ export default function PortfolioPage() {
   ]);
 
   return (
-    <div className="min-h-screen py-20 px-6">
+    <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-5xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6">Portfolio</h1>
-        <p className="text-lg text-gray-300">
-          Explore our projects across cosplay, filmmaking, 3D printing, and more.
+        <p className="text-lg text-secondary">
+          Explore Novar&apos;s projects across cosplay, filmmaking, robotics, coding, and more.
         </p>
       </div>
 
@@ -50,7 +50,7 @@ export default function PortfolioPage() {
                 className="w-full h-48 object-cover rounded-lg mb-4 hover:opacity-80 transition-opacity"
               />
             </a>
-            <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
+            <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
             <p className="mt-2">{project.description}</p>
           </div>
         ))}

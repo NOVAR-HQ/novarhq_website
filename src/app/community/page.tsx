@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function CommunityPage() {
-  // Prosjekt-data
+  // Project data
   const [projects] = useState([
     { 
       id: 1, 
@@ -24,10 +24,10 @@ export default function CommunityPage() {
   ]);
 
   return (
-    <div className="min-h-screen py-20 px-6">
+    <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6">Novar Community</h1>
-        <p className="text-lg text-gray-300">
+        <p className="text-lg text-secondary">
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
 
@@ -37,16 +37,16 @@ export default function CommunityPage() {
             href="https://discord.gg/gGufQ9p7Ak"
             target="_blank" 
             rel="noopener noreferrer"
-            className="bg-[var(--novar-yellow)] hover:brightness-110 px-6 py-3 rounded-lg text-white font-bold"
+            className="bg-accent hover:brightness-110 px-6 py-3 rounded-lg text-primary font-bold"
           >
             Join Our Discord
           </a>
         </div>
       </div>
 
-      {/* Prosjektseksjon */}
+      {/* Project Section */}
       <div className="mt-16 max-w-5xl mx-auto">
-        <h2 className="text-4xl font-semibold mb-6 text-center">Your Featured Projects:</h2>
+        <h2 className="text-4xl font-semibold mb-6 text-center">Your Featured Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <div key={project.id} className="box">
@@ -59,8 +59,8 @@ export default function CommunityPage() {
                   className="w-full h-48 object-cover rounded-lg mb-4 hover:opacity-80 transition-opacity"
                 />
               </a>
-              <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
-              <p className="text-gray-300">By {project.creator}</p>
+              <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
+              <p className="text-secondary">By {project.creator}</p>
               <p className="mt-2">{project.description}</p>
             </div>
           ))}
