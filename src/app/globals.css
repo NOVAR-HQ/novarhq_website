@@ -1,4 +1,4 @@
-@import "tailwindcss";  
+@import "tailwindcss";
 
 /* Global Theme Variables */
 :root {
@@ -7,10 +7,9 @@
   --box-bg: #0b4a6f; /* Lighter blue for better contrast */
   --discord-blue: #5865F2; /* Official Discord Color */
 
-
   /* Novar Theme Colors */
   --novar-blue: #163f57; /* Main background color */
-  --novar-blue-light: #03405f; /* Slightly lighter blue for boxes */
+  --novar-blue-light: #0a3b57; /* Slightly lighter blue for boxes */
   --novar-yellow: #ffc30e; /* Brand yellow */
   --navbar-bg: #021f30; /* Navbar color */
 
@@ -19,7 +18,26 @@
   --button-inactive: #021d30; /* Darker Inactive Button */
 
   /* Font Family */
-  --font-primary: "Bahnschrift Light", "DIN", "Rajdhani", "Titillium Web", sans-serif;
+  --font-primary: "Bahnschrift Light", "DIN", "Rajdhani", "Titillium Web", "Arial", "Helvetica", sans-serif;
+}
+
+@font-face {
+  font-family: "Bahnschrift Light";
+  src: local("Bahnschrift Light"),
+       url("/fonts/bahnschrift.woff2") format("woff2"),
+       url("/fonts/bahnschrift.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DIN";
+  src: url("/fonts/DIN.woff2") format("woff2"),
+       url("/fonts/DIN.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @theme inline {
@@ -77,7 +95,7 @@ footer {
 }
 
 /* Headings - Apply Novar Yellow */
-h1, h2, h3 {
+h1, h3 {
   color: var(--novar-yellow);
   font-family: var(--font-primary);
 }
@@ -121,13 +139,19 @@ h1, h2, h3 {
   filter: brightness(1.1);
 }
 
-/* Apply Lighter Blue to All Boxes */
+/* SHARP-EDGED BOXES (No Rounded Corners) */
 .box {
   background-color: var(--novar-blue-light);
-  border-radius: 8px;
+  border-radius: 0px; /* No rounded corners */
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: var(--font-primary);
+  transition: transform 0.2s ease-in-out;
+}
+
+.box:hover {
+  transform: scale(1.02);
+  cursor: pointer;
 }
 
 /* Brand Yellow Styling */
