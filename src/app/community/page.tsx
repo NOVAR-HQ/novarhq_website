@@ -7,11 +7,11 @@ export default function CommunityPage() {
   const [projects] = useState([
     { 
       id: 1, 
-      title: "Spider-Man suit", 
+      title: "The Last Hope| A The Last of Us inspired short film", 
       creator: "Yousef Mirza", 
-      description: "A photorealistic Spider-Man costume created from scratch.", 
-      image: "/projectspidey1.jpg",
-      link: "https://www.instagram.com/p/C38WfTTL7UA/"
+      description: "An original short film based on the hit game series The Last of Us. Written by Yousef Mirza, Produced by Yousef Mirza and GFF. Made by fans, for fans", 
+      image: "/projecttlh1.jpg",
+      link: "https://www.youtube.com/watch?v=H1lN3PLcokQ"
     },
     { 
       id: 2, 
@@ -28,7 +28,7 @@ export default function CommunityPage() {
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6">Novar Community</h1>
         <p className="text-lg text-gray-300">
-          Join our community to share your projects, collaborate, inspire others, and get inspired by others!
+          Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
 
         {/* Discord Link */}
@@ -46,7 +46,7 @@ export default function CommunityPage() {
 
       {/* Prosjektseksjon */}
       <div className="mt-16 max-w-5xl mx-auto">
-        <h2 className="text-4xl font-semibold mb-6 text-center">Featured Community Projects</h2>
+        <h2 className="text-4xl font-semibold mb-6 text-center">Your Featured Projects:</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <div key={project.id} className="bg-gray-800 p-6 rounded-lg shadow-lg">

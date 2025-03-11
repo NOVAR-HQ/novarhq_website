@@ -10,21 +10,21 @@ export default function PortfolioPage() {
       title: "Spider-Man Suit", 
       description: "A photorealistic Spider-Man costume created from scratch.", 
       image: "/projectspidey1.jpg",
-      link: "https://www.instagram.com/p/your-spiderman-post/"
+      link: "https://www.instagram.com/p/C38WfTTL7UA/"
     },
     { 
       id: 2, 
       title: "Katroa - A Star Wars Fan Film", 
       description: "A collaboration between actors, cosplayers, and Star Wars fans.", 
       image: "/projectkatroa1.jpg",
-      link: "https://www.youtube.com/watch?v=your-katroa-video"
+      link: "https://www.youtube.com/watch?v=yOVVl54MuhM"
     },
     { 
       id: 3, 
       title: "3D-Printed Iron Man Helmet", 
       description: "A 3D-printed Iron Man helmet.", 
       image: "/projectironmanhelmet.jpg",
-      link: "https://www.instagram.com/p/your-helmet-post/"
+      link: "https://www.instagram.com/p/DEIb-MioS6y/?img_index=7"
     }
   ]);
 
