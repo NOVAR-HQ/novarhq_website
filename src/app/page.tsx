@@ -27,9 +27,6 @@ export default function Home() {
           <a href="https://www.facebook.com/profile.php?id=61572770470991" target="_blank" rel="noopener noreferrer">
             <FaFacebook className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
           </a>
-          <a href="https://www.linkedin.com/company/novar-hq" target="_blank" rel="noopener noreferrer">
-            <FaLinkedin className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
-          </a>
         </div>
       </section>
 

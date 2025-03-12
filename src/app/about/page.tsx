@@ -39,15 +39,15 @@ export default function AboutPage() {
         <h2 className="text-4xl font-semibold mb-6">Our Core Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-secondary">
           <div className="p-6 box">
-            <h3 className="text-xl font-bold text-accent">Innovation</h3>
+            <h2 className="text-xl font-bold text-accent">Innovation</h2>
             <p className="mt-2">We push creative and technological boundaries.</p>
           </div>
           <div className="p-6 box">
-            <h3 className="text-xl font-bold text-accent">Collaboration</h3>
+            <h2 className="text-xl font-bold text-accent">Collaboration</h2>
             <p className="mt-2">Great things happen when minds work together.</p>
           </div>
           <div className="p-6 box">
-            <h3 className="text-xl font-bold text-accent">Education</h3>
+            <h2 className="text-xl font-bold text-accent">Education</h2>
             <p className="mt-2">Sharing knowledge fuels the next generation of creators.</p>
           </div>
         </div>
