@@ -33,7 +33,7 @@ export default function PortfolioPage() {
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-5xl font-bold mb-6">Portfolio</h2>
         <p className="text-lg text-secondary">
-          Explore Novar&apos;s projects across cosplay, filmmaking, robotics, coding, and more.
+          Explore Novar&apos;s projects across cosplay, filmmaking, coding, and more.
         </p>
       </div>
 
