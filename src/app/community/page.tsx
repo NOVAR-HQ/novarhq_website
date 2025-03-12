@@ -1,10 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { db } from "@/firebase/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 
 export default function CommunityPage() {
-  // Project data
-  const [projects] = useState([
+  const [firebasePosts, setFirebasePosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Hardcoded projects (keep these)
+  const hardcodedProjects = [
     { 
       id: 1, 
       title: "The Last Hope | A The Last of Us Inspired Short Film", 
@@ -21,7 +26,27 @@ export default function CommunityPage() {
       image: "/projectkatroa1.jpg",
       link: "https://www.youtube.com/watch?v=yOVVl54MuhM"
     }
-  ]);
+  ];
+
+  // Fetch posts from Firestore
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const querySnapshot = await getDocs(collection(db, "community_posts"));
+        const fetchedPosts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFirebasePosts(fetchedPosts);
+      } catch (error) {
+        console.error("Error fetching community posts:", error);
+      }
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
@@ -31,25 +56,26 @@ export default function CommunityPage() {
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
 
-        {/* Discord Link - Now Styled with Discord Blue */}
+        {/* Discord Button (Unchanged) */}
         <div className="mt-6 flex justify-center">
-        <a 
+          <a 
             href="https://discord.gg/gGufQ9p7Ak"
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-[var(--discord-blue)] hover:brightness-110 px-4 py-2 rounded-lg text-white font-bold flex items-center space-x-2 w-fit">
             <Image src="/discord-icon.png" alt="Discord" width={20} height={20} />
             <span>Join Our Discord</span>
-        </a>
+          </a>
         </div>
-
       </div>
 
-      {/* Project Section */}
+      {/* Community Posts Section */}
       <div className="mt-16 max-w-5xl mx-auto">
-      <h1 className="text-4xl font-semibold mb-6 text-center text-accent"> Your Featured Projects: </h1>
+        <h1 className="text-4xl font-semibold mb-6 text-center text-accent"> Your Featured Projects: </h1>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project) => (
+          {/* Hardcoded Projects */}
+          {hardcodedProjects.map((project) => (
             <a key={project.id} href={project.link} target="_blank" rel="noopener noreferrer" className="box has-link block">
               <Image 
                 src={project.image} 
@@ -63,6 +89,29 @@ export default function CommunityPage() {
               <p className="mt-2">{project.description}</p>
             </a>
           ))}
+
+          {/* Firebase Projects */}
+          {loading ? (
+            <p className="text-center col-span-2">Loading posts...</p>
+          ) : firebasePosts.length === 0 ? (
+            <p className="text-center col-span-2">No posts yet.</p>
+          ) : (
+            firebasePosts.map((post) => (
+              <div key={post.id} className="box has-link p-4">
+                {post.imageUrl && (
+                  <Image
+                    src={post.imageUrl}
+                    alt={post.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-48 object-cover mb-4"
+                  />
+                )}
+                <h3 className="text-2xl font-bold">{post.title}</h3>
+                <p className="mt-2">{post.description}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

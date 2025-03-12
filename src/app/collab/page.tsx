@@ -1,9 +1,39 @@
 "use client";
 import { useState } from "react";
+import { db } from "@/firebase/firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function CollabPage() {
   const [formType, setFormType] = useState("collaboration");
   const [commissionType, setCommissionType] = useState("Advertisement");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [details, setDetails] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const formData = {
+      name,
+      email,
+      details,
+      type: formType, // Sørger for at type = "collaboration" eller "commission"
+      commissionType: formType === "commission" ? commissionType : null, // Kun for commissions
+      timestamp: new Date(),
+    };
+
+    try {
+      await addDoc(collection(db, "forms"), formData);
+      alert("Form submitted successfully!");
+      setName("");
+      setEmail("");
+      setDetails("");
+      setCommissionType("Advertisement");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to submit form.");
+    }
+  };
 
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
@@ -18,9 +48,7 @@ export default function CollabPage() {
           <button
             onClick={() => setFormType("collaboration")}
             className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
-              formType === "collaboration"
-                ? "btn-primary"
-                : "btn-inactive"
+              formType === "collaboration" ? "btn-primary" : "btn-inactive"
             }`}
           >
             Collaboration Form
@@ -28,9 +56,7 @@ export default function CollabPage() {
           <button
             onClick={() => setFormType("commission")}
             className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
-              formType === "commission"
-                ? "btn-primary"
-                : "btn-inactive"
+              formType === "commission" ? "btn-primary" : "btn-inactive"
             }`}
           >
             Commission Form
@@ -40,50 +66,35 @@ export default function CollabPage() {
 
       {/* Forms */}
       <div className="max-w-3xl mx-auto mt-10 box">
-        {formType === "collaboration" ? (
-          <form>
-            <h2 className="text-3xl font-semibold mb-4 text-accent">Collaboration Form</h2>
+        <form onSubmit={handleSubmit}>
+          <h2 className="text-3xl font-semibold mb-4 text-accent">
+            {formType === "collaboration" ? "Collaboration Form" : "Commission Form"}
+          </h2>
 
-            <label className="block mb-2 text-lg">Your Name</label>
-            <input type="text" className="input-field mb-4" placeholder="Enter your name" />
+          <label className="block mb-2 text-lg">Your Name</label>
+          <input type="text" className="input-field mb-4" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} required />
 
-            <label className="block mb-2 text-lg">Your Email</label>
-            <input type="email" className="input-field mb-4" placeholder="Enter your email" />
+          <label className="block mb-2 text-lg">Your Email</label>
+          <input type="email" className="input-field mb-4" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-            <label className="block mb-2 text-lg">Project Description</label>
-            <textarea className="input-field mb-4" rows={4} placeholder="Describe your project"></textarea>
+          {formType === "commission" && (
+            <>
+              <label className="block mb-2 text-lg">Type of Commission</label>
+              <select className="input-field mb-4" value={commissionType} onChange={(e) => setCommissionType(e.target.value)} required>
+                <option value="Advertisement">Advertisement</option>
+                <option value="Photoshoot">Photoshoot</option>
+                <option value="Short Film">Short Film</option>
+                <option value="3D Printing">3D Printing</option>
+                <option value="Prop Making">Prop Making</option>
+              </select>
+            </>
+          )}
 
-            <button type="submit" className="w-full mt-4 btn-primary">
-              Submit
-            </button>
-          </form>
-        ) : (
-          <form>
-            <h2 className="text-3xl font-semibold mb-4 text-accent">Commission Form</h2>
+          <label className="block mb-2 text-lg">Details</label>
+          <textarea className="input-field mb-4" rows={4} placeholder="Describe what you need" value={details} onChange={(e) => setDetails(e.target.value)} required></textarea>
 
-            <label className="block mb-2 text-lg">Your Name</label>
-            <input type="text" className="input-field mb-4" placeholder="Enter your name" />
-
-            <label className="block mb-2 text-lg">Your Email</label>
-            <input type="email" className="input-field mb-4" placeholder="Enter your email" />
-
-            <label className="block mb-2 text-lg">Type of Commission</label>
-            <select className="input-field mb-4" value={commissionType} onChange={(e) => setCommissionType(e.target.value)}>
-              <option value="Advertisement">Advertisement</option>
-              <option value="Photoshoot">Photoshoot</option>
-              <option value="Short Film">Short Film</option>
-              <option value="3D Printing">3D Printing</option>
-              <option value="Prop Making">Prop Making</option>
-            </select>
-
-            <label className="block mb-2 text-lg">Details</label>
-            <textarea className="input-field mb-4" rows={4} placeholder="Describe what you need"></textarea>
-
-            <button type="submit" className="w-full mt-4 btn-primary">
-              Submit
-            </button>
-          </form>
-        )}
+          <button type="submit" className="w-full mt-4 btn-primary">Submit</button>
+        </form>
       </div>
     </div>
   );
