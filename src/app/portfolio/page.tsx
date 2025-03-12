@@ -40,18 +40,16 @@ export default function PortfolioPage() {
       {/* Portfolio Projects */}
       <div className="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
-          <a href={project.link} target="_blank" rel="noopener noreferrer" key={project.id}>
-            <div className="box">
-              <Image 
-                src={project.image} 
-                alt={project.title} 
-                width={600} 
-                height={400} 
-                className="w-full h-48 object-cover mb-4 hover:opacity-80 transition-opacity"
-              />
-              <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
-              <p className="mt-2">{project.description}</p>
-            </div>
+          <a key={project.id} href={project.link} target="_blank" rel="noopener noreferrer" className="box has-link block">
+            <Image 
+              src={project.image} 
+              alt={project.title} 
+              width={600} 
+              height={400} 
+              className="w-full h-48 object-cover mb-4"
+            />
+            <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
+            <p className="mt-2">{project.description}</p>
           </a>
         ))}
       </div>

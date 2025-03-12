@@ -33,16 +33,16 @@ export default function CommunityPage() {
 
         {/* Discord Link - Now Styled with Discord Blue */}
         <div className="mt-6 flex justify-center">
-          <a 
+        <a 
             href="https://discord.gg/gGufQ9p7Ak"
             target="_blank" 
             rel="noopener noreferrer"
-            className="bg-[var(--discord-blue)] hover:brightness-110 px-4 py-2 rounded-lg text-white font-bold flex items-center space-x-2 w-fit"
-          >
+            className="bg-[var(--discord-blue)] hover:brightness-110 px-4 py-2 rounded-lg text-white font-bold flex items-center space-x-2 w-fit">
             <Image src="/discord-icon.png" alt="Discord" width={20} height={20} />
             <span>Join Our Discord</span>
-          </a>
+        </a>
         </div>
+
       </div>
 
       {/* Project Section */}
@@ -50,19 +50,17 @@ export default function CommunityPage() {
         <h2 className="text-4xl font-semibold mb-6 text-center text-[var(--novar-yellow)]">Your Featured Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
-            <a href={project.link} target="_blank" rel="noopener noreferrer" key={project.id}>
-              <div className="box">
-                <Image 
-                  src={project.image} 
-                  alt={project.title} 
-                  width={600} 
-                  height={400} 
-                  className="w-full h-48 object-cover mb-4 hover:opacity-80 transition-opacity"
-                />
-                <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
-                <p className="text-secondary">By {project.creator}</p>
-                <p className="mt-2">{project.description}</p>
-              </div>
+            <a key={project.id} href={project.link} target="_blank" rel="noopener noreferrer" className="box has-link block">
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                width={600} 
+                height={400} 
+                className="w-full h-48 object-cover mb-4"
+              />
+              <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
+              <p className="text-secondary">By {project.creator}</p>
+              <p className="mt-2">{project.description}</p>
             </a>
           ))}
         </div>

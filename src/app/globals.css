@@ -95,7 +95,7 @@ footer {
 }
 
 /* Headings - Apply Novar Yellow */
-h1 {
+h2 {
   color: var(--novar-yellow);
   font-family: var(--font-primary);
 }
@@ -146,27 +146,14 @@ h1 {
   padding: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: var(--font-primary);
+}
+
+/* Hover Animation ONLY for Boxes that have a Link */
+.box.has-link {
   transition: transform 0.2s ease-in-out;
 }
 
-.box:hover {
+.box.has-link:hover {
   transform: scale(1.02);
   cursor: pointer;
-}
-
-/* Brand Yellow Styling */
-.text-yellow-500 {
-  color: var(--novar-yellow) !important;
-}
-
-.bg-yellow-500 {
-  background-color: var(--novar-yellow) !important;
-}
-
-.hover\:text-yellow-500:hover {
-  color: var(--novar-yellow) !important;
-}
-
-.hover\:bg-yellow-500:hover {
-  background-color: var(--novar-yellow) !important;
 }

@@ -8,7 +8,7 @@ export default function CollabPage() {
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-5xl font-bold mb-6">Collab & Commission</h1>
+        <h2 className="text-5xl font-bold mb-6">Collab & Commission</h2>
         <p className="text-lg text-secondary">
           Want to work with Novar? Choose whether you want to collaborate or request a commission.
         </p>
