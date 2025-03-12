@@ -47,7 +47,7 @@ export default function CommunityPage() {
 
       {/* Project Section */}
       <div className="mt-16 max-w-5xl mx-auto">
-        <h2 className="text-4xl font-semibold mb-6 text-center text-[var(--novar-yellow)]">Your Featured Projects</h2>
+      <h1 className="text-4xl font-semibold mb-6 text-center text-accent"> Your Featured Projects: </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <a key={project.id} href={project.link} target="_blank" rel="noopener noreferrer" className="box has-link block">
