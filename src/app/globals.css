@@ -8,8 +8,8 @@
   --discord-blue: #5865F2; /* Official Discord Color */
 
   /* Novar Theme Colors */
-  --novar-blue: #052233 ; /* Main background color */
-  --novar-blue-light: #052233 ; /* Slightly lighter blue for boxes */
+  --novar-blue: #021f30 ; /* Main background color */
+  --novar-blue-light: #021f30; /* Slightly lighter blue for boxes */
   --novar-yellow: #fbce07; /* Brand yellow */
   --navbar-bg: #163f57 ; /* Navbar color */
 
@@ -139,12 +139,11 @@ h2 {
   filter: brightness(1.1);
 }
 
-/* SHARP-EDGED BOXES (No Rounded Corners) */
+/* SHARP-EDGED BOXES (No Rounded Corners, No Shadows) */
 .box {
   background-color: var(--novar-blue-light);
   border-radius: 0px; /* No rounded corners */
   padding: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-family: var(--font-primary);
 }
 
