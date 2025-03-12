@@ -31,7 +31,7 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-5xl mx-auto text-center">
-        <h1 className="text-5xl font-bold mb-6">Portfolio</h1>
+        <h2 className="text-5xl font-bold mb-6">Portfolio</h2>
         <p className="text-lg text-secondary">
           Explore Novar&apos;s projects across cosplay, filmmaking, robotics, coding, and more.
         </p>
