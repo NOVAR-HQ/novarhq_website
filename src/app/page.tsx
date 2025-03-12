@@ -1,4 +1,4 @@
-import { FaInstagram, FaYoutube, FaTiktok, FaFacebook, FaLinkedin, FaDiscord } from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaTiktok, FaFacebook, FaDiscord } from "react-icons/fa";
 import Image from "next/image";
 
 export default function Home() {
