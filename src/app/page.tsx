@@ -1,20 +1,38 @@
+"use client";
+import { useState, useEffect } from "react";
 import { FaInstagram, FaYoutube, FaTiktok, FaDiscord, FaGithub } from "react-icons/fa";
 import Image from "next/image";
-import ScrollIndicator from "@/components/ScrollIndicator"; // Import the scroll component
-
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleScrollDown = () => {
+    window.scrollBy({
+      top: window.innerHeight * 0.5, // Scrolls down slightly
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="bg-[var(--novar-blue)] text-white">
-      <ScrollIndicator /> {/* 👈 Add this inside the main page */}
-      
       {/* Hero Section */}
-      <section className="h-screen flex flex-col items-center justify-center text-center">
+      <section className="h-screen flex flex-col items-center justify-center text-center relative">
         {/* Link Novar Icon to Admin Landing Page */}
         <a href="/admin-landing">
           <Image src="/novar-icon.png" alt="Novar Icon" width={96} height={96} className="mb-4 cursor-pointer" />
         </a>
-        <h2 className="text-5xl font-bold">Novar</h2>
+        <h2 className="text-5xl font-bold text-[var(--novar-yellow)]">Novar</h2>
         <p className="text-2xl mt-4">Creativity meets Technology</p>
 
         {/* Social Media Icons */}
@@ -35,6 +53,18 @@ export default function Home() {
             <FaGithub className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
           </a>
         </div>
+
+        {/* Clickable "V"-shaped Scroll Arrow */}
+        {isVisible && (
+          <button
+            onClick={handleScrollDown}
+            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+            aria-label="Scroll Down"
+          >
+            <div className="w-10 h-10 border-b-4 border-r-4 border-[var(--novar-yellow)] transform rotate-45"></div>
+            <div className="w-10 h-10 border-b-4 border-l-4 border-[var(--novar-yellow)] transform -rotate-45 -mt-[17px]"></div>
+          </button>
+        )}
       </section>
 
       {/* Sections */}
