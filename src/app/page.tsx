@@ -11,7 +11,6 @@ interface Post {
   title: string;
   description: string;
   imageUrl?: string;
-  link?: string;
 }
 
 export default function Home() {
@@ -39,7 +38,7 @@ export default function Home() {
         const communitySnapshot = await getDocs(communityQuery);
 
         const latestCommunity: Post | null = communitySnapshot.docs.length > 0
-          ? { id: communitySnapshot.docs[0].id, ...communitySnapshot.docs[0].data() as any }
+          ? { id: communitySnapshot.docs[0].id, ...(communitySnapshot.docs[0].data() as Post) }
           : null;
         setLatestCommunityPost(latestCommunity);
 
@@ -48,7 +47,7 @@ export default function Home() {
         const portfolioSnapshot = await getDocs(portfolioQuery);
 
         const latestPortfolio: Post | null = portfolioSnapshot.docs.length > 0
-          ? { id: portfolioSnapshot.docs[0].id, ...portfolioSnapshot.docs[0].data() as any }
+          ? { id: portfolioSnapshot.docs[0].id, ...(portfolioSnapshot.docs[0].data() as Post) }
           : null;
         setLatestPortfolioPost(latestPortfolio);
       } catch (error) {
@@ -115,19 +114,18 @@ export default function Home() {
         </p>
 
         {latestPortfolioPost ? (
-          <Link
-            href={latestPortfolioPost.link ?? "/portfolio"}
-            className="box has-link block mx-auto mt-6 max-w-3xl"
-          >
-            <Image
-              src={latestPortfolioPost.imageUrl || "/placeholder.png"}
-              alt={latestPortfolioPost.title}
-              width={600}
-              height={400}
-              className="w-full h-48 object-cover mb-4"
-            />
-            <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
-            <p className="mt-2">{latestPortfolioPost.description}</p>
+          <Link href="/portfolio" className="block mx-auto mt-6 max-w-3xl">
+            <div className="box cursor-pointer hover:opacity-90 transition">
+              <Image
+                src={latestPortfolioPost.imageUrl || "/placeholder.png"}
+                alt={latestPortfolioPost.title}
+                width={600}
+                height={400}
+                className="w-full h-48 object-cover mb-4 rounded-lg"
+              />
+              <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
+              <p className="mt-2">{latestPortfolioPost.description}</p>
+            </div>
           </Link>
         ) : (
           <p className="mt-6 text-lg">Loading latest portfolio post...</p>
@@ -146,19 +144,18 @@ export default function Home() {
         </p>
 
         {latestCommunityPost ? (
-          <Link
-            href={latestCommunityPost.link ?? "/community"}
-            className="box has-link block mx-auto mt-6 max-w-3xl"
-          >
-            <Image
-              src={latestCommunityPost.imageUrl || "/placeholder.png"}
-              alt={latestCommunityPost.title}
-              width={600}
-              height={400}
-              className="w-full h-48 object-cover mb-4"
-            />
-            <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
-            <p className="mt-2">{latestCommunityPost.description}</p>
+          <Link href="/community" className="block mx-auto mt-6 max-w-3xl">
+            <div className="box cursor-pointer hover:opacity-90 transition">
+              <Image
+                src={latestCommunityPost.imageUrl || "/placeholder.png"}
+                alt={latestCommunityPost.title}
+                width={600}
+                height={400}
+                className="w-full h-48 object-cover mb-4 rounded-lg"
+              />
+              <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
+              <p className="mt-2">{latestCommunityPost.description}</p>
+            </div>
           </Link>
         ) : (
           <p className="mt-6 text-lg">Loading latest community post...</p>
