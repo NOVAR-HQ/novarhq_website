@@ -11,6 +11,7 @@ export default function NavbarSwitcher() {
   const pathname = usePathname();
   const isAdminPage = pathname.startsWith("/admin");
   const isAdminLoginPage = pathname === "/admin"; // Only the login page
+  const isLandingPage = pathname === "/admin-landing"; // Exclude navbar from landing page
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -22,6 +23,9 @@ export default function NavbarSwitcher() {
 
     return () => unsubscribe();
   }, []);
+
+  // ✅ If it's the landing page, HIDE the navbar completely
+  if (isLandingPage) return null;
 
   // ✅ If it's the admin login page and the user isn't logged in, HIDE the navbar
   if (isAdminLoginPage && !isAuthenticated) return null;
