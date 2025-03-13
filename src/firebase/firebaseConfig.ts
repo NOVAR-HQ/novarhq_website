@@ -22,3 +22,5 @@ export const auth = getAuth(app); // Authentication
 export const db = getFirestore(app); // Firestore database
 export const storage = getStorage(app); // Cloud Storage
 export default app;
+
+
