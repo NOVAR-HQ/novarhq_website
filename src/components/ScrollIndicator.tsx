@@ -22,12 +22,7 @@ export default function ScrollIndicator() {
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
-      <div className="flex flex-col items-center animate-bounce text-white text-lg">
-        <span className="bg-[var(--novar-yellow)] text-black px-4 py-2 rounded-lg shadow-md">
-          See more
-        </span>
-        <FaChevronDown className="text-[var(--novar-yellow)] mt-2 text-2xl" />
-      </div>
+      <FaChevronDown className="text-[var(--novar-yellow)] text-3xl animate-bounce" />
     </div>
   );
 }
