@@ -29,7 +29,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center relative">
         {/* Novar Banner with Next.js <Image /> Optimization */}
-        <a href="/admin-landing" className="flex justify-center">
+        <a href="/" className="flex justify-center">
           <Image 
             src="/novar-banner.png"
             alt="Novar Banner"
