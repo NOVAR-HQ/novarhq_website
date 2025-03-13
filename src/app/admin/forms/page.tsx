@@ -7,7 +7,7 @@ interface FormData {
   id: string;
   name: string;
   email: string;
-  message: string;
+  details: string;
   type: string;
 }
 
@@ -74,7 +74,7 @@ export default function AdminFormsPage() {
               <div key={form.id} className="box mb-4 p-4">
                 <h2 className="text-xl font-bold">{form.name}</h2>
                 <p className="text-secondary">{form.email}</p>
-                <p className="mt-2">{form.message}</p>
+                <p className="mt-2">{form.details}</p>
                 <p className="mt-2 text-sm text-gray-400">Type: {form.type}</p>
                 <button onClick={() => handleDelete(form.id)} className="btn-inactive mt-2">
                   Delete
