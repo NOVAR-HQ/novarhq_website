@@ -1,9 +1,13 @@
 import { FaInstagram, FaYoutube, FaTiktok, FaDiscord, FaGithub } from "react-icons/fa";
 import Image from "next/image";
+import ScrollIndicator from "@/components/ScrollIndicator"; // Import the scroll component
+
 
 export default function Home() {
   return (
     <div className="bg-[var(--novar-blue)] text-white">
+      <ScrollIndicator /> {/* 👈 Add this inside the main page */}
+      
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center">
         {/* Link Novar Icon to Admin Landing Page */}
@@ -32,6 +36,23 @@ export default function Home() {
           </a>
         </div>
       </section>
+
+      {/* Sections */}
+      {[
+        { title: "About Novar", text: "Novar is a place where dreamers come together to push the boundaries of what is possible.", link: "/about", button: "Learn More" },
+        { title: "Portfolio", text: "Explore our past, present, and future projects.", link: "/portfolio", button: "View More" },
+        { title: "Collab & Commission", text: "Want to work with us or learn from our experience? Let’s create together!", link: "/collab", button: "Get Involved" },
+        { title: "Join the Community", text: "Share your projects and connect with other creators.", link: "/community", button: "Join Now" },
+        { title: "Contact Us", text: "Have questions or ideas? Let’s talk!", link: "mailto:contact@novarhq.com", button: "Email Us" }
+      ].map((section, index) => (
+        <section key={index} className="py-20 px-6 text-center">
+          <h1 className="text-4xl font-semibold text-accent">{section.title}</h1>
+          <p className="mt-4 max-w-3xl mx-auto text-secondary">{section.text}</p>
+          <a href={section.link} className="mt-6 inline-block btn-primary">
+            {section.button}
+          </a>
+        </section>
+      ))}
     </div>
   );
 }
