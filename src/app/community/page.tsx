@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { db } from "@/firebase/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import Image from "next/image";
 
 interface CommunityPost {
@@ -35,12 +35,14 @@ export default function CommunityPage() {
     }
   ];
 
-  // Fetch posts from Firestore
+  // Fetch posts from Firestore, ordered from newest to oldest
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const querySnapshot = await getDocs(collection(db, "community_posts"));
+        const querySnapshot = await getDocs(
+          query(collection(db, "community_posts"), orderBy("timestamp", "desc"))
+        );
         const fetchedPosts: CommunityPost[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...(doc.data() as Omit<CommunityPost, "id">),
@@ -97,7 +99,7 @@ export default function CommunityPage() {
             </a>
           ))}
 
-          {/* Firebase Projects */}
+          {/* Firebase Projects - Sorted from latest to oldest */}
           {loading ? (
             <p className="text-center col-span-2">Loading posts...</p>
           ) : firebasePosts.length === 0 ? (

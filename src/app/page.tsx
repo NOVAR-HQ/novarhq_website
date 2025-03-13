@@ -6,10 +6,18 @@ import Link from "next/link";
 import { db } from "@/firebase/firebaseConfig"; // Firestore
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
 
+interface Post {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  link?: string;
+}
+
 export default function Home() {
   const [isVisible, setIsVisible] = useState(true);
-  const [latestCommunityPost, setLatestCommunityPost] = useState(null);
-  const [latestPortfolioPost, setLatestPortfolioPost] = useState(null);
+  const [latestCommunityPost, setLatestCommunityPost] = useState<Post | null>(null);
+  const [latestPortfolioPost, setLatestPortfolioPost] = useState<Post | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,7 +93,7 @@ export default function Home() {
         {isVisible && (
           <button
             onClick={handleScrollDown}
-            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-[var(--novar-yellow)] text-white p-3 rounded-full animate-bounce"
+            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-[var(--novar-yellow)] text-white p-3 rounded-full shadow-md animate-bounce"
             aria-label="Scroll Down"
           >
             <FaArrowDown className="text-xl" />
@@ -95,23 +103,28 @@ export default function Home() {
 
       {/* Portfolio Section */}
       <section className="py-20 px-6 text-center">
-        <h1 className="text-4xl font-semibold text-accent">Portfolio</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">Explore our past, present, and future projects.</p>
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
+        <p className="text-lg text-secondary">
+          Explore Novar's past, present, and future projects.
+        </p>
 
         {latestPortfolioPost ? (
-          <div className="mt-6 max-w-lg mx-auto bg-[var(--novar-blue-light)] p-4 rounded-lg text-left">
+          <Link
+            href={latestPortfolioPost.link ?? "/portfolio"}
+            className="box has-link block mx-auto mt-6 max-w-3xl"
+          >
             <Image
-              src={latestPortfolioPost.imageUrl}
+              src={latestPortfolioPost.imageUrl || "/placeholder.png"}
               alt={latestPortfolioPost.title}
               width={600}
-              height={250}
-              className="rounded mb-4 object-cover w-full h-[250px]"
+              height={400}
+              className="w-full h-48 object-cover mb-4"
             />
-            <h2 className="text-xl font-semibold">{latestPortfolioPost.title}</h2>
-            <p className="text-sm">{latestPortfolioPost.description}</p>
-          </div>
+            <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
+            <p className="mt-2">{latestPortfolioPost.description}</p>
+          </Link>
         ) : (
-          <p>Loading latest portfolio post...</p>
+          <p className="mt-6 text-lg">Loading latest portfolio post...</p>
         )}
 
         <Link href="/portfolio" className="mt-6 inline-block btn-primary">
@@ -121,23 +134,28 @@ export default function Home() {
 
       {/* Community Section */}
       <section className="py-20 px-6 text-center">
-        <h1 className="text-4xl font-semibold text-accent">Community</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">Join our creative community and share your projects.</p>
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
+        <p className="text-lg text-secondary">
+          Join Novar's creative community and share your projects.
+        </p>
 
         {latestCommunityPost ? (
-          <div className="mt-6 max-w-lg mx-auto bg-[var(--novar-blue-light)] p-4 rounded-lg text-left">
+          <Link
+            href={latestCommunityPost.link ?? "/community"}
+            className="box has-link block mx-auto mt-6 max-w-3xl"
+          >
             <Image
-              src={latestCommunityPost.imageUrl}
+              src={latestCommunityPost.imageUrl || "/placeholder.png"}
               alt={latestCommunityPost.title}
               width={600}
-              height={250}
-              className="rounded mb-4 object-cover w-full h-[250px]"
+              height={400}
+              className="w-full h-48 object-cover mb-4"
             />
-            <h2 className="text-xl font-semibold">{latestCommunityPost.title}</h2>
-            <p className="text-sm">{latestCommunityPost.description}</p>
-          </div>
+            <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
+            <p className="mt-2">{latestCommunityPost.description}</p>
+          </Link>
         ) : (
-          <p>Loading latest community post...</p>
+          <p className="mt-6 text-lg">Loading latest community post...</p>
         )}
 
         <Link href="/community" className="mt-6 inline-block btn-primary">
@@ -145,11 +163,11 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* Collab & Commission Section */}
+      {/* Collab & Commission Section (Unchanged) */}
       <section className="py-20 px-6 text-center">
-        <h1 className="text-4xl font-semibold text-accent">Collab & Commission</h1>
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
         <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Want to work with us or let us help you?
+          Want to work with Novar or need Novar's help? Let’s create together!
         </p>
         <Link href="/collab" className="mt-6 inline-block btn-primary">
           Get Involved
@@ -158,10 +176,10 @@ export default function Home() {
 
       {/* Contact Section */}
       <section className="py-20 px-6 text-center">
-        <h1 className="text-4xl font-semibold text-accent">Contact Us</h1>
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Contact Novar</h1>
         <p className="mt-4 max-w-3xl mx-auto text-secondary">Have questions or ideas? Let’s talk!</p>
         <Link href="mailto:contact@novarhq.com" className="mt-6 inline-block btn-primary">
-          Email Us
+          Email Novar
         </Link>
       </section>
     </div>

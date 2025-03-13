@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { db } from "@/firebase/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 
 interface PortfolioPost {
   id: string;
@@ -19,7 +19,9 @@ export default function PortfolioPage() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "portfolio_posts"));
+        const querySnapshot = await getDocs(
+          query(collection(db, "portfolio_posts"), orderBy("timestamp", "desc"))
+        );
         const fetchedProjects: PortfolioPost[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...(doc.data() as Omit<PortfolioPost, "id">),
@@ -58,7 +60,6 @@ export default function PortfolioPage() {
               rel="noopener noreferrer"
               className="box has-link block"
             >
-              {/* Render Image ONLY if there is a valid URL */}
               {project.imageUrl ? (
                 <Image
                   src={project.imageUrl}
