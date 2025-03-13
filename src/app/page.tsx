@@ -39,7 +39,7 @@ export default function Home() {
         const communitySnapshot = await getDocs(communityQuery);
 
         const latestCommunity: Post | null = communitySnapshot.docs.length > 0
-          ? { id: communitySnapshot.docs[0].id, ...(communitySnapshot.docs[0].data() as Post) }
+          ? { id: communitySnapshot.docs[0].id, ...communitySnapshot.docs[0].data() as unknown }
           : null;
         setLatestCommunityPost(latestCommunity);
 
@@ -48,7 +48,7 @@ export default function Home() {
         const portfolioSnapshot = await getDocs(portfolioQuery);
 
         const latestPortfolio: Post | null = portfolioSnapshot.docs.length > 0
-          ? { id: portfolioSnapshot.docs[0].id, ...(portfolioSnapshot.docs[0].data() as Post) }
+          ? { id: portfolioSnapshot.docs[0].id, ...portfolioSnapshot.docs[0].data() as unknown }
           : null;
         setLatestPortfolioPost(latestPortfolio);
       } catch (error) {
@@ -110,7 +110,9 @@ export default function Home() {
       {/* Portfolio Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
-        <p className="text-lg text-secondary">Explore Novar&apos;s past, present, and future projects.</p>
+        <p className="text-lg text-secondary">
+          Explore Novar&apos;s past, present, and future projects.
+        </p>
 
         {latestPortfolioPost ? (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
@@ -126,7 +128,7 @@ export default function Home() {
             <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
             <p className="mt-2">{latestPortfolioPost.description}</p>
 
-            <Link href={latestPortfolioPost.link || "/portfolio"} className="mt-4 inline-block btn-primary">
+            <Link href={latestPortfolioPost.link ?? "/portfolio"} className="mt-4 inline-block btn-primary">
               View More
             </Link>
           </div>
@@ -138,7 +140,9 @@ export default function Home() {
       {/* Community Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
-        <p className="text-lg text-secondary">Join Novar&apos;s creative community and share your projects.</p>
+        <p className="text-lg text-secondary">
+          Join Novar&apos;s creative community and share your projects.
+        </p>
 
         {latestCommunityPost ? (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
@@ -154,7 +158,7 @@ export default function Home() {
             <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
             <p className="mt-2">{latestCommunityPost.description}</p>
 
-            <Link href={latestCommunityPost.link || "/community"} className="mt-4 inline-block btn-primary">
+            <Link href={latestCommunityPost.link ?? "/community"} className="mt-4 inline-block btn-primary">
               View More
             </Link>
           </div>
@@ -163,11 +167,26 @@ export default function Home() {
         )}
       </section>
 
+      {/* Collab & Commission Section */}
+      <section className="py-20 px-6 text-center">
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
+        <p className="mt-4 max-w-3xl mx-auto text-secondary">
+          Want to work with Novar or need Novar&apos;s help? Let&apos;s create together!
+        </p>
+        <Link href="/collab" className="mt-6 inline-block btn-primary">
+          Get Involved
+        </Link>
+      </section>
+
       {/* About Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">Learn more about Novar and our mission.</p>
-        <Link href="/about" className="mt-6 inline-block btn-primary">Learn More</Link>
+        <p className="mt-4 max-w-3xl mx-auto text-secondary">
+          Learn more about Novar and our mission.
+        </p>
+        <Link href="/about" className="mt-6 inline-block btn-primary">
+          Learn More
+        </Link>
       </section>
     </div>
   );
