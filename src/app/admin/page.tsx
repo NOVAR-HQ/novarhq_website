@@ -57,7 +57,7 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-6">
         <h1 className="text-4xl font-bold text-[var(--novar-yellow)] text-center">Admin Login</h1>
-        <p className="mt-2 text-lg text-center">Sign in with your @novarhq.com email.</p>
+        <p className="mt-2 text-lg text-center">Sign in with your authorized Novar account.</p>
         <button onClick={handleLogin} className="mt-4 btn-primary">
           Sign in
         </button>
