@@ -39,7 +39,7 @@ export default function Home() {
         const communitySnapshot = await getDocs(communityQuery);
 
         const latestCommunity: Post | null = communitySnapshot.docs.length > 0
-          ? { id: communitySnapshot.docs[0].id, ...communitySnapshot.docs[0].data() as unknown }
+          ? { id: communitySnapshot.docs[0].id, ...communitySnapshot.docs[0].data() as Post }
           : null;
         setLatestCommunityPost(latestCommunity);
 
@@ -48,7 +48,7 @@ export default function Home() {
         const portfolioSnapshot = await getDocs(portfolioQuery);
 
         const latestPortfolio: Post | null = portfolioSnapshot.docs.length > 0
-          ? { id: portfolioSnapshot.docs[0].id, ...portfolioSnapshot.docs[0].data() as unknown }
+          ? { id: portfolioSnapshot.docs[0].id, ...portfolioSnapshot.docs[0].data() as Post }
           : null;
         setLatestPortfolioPost(latestPortfolio);
       } catch (error) {
