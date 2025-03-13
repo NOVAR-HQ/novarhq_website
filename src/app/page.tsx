@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaInstagram, FaYoutube, FaTiktok, FaDiscord, FaGithub, FaArrowDown } from "react-icons/fa";
-import Image from "next/image";
+import Image from "next/image"; // ✅ Now used properly
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(true);
@@ -28,12 +28,15 @@ export default function Home() {
     <div className="bg-[var(--novar-blue)] text-white">
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center relative">
-        {/* 🏆 Novar Banner as SVG for better scalability */}
+        {/* 🏆 Novar Banner with Next.js <Image /> Optimization */}
         <a href="/admin-landing" className="flex justify-center">
-          <img 
-            src="/novar-banner.png" 
-            alt="Novar Banner" 
-            className="w-[70vw] max-w-[400px] md:max-w-[500px] lg:max-w-[600px] h-auto" 
+          <Image 
+            src="/novar-banner.png"
+            alt="Novar Banner"
+            width={600} // ✅ Adjusted for better responsiveness
+            height={150} // ✅ Scales properly
+            priority
+            className="max-w-[80vw] md:max-w-[500px] lg:max-w-[600px] h-auto"
           />
         </a>
 
