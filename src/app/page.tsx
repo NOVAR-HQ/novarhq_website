@@ -28,9 +28,13 @@ export default function Home() {
     <div className="bg-[var(--novar-blue)] text-white">
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center relative">
-        {/* 🏆 Novar Banner instead of Icon */}
-        <a href="/admin-landing">
-          <Image src="/novar-banner.png" alt="Novar Banner" width={250} height={70} className="mb-4 cursor-pointer" />
+        {/* 🏆 Novar Banner as SVG for better scalability */}
+        <a href="/admin-landing" className="flex justify-center">
+          <img 
+            src="/novar-banner.png" 
+            alt="Novar Banner" 
+            className="w-[70vw] max-w-[400px] md:max-w-[500px] lg:max-w-[600px] h-auto" 
+          />
         </a>
 
         <p className="text-2xl mt-4">Creativity meets Technology</p>
