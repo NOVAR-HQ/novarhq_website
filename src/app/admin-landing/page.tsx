@@ -12,7 +12,7 @@ export default function AdminLanding() {
       </p>
 
       <div className="mt-6 flex space-x-4">
-        <button onClick={() => router.push("/")} className="btn-inactive">
+        <button onClick={() => router.push("/")} className="btn-primary">
           Return to Home
         </button>
         <button onClick={() => router.push("/admin")} className="btn-primary">
