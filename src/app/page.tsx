@@ -183,6 +183,17 @@ export default function Home() {
         )}
       </section>
 
+      {/* Collab & Commission Section */}
+      <section className="py-20 px-6 text-center">
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
+        <p className="mt-4 max-w-3xl mx-auto text-secondary">
+          Want to work with Novar or need Novar&apos;s help? Let’s create together!
+        </p>
+        <Link href="/collab" className="mt-6 inline-block btn-primary">
+          Get Involved
+        </Link>
+      </section>
+
       {/* About Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
