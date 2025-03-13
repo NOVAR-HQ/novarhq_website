@@ -20,17 +20,17 @@ export default function AdminNavbar() {
         <Link href="/admin" className={`nav-link ${pathname === "/admin" ? "active" : ""}`}>
           Dashboard
         </Link>
+        <Link href="/admin/createpost" className={`nav-link ${pathname === "/admin/createpost" ? "active" : ""}`}>
+          Create Post
+        </Link>
         <Link href="/admin/posts" className={`nav-link ${pathname === "/admin/posts" ? "active" : ""}`}>
           Manage Posts
         </Link>
         <Link href="/admin/forms" className={`nav-link ${pathname === "/admin/forms" ? "active" : ""}`}>
           Manage Forms
         </Link>
-        <Link href="/admin/createpost" className={`nav-link ${pathname === "/admin/createpost" ? "active" : ""}`}>
-          Create Post
-        </Link>
         <Link href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>
-          Back to Novar
+          Novar HQ
         </Link>
       </div>
 
@@ -45,17 +45,17 @@ export default function AdminNavbar() {
           <Link href="/admin" className="block py-2 nav-link" onClick={() => setIsOpen(false)}>
             Dashboard
           </Link>
+          <Link href="/admin/createpost" className="block py-2 nav-link" onClick={() => setIsOpen(false)}>
+            Create Post
+          </Link>
           <Link href="/admin/posts" className="block py-2 nav-link" onClick={() => setIsOpen(false)}>
             Manage Posts
           </Link>
           <Link href="/admin/forms" className="block py-2 nav-link" onClick={() => setIsOpen(false)}>
             Manage Forms
           </Link>
-          <Link href="/admin/createpost" className="block py-2 nav-link" onClick={() => setIsOpen(false)}>
-            Create Post
-          </Link>
           <Link href="/" className="block py-2 nav-link" onClick={() => setIsOpen(false)}>
-            Back to Novar
+            Novar HQ
           </Link>
         </div>
       )}

@@ -13,7 +13,7 @@ export default function AdminLanding() {
 
       <div className="mt-6 flex space-x-4">
         <button onClick={() => router.push("/")} className="btn-primary">
-          Return to Home
+          Return to Novar HQ
         </button>
         <button onClick={() => router.push("/admin")} className="btn-primary">
           Proceed to Admin
