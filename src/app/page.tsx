@@ -4,7 +4,7 @@ import { FaInstagram, FaYoutube, FaGithub, FaArrowDown } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { db } from "@/firebase/firebaseConfig"; // Firestore
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, limit, getDocs, DocumentData } from "firebase/firestore";
 
 interface Post {
   id: string;
@@ -39,7 +39,7 @@ export default function Home() {
         const communitySnapshot = await getDocs(communityQuery);
 
         const latestCommunity: Post | null = communitySnapshot.docs.length > 0
-          ? { id: communitySnapshot.docs[0].id, ...communitySnapshot.docs[0].data() as unknown }
+          ? { id: communitySnapshot.docs[0].id, ...(communitySnapshot.docs[0].data() as DocumentData) }
           : null;
         setLatestCommunityPost(latestCommunity);
 
@@ -48,7 +48,7 @@ export default function Home() {
         const portfolioSnapshot = await getDocs(portfolioQuery);
 
         const latestPortfolio: Post | null = portfolioSnapshot.docs.length > 0
-          ? { id: portfolioSnapshot.docs[0].id, ...portfolioSnapshot.docs[0].data() as unknown }
+          ? { id: portfolioSnapshot.docs[0].id, ...(portfolioSnapshot.docs[0].data() as DocumentData) }
           : null;
         setLatestPortfolioPost(latestPortfolio);
       } catch (error) {
