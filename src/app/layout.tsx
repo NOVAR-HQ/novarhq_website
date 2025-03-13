@@ -1,7 +1,6 @@
 import "./globals.css";
 import Footer from "@/components/Footer";
 import NavbarSwitcher from "@/components/NavbarSwitcher";
-import ScrollToTop from "@/components/ScrollToTop"; // Import the new Scroll component
 
 export const metadata = {
   title: "Novar HQ",
@@ -11,9 +10,19 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        {/* Force Scroll to Top Script */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.history.scrollRestoration = 'manual';
+            window.onload = function() {
+              window.scrollTo(0, 0);
+            };
+          `,
+        }} />
+      </head>
       <body className="bg-[var(--novar-blue)] text-white">
-        <ScrollToTop /> {/* Ensure the page always starts at the top */}
-        <NavbarSwitcher /> {/* Automatically switches navbar */}
+        <NavbarSwitcher />
         <main className="min-h-screen">{children}</main>
         <Footer />
       </body>

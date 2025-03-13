@@ -32,7 +32,7 @@ export default function Home() {
         <a href="/admin-landing">
           <Image src="/novar-icon.png" alt="Novar Icon" width={96} height={96} className="mb-4 cursor-pointer" />
         </a>
-        <h2 className="text-5xl font-bold">Novar</h2>
+
         <p className="text-2xl mt-4">Creativity meets Technology</p>
 
         {/* Social Media Icons */}
