@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FaInstagram, FaYoutube, FaTiktok, FaDiscord, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaYoutube, FaTiktok, FaDiscord, FaGithub, FaArrowDown } from "react-icons/fa";
 import Image from "next/image";
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
 
   const handleScrollDown = () => {
     window.scrollBy({
-      top: window.innerHeight * 0.5, // Scrolls down slightly
+      top: window.innerHeight * 0.5, // Scrolls down half the viewport height
       behavior: "smooth",
     });
   };
@@ -32,7 +32,7 @@ export default function Home() {
         <a href="/admin-landing">
           <Image src="/novar-icon.png" alt="Novar Icon" width={96} height={96} className="mb-4 cursor-pointer" />
         </a>
-        <h2 className="text-5xl font-bold text-[var(--novar-yellow)]">Novar</h2>
+        <h2 className="text-5xl font-bold">Novar</h2>
         <p className="text-2xl mt-4">Creativity meets Technology</p>
 
         {/* Social Media Icons */}
@@ -54,15 +54,14 @@ export default function Home() {
           </a>
         </div>
 
-        {/* Clickable "V"-shaped Scroll Arrow */}
+        {/* Clickable Scroll Button */}
         {isVisible && (
           <button
             onClick={handleScrollDown}
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-[var(--novar-yellow)] text-white p-3 rounded-full shadow-md animate-bounce"
             aria-label="Scroll Down"
           >
-            <div className="w-6 h-6 border-b-4 border-r-4 border-[var(--novar-yellow)] transform rotate-45"></div>
-            <div className="w-6 h-6 border-b-4 border-l-4 border-[var(--novar-yellow)] transform -rotate-45 -mt-[9px]"></div>
+            <FaArrowDown className="text-xl" />
           </button>
         )}
       </section>
