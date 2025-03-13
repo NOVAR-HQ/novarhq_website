@@ -39,7 +39,7 @@ export default function Home() {
         const communitySnapshot = await getDocs(communityQuery);
 
         const latestCommunity: Post | null = communitySnapshot.docs.length > 0
-          ? { id: communitySnapshot.docs[0].id, ...communitySnapshot.docs[0].data() as Post }
+          ? { id: communitySnapshot.docs[0].id, ...(communitySnapshot.docs[0].data() as Post) }
           : null;
         setLatestCommunityPost(latestCommunity);
 
@@ -48,7 +48,7 @@ export default function Home() {
         const portfolioSnapshot = await getDocs(portfolioQuery);
 
         const latestPortfolio: Post | null = portfolioSnapshot.docs.length > 0
-          ? { id: portfolioSnapshot.docs[0].id, ...portfolioSnapshot.docs[0].data() as Post }
+          ? { id: portfolioSnapshot.docs[0].id, ...(portfolioSnapshot.docs[0].data() as Post) }
           : null;
         setLatestPortfolioPost(latestPortfolio);
       } catch (error) {
@@ -108,98 +108,66 @@ export default function Home() {
       </section>
 
       {/* Portfolio Section */}
-<section className="py-20 px-6 text-center">
-  <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
-  <p className="text-lg text-secondary">
-    Explore Novar's past, present, and future projects.
-  </p>
-
-  {latestPortfolioPost ? (
-    <div className="box has-link block mx-auto mt-6 max-w-3xl">
-      {latestPortfolioPost.imageUrl && (
-        <Image
-          src={latestPortfolioPost.imageUrl}
-          alt={latestPortfolioPost.title}
-          width={600}
-          height={400}
-          className="w-full h-48 object-cover mb-4"
-        />
-      )}
-      <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
-      <p className="mt-2">{latestPortfolioPost.description}</p>
-
-      {/* Only show the "View More" button if a valid link exists */}
-      {latestPortfolioPost.link ? (
-        <Link href={latestPortfolioPost.link} className="mt-4 inline-block btn-primary">
-          View More
-        </Link>
-      ) : (
-        <Link href="/portfolio" className="mt-4 inline-block btn-primary">
-          View More
-        </Link>
-      )}
-    </div>
-  ) : (
-    <p className="mt-6 text-lg">Loading latest portfolio post...</p>
-  )}
-</section>
-
-{/* Community Section */}
-<section className="py-20 px-6 text-center">
-  <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
-  <p className="text-lg text-secondary">
-    Join Novar's creative community and share your projects.
-  </p>
-
-  {latestCommunityPost ? (
-    <div className="box has-link block mx-auto mt-6 max-w-3xl">
-      {latestCommunityPost.imageUrl && (
-        <Image
-          src={latestCommunityPost.imageUrl}
-          alt={latestCommunityPost.title}
-          width={600}
-          height={400}
-          className="w-full h-48 object-cover mb-4"
-        />
-      )}
-      <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
-      <p className="mt-2">{latestCommunityPost.description}</p>
-
-      {/* Only show the "View More" button if a valid link exists */}
-      {latestCommunityPost.link ? (
-        <Link href={latestCommunityPost.link} className="mt-4 inline-block btn-primary">
-          View More
-        </Link>
-      ) : (
-        <Link href="/community" className="mt-4 inline-block btn-primary">
-          View More
-        </Link>
-      )}
-    </div>
-  ) : (
-    <p className="mt-6 text-lg">Loading latest community post...</p>
-  )}
-</section>
-      {/* Collab & Commission Section */}
       <section className="py-20 px-6 text-center">
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Want to work with Novar or need Novar&apos;s help? Let’s create together!
-        </p>
-        <Link href="/collab" className="mt-6 inline-block btn-primary">
-          Get Involved
-        </Link>
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
+        <p className="text-lg text-secondary">Explore Novar's past, present, and future projects.</p>
+
+        {latestPortfolioPost ? (
+          <div className="box has-link block mx-auto mt-6 max-w-3xl">
+            {latestPortfolioPost.imageUrl && (
+              <Image
+                src={latestPortfolioPost.imageUrl}
+                alt={latestPortfolioPost.title}
+                width={600}
+                height={400}
+                className="w-full h-48 object-cover mb-4"
+              />
+            )}
+            <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
+            <p className="mt-2">{latestPortfolioPost.description}</p>
+
+            <Link href={latestPortfolioPost.link || "/portfolio"} className="mt-4 inline-block btn-primary">
+              View More
+            </Link>
+          </div>
+        ) : (
+          <p className="mt-6 text-lg">Loading latest portfolio post...</p>
+        )}
+      </section>
+
+      {/* Community Section */}
+      <section className="py-20 px-6 text-center">
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
+        <p className="text-lg text-secondary">Join Novar's creative community and share your projects.</p>
+
+        {latestCommunityPost ? (
+          <div className="box has-link block mx-auto mt-6 max-w-3xl">
+            {latestCommunityPost.imageUrl && (
+              <Image
+                src={latestCommunityPost.imageUrl}
+                alt={latestCommunityPost.title}
+                width={600}
+                height={400}
+                className="w-full h-48 object-cover mb-4"
+              />
+            )}
+            <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
+            <p className="mt-2">{latestCommunityPost.description}</p>
+
+            <Link href={latestCommunityPost.link || "/community"} className="mt-4 inline-block btn-primary">
+              View More
+            </Link>
+          </div>
+        ) : (
+          <p className="mt-6 text-lg">Loading latest community post...</p>
+        )}
       </section>
 
       {/* About Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Learn more about Novar and our mission.
-        </p>
-        <Link href="/about" className="mt-6 inline-block btn-primary">
-          Learn More
-        </Link>
+        <p className="mt-4 max-w-3xl mx-auto text-secondary">Learn more about Novar and our mission.</p>
+        <Link href="/about" className="mt-6 inline-block btn-primary">Learn More</Link>
       </section>
     </div>
   );
