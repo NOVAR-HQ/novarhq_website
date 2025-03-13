@@ -10,8 +10,8 @@ interface Post {
   id: string;
   title: string;
   description: string;
-  imageUrl?: string;
-  link?: string;
+  imageUrl: string;
+  link: string;
 }
 
 export default function Home() {
@@ -47,8 +47,8 @@ export default function Home() {
               id: doc.id,
               title: data.title,
               description: data.description,
-              imageUrl: data.imageUrl || "/placeholder.png",
-              link: data.link || "/community"
+              imageUrl: data.imageUrl ?? "/placeholder.png",
+              link: data.link ?? "/community"
             });
           }
         }
@@ -66,8 +66,8 @@ export default function Home() {
               id: doc.id,
               title: data.title,
               description: data.description,
-              imageUrl: data.imageUrl || "/placeholder.png",
-              link: data.link || "/portfolio"
+              imageUrl: data.imageUrl ?? "/placeholder.png",
+              link: data.link ?? "/portfolio"
             });
           }
         }
