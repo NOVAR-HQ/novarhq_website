@@ -47,7 +47,7 @@ export default function AdminPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
+        <p className="text-center text-lg">Loading...</p>
       </div>
     );
   }
@@ -55,9 +55,9 @@ export default function AdminPage() {
   // If not logged in or not an admin, show login screen
   if (!user || !isAdmin) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Admin Login</h1>
-        <p className="mt-2 text-lg">Sign in with your @novarhq.com email.</p>
+      <div className="min-h-screen flex flex-col items-center justify-center px-6">
+        <h1 className="text-4xl font-bold text-[var(--novar-yellow)] text-center">Admin Login</h1>
+        <p className="mt-2 text-lg text-center">Sign in with your @novarhq.com email.</p>
         <button onClick={handleLogin} className="mt-4 btn-primary">
           Sign in
         </button>
@@ -69,7 +69,7 @@ export default function AdminPage() {
   return (
     <div>
       <AdminNavbar />
-      <div className="min-h-screen flex flex-col items-center justify-center">
+      <div className="min-h-screen flex flex-col items-center justify-center px-6 text-center">
         <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Welcome, {user.displayName}</h1>
         <p className="mt-2 text-lg">You are logged in as an admin.</p>
         <button onClick={handleLogout} className="mt-4 btn-primary">
