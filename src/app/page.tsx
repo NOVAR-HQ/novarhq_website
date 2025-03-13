@@ -37,13 +37,19 @@ export default function Home() {
         // Fetch latest Community post
         const communityQuery = query(collection(db, "community_posts"), orderBy("timestamp", "desc"), limit(1));
         const communitySnapshot = await getDocs(communityQuery);
-        const latestCommunity = communitySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))[0] || null;
+
+        const latestCommunity: Post | null = communitySnapshot.docs.length > 0
+          ? { id: communitySnapshot.docs[0].id, ...communitySnapshot.docs[0].data() as any }
+          : null;
         setLatestCommunityPost(latestCommunity);
 
         // Fetch latest Portfolio post
         const portfolioQuery = query(collection(db, "portfolio_posts"), orderBy("timestamp", "desc"), limit(1));
         const portfolioSnapshot = await getDocs(portfolioQuery);
-        const latestPortfolio = portfolioSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))[0] || null;
+
+        const latestPortfolio: Post | null = portfolioSnapshot.docs.length > 0
+          ? { id: portfolioSnapshot.docs[0].id, ...portfolioSnapshot.docs[0].data() as any }
+          : null;
         setLatestPortfolioPost(latestPortfolio);
       } catch (error) {
         console.error("Error fetching latest posts:", error);
@@ -163,7 +169,7 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* Collab & Commission Section (Unchanged) */}
+      {/* Collab & Commission Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
         <p className="mt-4 max-w-3xl mx-auto text-secondary">
@@ -174,12 +180,14 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* Contact Section */}
+      {/* About Section */}
       <section className="py-20 px-6 text-center">
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Contact Novar</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">Have questions or ideas? Let’s talk!</p>
-        <Link href="mailto:contact@novarhq.com" className="mt-6 inline-block btn-primary">
-          Email Novar
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
+        <p className="mt-4 max-w-3xl mx-auto text-secondary">
+          Learn more about Novar and our mission.
+        </p>
+        <Link href="/about" className="mt-6 inline-block btn-primary">
+          Learn More
         </Link>
       </section>
     </div>
