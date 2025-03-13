@@ -17,7 +17,7 @@ export default function NavbarSwitcher() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       // User is authenticated if they have an @novarhq.com email
-      setIsAuthenticated(!!user && user.email?.endsWith("@novarhq.com"));
+      setIsAuthenticated(!!(user && user.email?.endsWith("@novarhq.com")));
     });
 
     return () => unsubscribe();
