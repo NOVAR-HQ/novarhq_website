@@ -8,6 +8,7 @@ import { uploadToFirebaseStorage } from "@/utils/uploadImage"; // Import fixed u
 export default function CreatePostPage() {
   const router = useRouter();
   const [title, setTitle] = useState<string>("");
+  const [creator, setCreator] = useState<string>(""); // New field for creator
   const [description, setDescription] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [category, setCategory] = useState<string>("community");
@@ -33,6 +34,7 @@ export default function CreatePostPage() {
 
       await addDoc(collection(db, collectionPath), {
         title,
+        creator, // Store the creator's name
         description,
         link: link || null,
         imageUrl: imageUrl || null,
@@ -41,6 +43,7 @@ export default function CreatePostPage() {
 
       console.log("Post added successfully!");
       setTitle("");
+      setCreator(""); // Reset creator field
       setDescription("");
       setLink("");
       setImage(null);
@@ -66,6 +69,15 @@ export default function CreatePostPage() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="input-field mb-4"
+            required
+          />
+
+          <label className="block mb-2">Creator:</label>
+          <input
+            type="text"
+            value={creator}
+            onChange={(e) => setCreator(e.target.value)}
             className="input-field mb-4"
             required
           />
