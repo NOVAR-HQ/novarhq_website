@@ -58,11 +58,11 @@ export default function Home() {
         {isVisible && (
           <button
             onClick={handleScrollDown}
-            className="fixed bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
             aria-label="Scroll Down"
           >
-            <div className="w-10 h-10 border-b-4 border-r-4 border-[var(--novar-yellow)] transform rotate-45"></div>
-            <div className="w-10 h-10 border-b-4 border-l-4 border-[var(--novar-yellow)] transform -rotate-45 -mt-[17px]"></div>
+            <div className="w-6 h-6 border-b-4 border-r-4 border-[var(--novar-yellow)] transform rotate-45"></div>
+            <div className="w-6 h-6 border-b-4 border-l-4 border-[var(--novar-yellow)] transform -rotate-45 -mt-[9px]"></div>
           </button>
         )}
       </section>
