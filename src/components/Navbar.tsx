@@ -8,9 +8,9 @@ export default function Navbar() {
 
   return (
     <nav className="fixed w-full top-0 shadow-md z-50 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]">
-      {/* Novar Banner */}
+      {/* 🏆 Novar Icon instead of Banner */}
       <Link href="/">
-        <Image src="/novar-banner.png" alt="Novar Banner" width={150} height={40} priority />
+        <Image src="/novar-icon.png" alt="Novar Icon" width={50} height={50} priority />
       </Link>
 
       {/* Desktop Menu */}
