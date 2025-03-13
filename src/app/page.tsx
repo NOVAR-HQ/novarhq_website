@@ -111,7 +111,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
         <p className="text-lg text-secondary">
-          Explore Novar's past, present, and future projects.
+          Explore Novar&apos;s past, present, and future projects.
         </p>
 
         {latestPortfolioPost ? (
@@ -142,7 +142,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
         <p className="text-lg text-secondary">
-          Join Novar's creative community and share your projects.
+          Join Novar&apos;s creative community and share your projects.
         </p>
 
         {latestCommunityPost ? (
@@ -173,7 +173,7 @@ export default function Home() {
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
         <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Want to work with Novar or need Novar's help? Let’s create together!
+          Want to work with Novar or need Novar&apos;s help? Let’s create together!
         </p>
         <Link href="/collab" className="mt-6 inline-block btn-primary">
           Get Involved
