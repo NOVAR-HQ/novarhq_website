@@ -9,9 +9,7 @@ export default function AdminPosts() {
   const [posts, setPosts] = useState<any[]>([]);
   const [category, setCategory] = useState("community"); // Default category
   const [loading, setLoading] = useState(true);
-  const [editingPost, setEditingPost] = useState<any | null>(null);
 
-  // Fetch posts from Firestore
   useEffect(() => {
     const fetchPosts = async () => {
       setLoading(true);
@@ -32,7 +30,6 @@ export default function AdminPosts() {
     fetchPosts();
   }, [category]);
 
-  // Delete post function
   const handleDelete = async (postId: string, imageUrl?: string) => {
     const confirmDelete = confirm("Are you sure you want to delete this post?");
     if (!confirmDelete) return;
@@ -41,7 +38,6 @@ export default function AdminPosts() {
       const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
       await deleteDoc(doc(db, collectionPath, postId));
 
-      // Delete image from Firebase Storage if exists
       if (imageUrl) {
         const imageRef = ref(storage, imageUrl);
         await deleteObject(imageRef);
@@ -55,7 +51,6 @@ export default function AdminPosts() {
     }
   };
 
-  // Edit post function
   const handleEdit = async (postId: string) => {
     const newTitle = prompt("Enter new title:");
     const newDescription = prompt("Enter new description:");
@@ -84,15 +79,17 @@ export default function AdminPosts() {
     <div className="min-h-screen flex flex-col items-center justify-center pt-20">
       <h1 className="text-4xl font-bold text-[var(--novar-yellow)] mb-6">Manage Posts</h1>
 
-      {/* Category Selector */}
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className="input-field mb-4"
-      >
-        <option value="community">Community Posts</option>
-        <option value="portfolio">Portfolio Posts</option>
-      </select>
+      {/* Smaller Category Selector - Left Aligned */}
+      <div className="w-full max-w-3xl mt-4 flex">
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="input-field px-3 py-2 border rounded-md w-40"
+        >
+          <option value="community">Community Posts</option>
+          <option value="portfolio">Portfolio Posts</option>
+        </select>
+      </div>
 
       {loading ? (
         <p>Loading posts...</p>

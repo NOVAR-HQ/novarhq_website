@@ -2,19 +2,23 @@
 import { useEffect, useState } from "react";
 import { auth } from "@/firebase/firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import AdminNavbar from "@/components/AdminNavbar";
 
 export default function AdminPage() {
   const [user, setUser] = useState<User | null>(null);
-  const router = useRouter();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user && user.email?.endsWith("@novarhq.com")) {
         setUser(user);
+        setIsAdmin(true);
       } else {
         setUser(null);
+        setIsAdmin(false);
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -35,36 +39,43 @@ export default function AdminPage() {
 
   const handleLogout = async () => {
     await signOut(auth);
-    router.push("/");
+    setUser(null);
+    setIsAdmin(false);
   };
 
+  // Show loading message while checking authentication state
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  // If not logged in or not an admin, show login screen
+  if (!user || !isAdmin) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Admin Login</h1>
+        <p className="mt-2 text-lg">Sign in with your @novarhq.com email.</p>
+        <button onClick={handleLogin} className="mt-4 btn-primary">
+          Sign in
+        </button>
+      </div>
+    );
+  }
+
+  // If logged in as an admin, show the full admin panel
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      {user ? (
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Welcome, {user.displayName}</h1>
-          <p className="mt-2 text-lg">Admin Dashboard</p>
-
-          {/* Admin Navigasjon */}
-          <div className="mt-6 flex flex-col gap-4">
-            <a href="/admin/posts" className="btn-primary">Manage Posts</a>
-            <a href="/admin/forms" className="btn-primary">View Forms</a>
-          </div>
-
-          {/* Logout Knapp */}
-          <button onClick={handleLogout} className="mt-6 btn-inactive">
-            Logout
-          </button>
-        </div>
-      ) : (
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Admin Login</h1>
-          <p className="mt-2 text-lg">Sign in with your @novarhq.com email.</p>
-          <button onClick={handleLogin} className="mt-4 btn-primary">
-            Sign in with Google
-          </button>
-        </div>
-      )}
+    <div>
+      <AdminNavbar />
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Welcome, {user.displayName}</h1>
+        <p className="mt-2 text-lg">You are logged in as an admin.</p>
+        <button onClick={handleLogout} className="mt-4 btn-primary">
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

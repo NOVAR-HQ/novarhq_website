@@ -1,13 +1,20 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function AdminNavbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-[var(--navbar-bg)] text-white py-3 px-6 fixed top-0 w-full z-50 shadow-md">
-      <div className="flex justify-center space-x-6">
+    <nav className="bg-[var(--navbar-bg)] text-white py-3 px-6 fixed top-0 w-full z-50 shadow-md flex items-center justify-between">
+      {/* Novar Banner */}
+      <Link href="/" className="flex items-center">
+        <Image src="/novar-banner.png" alt="Novar Banner" width={150} height={40} />
+      </Link>
+
+      {/* Admin Links */}
+      <div className="flex space-x-6">
         <Link href="/admin" className={`nav-link ${pathname === "/admin" ? "active" : ""}`}>
           Dashboard
         </Link>

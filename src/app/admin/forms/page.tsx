@@ -5,7 +5,7 @@ import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
 export default function AdminFormsPage() {
   const [forms, setForms] = useState<any[]>([]);
-  const [filter, setFilter] = useState("all"); // Standard: Vis alle skjemaer
+  const [filter, setFilter] = useState("all"); // Standard: Show all forms
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,22 +40,25 @@ export default function AdminFormsPage() {
     }
   };
 
-  // Filtrer skjemaene basert på type
-  const filteredForms = forms.filter(
-    (form) => filter === "all" || form.type === filter
-  );
-  
+  // Filter forms by type
+  const filteredForms = forms.filter((form) => filter === "all" || form.type === filter);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Submitted Forms</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center pt-20">
+      <h1 className="text-4xl font-bold text-[var(--novar-yellow)] mb-6">Manage Forms</h1>
 
-      {/* Filter dropdown */}
-      <select value={filter} onChange={(e) => setFilter(e.target.value)} className="input-field mt-4">
-        <option value="all">All Forms</option>
-        <option value="commission">Commission Requests</option>
-        <option value="collaboration">Collaboration Requests</option>
-      </select>
+      {/* Smaller Filter Dropdown - Left Aligned */}
+      <div className="w-full max-w-3xl flex">
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="input-field px-3 py-2 border rounded-md w-40"
+        >
+          <option value="all">All Forms</option>
+          <option value="commission">Commission Requests</option>
+          <option value="collaboration">Collaboration Requests</option>
+        </select>
+      </div>
 
       {loading ? (
         <p className="mt-4">Loading forms...</p>
