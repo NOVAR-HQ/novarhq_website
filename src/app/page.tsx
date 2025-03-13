@@ -37,20 +37,40 @@ export default function Home() {
         // Fetch latest Community post
         const communityQuery = query(collection(db, "community_posts"), orderBy("timestamp", "desc"), limit(1));
         const communitySnapshot = await getDocs(communityQuery);
+        
+        if (!communitySnapshot.empty) {
+          const doc = communitySnapshot.docs[0];
+          const data = doc.data() as DocumentData;
 
-        const latestCommunity: Post | null = communitySnapshot.docs.length > 0
-          ? { id: communitySnapshot.docs[0].id, ...(communitySnapshot.docs[0].data() as DocumentData) }
-          : null;
-        setLatestCommunityPost(latestCommunity);
+          if (data.title && data.description) {
+            setLatestCommunityPost({
+              id: doc.id,
+              title: data.title,
+              description: data.description,
+              imageUrl: data.imageUrl || "/placeholder.png",
+              link: data.link || "/community"
+            });
+          }
+        }
 
         // Fetch latest Portfolio post
         const portfolioQuery = query(collection(db, "portfolio_posts"), orderBy("timestamp", "desc"), limit(1));
         const portfolioSnapshot = await getDocs(portfolioQuery);
 
-        const latestPortfolio: Post | null = portfolioSnapshot.docs.length > 0
-          ? { id: portfolioSnapshot.docs[0].id, ...(portfolioSnapshot.docs[0].data() as DocumentData) }
-          : null;
-        setLatestPortfolioPost(latestPortfolio);
+        if (!portfolioSnapshot.empty) {
+          const doc = portfolioSnapshot.docs[0];
+          const data = doc.data() as DocumentData;
+
+          if (data.title && data.description) {
+            setLatestPortfolioPost({
+              id: doc.id,
+              title: data.title,
+              description: data.description,
+              imageUrl: data.imageUrl || "/placeholder.png",
+              link: data.link || "/portfolio"
+            });
+          }
+        }
       } catch (error) {
         console.error("Error fetching latest posts:", error);
       }
@@ -116,19 +136,17 @@ export default function Home() {
 
         {latestPortfolioPost ? (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
-            {latestPortfolioPost.imageUrl && (
-              <Image
-                src={latestPortfolioPost.imageUrl}
-                alt={latestPortfolioPost.title}
-                width={600}
-                height={400}
-                className="w-full h-48 object-cover mb-4"
-              />
-            )}
+            <Image
+              src={latestPortfolioPost.imageUrl}
+              alt={latestPortfolioPost.title}
+              width={600}
+              height={400}
+              className="w-full h-48 object-cover mb-4"
+            />
             <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
             <p className="mt-2">{latestPortfolioPost.description}</p>
 
-            <Link href={latestPortfolioPost.link ?? "/portfolio"} className="mt-4 inline-block btn-primary">
+            <Link href={latestPortfolioPost.link} className="mt-4 inline-block btn-primary">
               View More
             </Link>
           </div>
@@ -146,36 +164,23 @@ export default function Home() {
 
         {latestCommunityPost ? (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
-            {latestCommunityPost.imageUrl && (
-              <Image
-                src={latestCommunityPost.imageUrl}
-                alt={latestCommunityPost.title}
-                width={600}
-                height={400}
-                className="w-full h-48 object-cover mb-4"
-              />
-            )}
+            <Image
+              src={latestCommunityPost.imageUrl}
+              alt={latestCommunityPost.title}
+              width={600}
+              height={400}
+              className="w-full h-48 object-cover mb-4"
+            />
             <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
             <p className="mt-2">{latestCommunityPost.description}</p>
 
-            <Link href={latestCommunityPost.link ?? "/community"} className="mt-4 inline-block btn-primary">
+            <Link href={latestCommunityPost.link} className="mt-4 inline-block btn-primary">
               View More
             </Link>
           </div>
         ) : (
           <p className="mt-6 text-lg">Loading latest community post...</p>
         )}
-      </section>
-
-      {/* Collab & Commission Section */}
-      <section className="py-20 px-6 text-center">
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Want to work with Novar or need Novar&apos;s help? Let&apos;s create together!
-        </p>
-        <Link href="/collab" className="mt-6 inline-block btn-primary">
-          Get Involved
-        </Link>
       </section>
 
       {/* About Section */}
