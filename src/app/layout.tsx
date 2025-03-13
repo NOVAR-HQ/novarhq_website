@@ -1,6 +1,7 @@
 import "./globals.css";
 import Footer from "@/components/Footer";
 import NavbarSwitcher from "@/components/NavbarSwitcher";
+import BackToTopButton from "@/components/BackToTopButton"; // Import Back to Top button
 
 export const metadata = {
   title: "Novar HQ",
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NavbarSwitcher />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <BackToTopButton /> {/* Added Back to Top button */}
       </body>
     </html>
   );

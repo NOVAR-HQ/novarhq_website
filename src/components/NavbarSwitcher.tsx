@@ -24,12 +24,12 @@ export default function NavbarSwitcher() {
     return () => unsubscribe();
   }, []);
 
-  // ✅ If it's the landing page, HIDE the navbar completely
+  // If it's the landing page, HIDE the navbar completely
   if (isLandingPage) return null;
 
-  // ✅ If it's the admin login page and the user isn't logged in, HIDE the navbar
+  // If it's the admin login page and the user isn't logged in, HIDE the navbar
   if (isAdminLoginPage && !isAuthenticated) return null;
 
-  // ✅ If it's an admin page and the user is authenticated, show the admin navbar
+  // If it's an admin page and the user is authenticated, show the admin navbar
   return isAdminPage && isAuthenticated ? <AdminNavbar /> : <Navbar />;
 }
