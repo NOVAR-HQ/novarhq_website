@@ -4,17 +4,25 @@ import Image from "next/image";
 import { db } from "@/firebase/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
+interface PortfolioPost {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  link?: string;
+}
+
 export default function PortfolioPage() {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState<PortfolioPost[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "portfolio_posts"));
-        const fetchedProjects = querySnapshot.docs.map((doc) => ({
+        const fetchedProjects: PortfolioPost[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...(doc.data() as Omit<PortfolioPost, "id">),
         }));
         setProjects(fetchedProjects);
       } catch (error) {
@@ -45,7 +53,7 @@ export default function PortfolioPage() {
           projects.map((project) => (
             <a
               key={project.id}
-              href={project.link}
+              href={project.link ?? "#"}
               target="_blank"
               rel="noopener noreferrer"
               className="box has-link block"
@@ -60,7 +68,6 @@ export default function PortfolioPage() {
                   className="w-full h-48 object-cover mb-4"
                 />
               ) : (
-                // Use a placeholder image if none is available
                 <Image
                   src="/placeholder.png"
                   alt="Placeholder Image"

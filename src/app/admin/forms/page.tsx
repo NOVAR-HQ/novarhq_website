@@ -3,19 +3,27 @@ import { useState, useEffect } from "react";
 import { db } from "@/firebase/firebaseConfig";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 
+interface FormData {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  type: string;
+}
+
 export default function AdminFormsPage() {
-  const [forms, setForms] = useState<any[]>([]);
-  const [filter, setFilter] = useState("all"); // Standard: Show all forms
-  const [loading, setLoading] = useState(true);
+  const [forms, setForms] = useState<FormData[]>([]);
+  const [filter, setFilter] = useState<string>("all");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchForms = async () => {
       setLoading(true);
       try {
         const querySnapshot = await getDocs(collection(db, "forms"));
-        const fetchedForms = querySnapshot.docs.map((doc) => ({
+        const fetchedForms: FormData[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...(doc.data() as Omit<FormData, "id">),
         }));
         setForms(fetchedForms);
       } catch (error) {
@@ -28,9 +36,7 @@ export default function AdminFormsPage() {
   }, []);
 
   const handleDelete = async (id: string) => {
-    const confirmDelete = confirm("Are you sure you want to delete this form?");
-    if (!confirmDelete) return;
-
+    if (!confirm("Are you sure you want to delete this form?")) return;
     try {
       await deleteDoc(doc(db, "forms", id));
       setForms(forms.filter((form) => form.id !== id));
@@ -40,15 +46,12 @@ export default function AdminFormsPage() {
     }
   };
 
-  // Filter forms by type
   const filteredForms = forms.filter((form) => filter === "all" || form.type === filter);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center pt-20">
-      <h1 className="text-4xl font-bold text-[var(--novar-yellow)] mb-6">Manage Forms</h1>
-
-      {/* Smaller Filter Dropdown - Left Aligned */}
-      <div className="w-full max-w-3xl flex">
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold text-[var(--novar-yellow)]">Submitted Forms</h1>
+      <div className="w-full max-w-3xl mt-4 flex">
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}

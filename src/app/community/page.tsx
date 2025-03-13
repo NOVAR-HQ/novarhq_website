@@ -4,14 +4,21 @@ import { db } from "@/firebase/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
 
+interface CommunityPost {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+}
+
 export default function CommunityPage() {
-  const [firebasePosts, setFirebasePosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [firebasePosts, setFirebasePosts] = useState<CommunityPost[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // Hardcoded projects (keep these)
   const hardcodedProjects = [
     { 
-      id: 1, 
+      id: "1", 
       title: "The Last Hope | A The Last of Us Inspired Short Film", 
       creator: "Yousef Mirza", 
       description: "An original short film based on the hit game series The Last of Us. Written by Yousef Mirza, Produced by Yousef Mirza and GFF. Made by fans, for fans.", 
@@ -19,7 +26,7 @@ export default function CommunityPage() {
       link: "https://www.youtube.com/watch?v=H1lN3PLcokQ"
     },
     { 
-      id: 2, 
+      id: "2", 
       title: "Katroa - A Star Wars Fan Film", 
       creator: "Sam Kesch and Yousef Mirza", 
       description: "A collaboration between actors, cosplayers, and Star Wars fans.", 
@@ -34,9 +41,9 @@ export default function CommunityPage() {
       setLoading(true);
       try {
         const querySnapshot = await getDocs(collection(db, "community_posts"));
-        const fetchedPosts = querySnapshot.docs.map((doc) => ({
+        const fetchedPosts: CommunityPost[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...(doc.data() as Omit<CommunityPost, "id">),
         }));
         setFirebasePosts(fetchedPosts);
       } catch (error) {

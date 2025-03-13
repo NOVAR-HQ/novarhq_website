@@ -22,7 +22,7 @@ export default function AdminNavbar() {
           Manage Posts
         </Link>
         <Link href="/admin/forms" className={`nav-link ${pathname === "/admin/forms" ? "active" : ""}`}>
-          View Forms
+          Manage Forms
         </Link>
       </div>
 

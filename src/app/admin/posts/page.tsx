@@ -5,10 +5,17 @@ import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firesto
 import { ref, deleteObject } from "firebase/storage";
 import Image from "next/image";
 
+interface PostData {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+}
+
 export default function AdminPosts() {
-  const [posts, setPosts] = useState<any[]>([]);
-  const [category, setCategory] = useState("community"); // Default category
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const [category, setCategory] = useState<string>("community");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,9 +23,9 @@ export default function AdminPosts() {
       try {
         const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
         const querySnapshot = await getDocs(collection(db, collectionPath));
-        const fetchedPosts = querySnapshot.docs.map((doc) => ({
+        const fetchedPosts: PostData[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...(doc.data() as Omit<PostData, "id">),
         }));
         setPosts(fetchedPosts);
       } catch (error) {
@@ -31,8 +38,7 @@ export default function AdminPosts() {
   }, [category]);
 
   const handleDelete = async (postId: string, imageUrl?: string) => {
-    const confirmDelete = confirm("Are you sure you want to delete this post?");
-    if (!confirmDelete) return;
+    if (!confirm("Are you sure you want to delete this post?")) return;
 
     try {
       const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
@@ -51,41 +57,12 @@ export default function AdminPosts() {
     }
   };
 
-  const handleEdit = async (postId: string) => {
-    const newTitle = prompt("Enter new title:");
-    const newDescription = prompt("Enter new description:");
-    if (!newTitle || !newDescription) return;
-
-    try {
-      const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
-      await updateDoc(doc(db, collectionPath, postId), {
-        title: newTitle,
-        description: newDescription,
-      });
-
-      setPosts(
-        posts.map((post) =>
-          post.id === postId ? { ...post, title: newTitle, description: newDescription } : post
-        )
-      );
-      alert("Post updated successfully.");
-    } catch (error) {
-      console.error("Error updating post:", error);
-      alert("Failed to update post.");
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center pt-20">
       <h1 className="text-4xl font-bold text-[var(--novar-yellow)] mb-6">Manage Posts</h1>
 
-      {/* Smaller Category Selector - Left Aligned */}
       <div className="w-full max-w-3xl mt-4 flex">
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="input-field px-3 py-2 border rounded-md w-40"
-        >
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="input-field px-3 py-2 border rounded-md w-40">
           <option value="community">Community Posts</option>
           <option value="portfolio">Portfolio Posts</option>
         </select>
@@ -111,9 +88,6 @@ export default function AdminPosts() {
               <h2 className="text-xl font-bold">{post.title}</h2>
               <p className="mt-2">{post.description}</p>
               <div className="mt-2 flex space-x-4">
-                <button onClick={() => handleEdit(post.id)} className="btn-primary">
-                  Edit
-                </button>
                 <button onClick={() => handleDelete(post.id, post.imageUrl)} className="btn-inactive">
                   Delete
                 </button>
