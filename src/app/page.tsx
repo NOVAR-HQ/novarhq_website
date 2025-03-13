@@ -1,13 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { FaInstagram, FaYoutube, FaGithub, FaArrowDown } from "react-icons/fa";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Image from "next/image"; // Now used properly
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(true);
-  const router = useRouter();
-  const [isTrustedDevice, setIsTrustedDevice] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,34 +17,24 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Check if the device is trusted
-    const trustedDevices = JSON.parse(localStorage.getItem("trustedDevices") || "[]");
-    if (trustedDevices.includes("my-laptop") || trustedDevices.includes("my-phone")) {
-      setIsTrustedDevice(true);
-    }
-  }, []);
-
-  const handleLogoClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent default navigation
-    if (isTrustedDevice) {
-      router.push("/admin");
-    } else {
-      router.push("/"); // Redirect unauthorized users back to home
-    }
+  const handleScrollDown = () => {
+    window.scrollBy({
+      top: window.innerHeight * 0.5, // Scrolls down half the viewport height
+      behavior: "smooth",
+    });
   };
 
   return (
     <div className="bg-[var(--novar-blue)] text-white">
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center relative">
-        {/* Secure Novar Banner */}
-        <a href="#" onClick={handleLogoClick} className="flex justify-center">
+        {/* Novar Banner with Next.js <Image /> Optimization */}
+        <a href="/admin-landing" className="flex justify-center">
           <Image 
             src="/novar-banner.png"
             alt="Novar Banner"
-            width={600}
-            height={150}
+            width={600} // Adjusted for better responsiveness
+            height={150} // Scales properly
             priority
             className="max-w-[80vw] md:max-w-[500px] lg:max-w-[600px] h-auto"
           />
@@ -71,7 +58,7 @@ export default function Home() {
         {/* Clickable Scroll Button */}
         {isVisible && (
           <button
-            onClick={() => window.scrollBy({ top: window.innerHeight * 0.5, behavior: "smooth" })}
+            onClick={handleScrollDown}
             className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-[var(--novar-yellow)] text-white p-3 rounded-full shadow-md animate-bounce"
             aria-label="Scroll Down"
           >
@@ -99,3 +86,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+
