@@ -110,7 +110,7 @@ export default function Home() {
       {/* Portfolio Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
-        <p className="text-lg text-secondary">Explore Novar's past, present, and future projects.</p>
+        <p className="text-lg text-secondary">Explore Novar&apos;s past, present, and future projects.</p>
 
         {latestPortfolioPost ? (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
@@ -138,7 +138,7 @@ export default function Home() {
       {/* Community Section */}
       <section className="py-20 px-6 text-center">
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
-        <p className="text-lg text-secondary">Join Novar's creative community and share your projects.</p>
+        <p className="text-lg text-secondary">Join Novar&apos;s creative community and share your projects.</p>
 
         {latestCommunityPost ? (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
