@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation"; //  Import pathname to check the current page
+import { usePathname } from "next/navigation"; // Import pathname to check the current page
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,14 +11,15 @@ export default function Navbar() {
 
   return (
     <nav className="fixed w-full top-0 shadow-md z-50 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]">
-      {/* Novar Icon Always in Navbar */}
+      {/* Novar Banner Always in Navbar */}
       <Link href="/">
         <Image 
-          src="/novar-icon.png"
-          alt="Novar Icon" 
-          width={50} 
-          height={50} 
+          src="/novar-banner.png" 
+          alt="Novar Banner" 
+          width={150} 
+          height={40} 
           priority 
+          className="h-auto max-w-[50vw] md:max-w-[150px]" 
         />
       </Link>
 

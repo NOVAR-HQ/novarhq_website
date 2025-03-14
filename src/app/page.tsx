@@ -90,14 +90,14 @@ export default function Home() {
     <div className="bg-[var(--novar-blue)] text-white">
       {/* Hero Section */}
       <section className="h-screen flex flex-col items-center justify-center text-center relative">
-        <Link href="/" className="flex justify-center">
+      <Link href="/" className="flex justify-center">
           <Image 
-            src="/novar-banner.png"
-            alt="Novar Banner"
-            width={600}
-            height={150}
+            src="/novar-icon.png"
+            alt="Novar Icon"
+            width={100}
+            height={100}
             priority
-            className="max-w-[80vw] md:max-w-[500px] lg:max-w-[600px] h-auto"
+            className="h-auto max-w-[50vw] md:max-w-[100px]"
           />
         </Link>
         <p className="text-2xl mt-4">Creativity meets Technology</p>
