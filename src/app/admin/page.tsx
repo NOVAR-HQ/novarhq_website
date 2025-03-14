@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; // Import Next.js router
 import { auth } from "@/firebase/firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, User } from "firebase/auth";
 import AdminNavbar from "@/components/AdminNavbar";
@@ -8,6 +9,7 @@ export default function AdminPage() {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const router = useRouter(); // Initialize router
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -29,7 +31,7 @@ export default function AdminPage() {
     try {
       const result = await signInWithPopup(auth, provider);
       if (!result.user.email?.endsWith("@novarhq.com")) {
-        alert("Only authorized emails are allowed, pleae contact Admin.");
+        alert("Only authorized emails are allowed, please contact Admin.");
         await signOut(auth);
       }
     } catch (error) {
@@ -41,6 +43,10 @@ export default function AdminPage() {
     await signOut(auth);
     setUser(null);
     setIsAdmin(false);
+  };
+
+  const handleBack = () => {
+    router.push("/"); // Redirects to main page
   };
 
   // Show loading message while checking authentication state
@@ -58,9 +64,15 @@ export default function AdminPage() {
       <div className="min-h-screen flex flex-col items-center justify-center px-6">
         <h1 className="text-4xl font-bold text-[var(--novar-yellow)] text-center">Admin Login</h1>
         <p className="mt-2 text-lg text-center">Sign in with your authorized Novar account.</p>
-        <button onClick={handleLogin} className="mt-4 btn-primary">
-          Sign in
-        </button>
+        
+        <div className="flex flex-col mt-4 space-y-3">
+          <button onClick={handleLogin} className="btn-primary">
+            Sign in
+          </button>
+          <button onClick={handleBack} className="btn-inactive">
+            Back
+          </button>
+        </div>
       </div>
     );
   }
