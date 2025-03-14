@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { db } from "@/firebase/firebaseConfig";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import Image from "next/image";
@@ -58,34 +59,70 @@ export default function CommunityPage() {
   }, []);
 
   return (
-    <div className="min-h-screen py-20 px-6 bg-primary text-primary">
-      <div className="max-w-4xl mx-auto text-center">
+    <motion.div
+      className="min-h-screen py-20 px-6 bg-primary text-primary"
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <motion.div
+        className="max-w-4xl mx-auto text-center"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <h1 className="text-5xl font-bold mb-6 text-[var(--novar-yellow)]">Novar Community</h1>
         <p className="text-lg text-secondary">
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
 
-        {/* Discord Button (Unchanged) */}
-        <div className="mt-6 flex justify-center">
+        {/* Discord Button (Animated separately) */}
+        <motion.div
+          className="mt-6 flex justify-center"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           <a 
             href="https://discord.gg/gGufQ9p7Ak"
             target="_blank" 
             rel="noopener noreferrer"
-            className="bg-[var(--discord-blue)] hover:brightness-110 px-4 py-2 rounded-lg text-white font-bold flex items-center space-x-2 w-fit">
+            className="bg-[var(--discord-blue)] hover:brightness-110 px-4 py-2 rounded-lg text-white font-bold flex items-center space-x-2 w-fit"
+          >
             <Image src="/discord-icon.png" alt="Discord" width={20} height={20} />
             <span>Join Our Discord</span>
           </a>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Community Posts Section */}
-      <div className="mt-16 max-w-5xl mx-auto">
-        <h1 className="text-4xl font-semibold mb-6 text-center text-accent"> Your Featured Projects: </h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <motion.div
+        className="mt-16 max-w-5xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
+        <h1 className="text-4xl font-semibold mb-6 text-center text-accent">Your Featured Projects:</h1>
+
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0, y: 10 },
+            visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.2 } }
+          }}
+        >
           {/* Hardcoded Projects */}
           {hardcodedProjects.map((project) => (
-            <a key={project.id} href={project.link} target="_blank" rel="noopener noreferrer" className="box has-link block">
+            <motion.a 
+              key={project.id}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="box has-link block"
+              variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+            >
               <Image 
                 src={project.image} 
                 alt={project.title} 
@@ -96,17 +133,25 @@ export default function CommunityPage() {
               <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
               <p className="text-secondary">By {project.creator}</p>
               <p className="mt-2">{project.description}</p>
-            </a>
+            </motion.a>
           ))}
 
           {/* Firebase Projects - Sorted from latest to oldest */}
           {loading ? (
-            <p className="text-center col-span-2">Loading posts...</p>
+            <motion.p className="text-center col-span-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+              Loading posts...
+            </motion.p>
           ) : firebasePosts.length === 0 ? (
-            <p className="text-center col-span-2">No posts yet.</p>
+            <motion.p className="text-center col-span-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+              No posts yet.
+            </motion.p>
           ) : (
             firebasePosts.map((post) => (
-              <div key={post.id} className="box has-link p-4">
+              <motion.div
+                key={post.id}
+                className="box has-link p-4"
+                variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0 } }}
+              >
                 {post.imageUrl && (
                   <Image
                     src={post.imageUrl}
@@ -118,11 +163,11 @@ export default function CommunityPage() {
                 )}
                 <h3 className="text-2xl font-bold">{post.title}</h3>
                 <p className="mt-2">{post.description}</p>
-              </div>
+              </motion.div>
             ))
           )}
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }

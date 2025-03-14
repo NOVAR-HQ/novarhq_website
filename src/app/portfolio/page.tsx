@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { db } from "@/firebase/firebaseConfig";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
@@ -37,28 +38,51 @@ export default function PortfolioPage() {
   }, []);
 
   return (
-    <div className="min-h-screen py-20 px-6 bg-primary text-primary">
+    <motion.div
+      className="min-h-screen py-20 px-6 bg-primary text-primary"
+      initial={{ opacity: 0, scale: 0.98 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <div className="max-w-5xl mx-auto text-center">
-        <h1 className="text-5xl font-bold mb-6 text-[var(--novar-yellow)]">Portfolio</h1>
-        <p className="text-lg text-secondary">
+        <motion.h1 
+          className="text-5xl font-bold mb-6 text-[var(--novar-yellow)]"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Portfolio
+        </motion.h1>
+        <motion.p 
+          className="text-lg text-secondary"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
           Explore Novar&apos;s projects across cosplay, filmmaking, coding, and more.
-        </p>
+        </motion.p>
       </div>
 
-      {/* Portfolio Projects */}
-      <div className="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <motion.div
+        className="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      >
         {loading ? (
           <p className="text-center text-lg">Loading projects...</p>
         ) : projects.length === 0 ? (
           <p className="text-center text-lg">No projects available.</p>
         ) : (
           projects.map((project) => (
-            <a
+            <motion.a
               key={project.id}
               href={project.link ?? "#"}
               target="_blank"
               rel="noopener noreferrer"
               className="box has-link block"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
             >
               {project.imageUrl ? (
                 <Image
@@ -79,10 +103,10 @@ export default function PortfolioPage() {
               )}
               <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
               <p className="mt-2">{project.description}</p>
-            </a>
+            </motion.a>
           ))
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
