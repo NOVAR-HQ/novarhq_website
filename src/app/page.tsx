@@ -157,7 +157,7 @@ export default function Home() {
         transition={{ duration: 1, delay: 0.5 }}
       >
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
-        <p className="text-lg text-secondary">Explore Novar's past, present, and future projects.</p>
+        <p className="text-lg text-secondary">Explore Novar&apos;s past, present, and future projects.</p>
 
         {latestPortfolioPost && (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
@@ -183,7 +183,7 @@ export default function Home() {
         transition={{ duration: 1, delay: 0.7 }}
       >
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
-        <p className="text-lg text-secondary">Join Novar's creative community and share your projects.</p>
+        <p className="text-lg text-secondary">Join Novar&apos;s creative community and share your projects.</p>
 
         {latestCommunityPost && (
           <div className="box has-link block mx-auto mt-6 max-w-3xl">
@@ -228,7 +228,7 @@ export default function Home() {
 
         <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
         <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Learn more about Novar and our mission.
+          Learn more about Novar&apos;s mission.
         </p>
         <Link href="/about" className="mt-6 inline-block btn-primary">
           Learn More
