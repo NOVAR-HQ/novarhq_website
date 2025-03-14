@@ -46,7 +46,7 @@ export default function AdminPage() {
   };
 
   const handleBack = () => {
-    router.push("/"); // Redirects to main page
+    router.push("/admin-landing"); // Redirects to Admin Landing Page
   };
 
   // Show loading message while checking authentication state
@@ -65,11 +65,11 @@ export default function AdminPage() {
         <h1 className="text-4xl font-bold text-[var(--novar-yellow)] text-center">Admin Login</h1>
         <p className="mt-2 text-lg text-center">Sign in with your authorized Novar account.</p>
         
-        <div className="flex flex-col mt-4 space-y-3">
-          <button onClick={handleLogin} className="btn-primary">
+        <div className="flex flex-col mt-4 space-y-3 w-full max-w-xs">
+          <button onClick={handleLogin} className="btn-primary w-full">
             Sign in
           </button>
-          <button onClick={handleBack} className="btn-inactive">
+          <button onClick={handleBack} className="btn-primary w-full">
             Back
           </button>
         </div>
