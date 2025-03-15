@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation"; // Import pathname to check the current page
+import { motion } from "framer-motion"; // Import Framer Motion for animations
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +11,12 @@ export default function Navbar() {
   const isHomePage = pathname === "/"; // Check if it's the homepage
 
   return (
-    <nav className="fixed w-full top-0 shadow-md z-50 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]">
+    <motion.nav 
+      className="fixed w-full top-0 shadow-md z-50 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]"
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       {/* Novar Banner Always in Navbar */}
       <Link href="/">
         <Image 
@@ -41,7 +47,12 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-[var(--navbar-bg)] p-4 shadow-md">
+        <motion.div 
+          className="absolute top-full left-0 w-full bg-[var(--navbar-bg)] p-4 shadow-md"
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ duration: 1 }}
+        >
           {!isHomePage && ( // Show "Home" in mobile menu too if NOT on the homepage
             <Link href="/" className="block py-2 hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>
               Home
@@ -51,8 +62,8 @@ export default function Navbar() {
           <Link href="/community" className="block py-2 hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>Community</Link>
           <Link href="/collab" className="block py-2 hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>Collab & Commission</Link>
           <Link href="/about" className="block py-2 hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>About</Link>
-        </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 }
