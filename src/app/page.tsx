@@ -95,7 +95,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.8, y: -50 }} 
             animate={{ opacity: 1, scale: 1, y: 0 }} 
-            transition={{ duration: 1.5 }}
+            transition={{ duration: 1.5, delay: 1 }}
           >
             <Image 
               src="/novar-icon.png"
