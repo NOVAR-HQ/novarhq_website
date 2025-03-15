@@ -2,20 +2,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation"; // Import pathname to check the current page
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion"; // Import Framer Motion for animations
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname(); // Get current path
-  const isHomePage = pathname === "/"; // Check if it's the homepage
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   return (
     <motion.nav 
       className="fixed w-full top-0 shadow-md z-50 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]"
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
-      transition={{ duration: 1.2, ease: "easeOut" }} // Slower fade-in effect
+      transition={{ duration: 0.8, delay: 0.8 }} // Slightly faster transition
     >
       {/* Novar Banner Always in Navbar */}
       <Link href="/">
@@ -31,7 +31,7 @@ export default function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-6">
-        {!isHomePage && ( // Show "Home" only if NOT on the homepage
+        {!isHomePage && (
           <Link href="/" className="hover:text-[var(--novar-yellow)]">Home</Link>
         )}
         <Link href="/portfolio" className="hover:text-[var(--novar-yellow)]">Portfolio</Link>
@@ -51,9 +51,9 @@ export default function Navbar() {
           className="absolute top-full left-0 w-full bg-[var(--navbar-bg)] p-4 shadow-md"
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
-          transition={{ duration: 0.6 }} // Slightly slower fade-in for the mobile menu
+          transition={{ duration: 0.5 }} // Also slightly faster for better feel
         >
-          {!isHomePage && ( // Show "Home" in mobile menu too if NOT on the homepage
+          {!isHomePage && (
             <Link href="/" className="block py-2 hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>
               Home
             </Link>
