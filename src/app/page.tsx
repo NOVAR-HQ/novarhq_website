@@ -109,12 +109,13 @@ export default function Home() {
         </Link>
         <motion.p 
           className="text-2xl mt-4" 
-          initial={{ y: 30, opacity: 0 }} 
-          animate={{ y: 0, opacity: 1 }} 
-          transition={{ duration: 1. }}
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          transition={{ duration: 1 }}
         >
           Creativity meets Technology
         </motion.p>
+
         
         {/* Social Media Icons */}
         <motion.div 
