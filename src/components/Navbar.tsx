@@ -51,7 +51,7 @@ export default function Navbar() {
           className="absolute top-full left-0 w-full bg-[var(--navbar-bg)] p-4 shadow-md"
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
-          transition={{ duration: 1 }}
+          transition={{ duration: 10 }}
         >
           {!isHomePage && ( // Show "Home" in mobile menu too if NOT on the homepage
             <Link href="/" className="block py-2 hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>
