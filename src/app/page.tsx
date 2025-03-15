@@ -95,7 +95,7 @@ export default function Home() {
           <motion.div 
             initial={{ opacity: 0, scale: 0.8, y: -50 }} 
             animate={{ opacity: 1, scale: 1, y: 0 }} 
-            transition={{ duration: 1.5, delay: 1 }}
+            transition={{ duration: 1.2, delay: 1 }}
           >
             <Image 
               src="/novar-icon.png"
@@ -111,7 +111,7 @@ export default function Home() {
           className="text-2xl mt-4" 
           initial={{ y: 30, opacity: 0 }} 
           animate={{ y: 0, opacity: 1 }} 
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1. }}
         >
           Creativity meets Technology
         </motion.p>
@@ -121,7 +121,7 @@ export default function Home() {
           className="mt-6 flex space-x-6" 
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 1.5, delay: 0.5 }}
+          transition={{ duration: 1.5, delay: 0.7 }}
         >
           <a href="https://github.com/NOVAR-HQ" target="_blank" rel="noopener noreferrer">
             <FaGithub className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
