@@ -15,7 +15,7 @@ export default function Navbar() {
       className="fixed w-full top-0 shadow-md z-50 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]"
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 1.2, ease: "easeOut" }} // Slower fade-in effect
     >
       {/* Novar Banner Always in Navbar */}
       <Link href="/">
@@ -51,7 +51,7 @@ export default function Navbar() {
           className="absolute top-full left-0 w-full bg-[var(--navbar-bg)] p-4 shadow-md"
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
-          transition={{ duration: 10 }}
+          transition={{ duration: 0.6 }} // Slightly slower fade-in for the mobile menu
         >
           {!isHomePage && ( // Show "Home" in mobile menu too if NOT on the homepage
             <Link href="/" className="block py-2 hover:text-[var(--novar-yellow)]" onClick={() => setIsOpen(false)}>
