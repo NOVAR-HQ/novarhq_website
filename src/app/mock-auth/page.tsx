@@ -5,7 +5,6 @@ import { db } from "@/firebase/firebaseConfig";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 
 export default function MockAuthPage() {
-  const [authType, setAuthType] = useState<"login" | "register">("login"); // Toggle state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
@@ -24,13 +23,13 @@ export default function MockAuthPage() {
     return true;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (type: "register" | "login") => {
     if (!validateInput()) return;
 
     try {
       const usersRef = collection(db, "mock_users");
 
-      if (authType === "login") {
+      if (type === "login") {
         // Check if user exists in Firestore
         const q = query(usersRef, where("email", "==", email));
         const querySnapshot = await getDocs(q);
@@ -69,26 +68,6 @@ export default function MockAuthPage() {
         Mock Login & Register
       </h1>
 
-      {/* Toggle Buttons */}
-      <div className="mt-6 flex justify-center space-x-4">
-        <button
-          onClick={() => setAuthType("login")}
-          className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
-            authType === "login" ? "btn-primary" : "btn-inactive"
-          }`}
-        >
-          Login
-        </button>
-        <button
-          onClick={() => setAuthType("register")}
-          className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
-            authType === "register" ? "btn-primary" : "btn-inactive"
-          }`}
-        >
-          Register
-        </button>
-      </div>
-
       {message && <p className="mt-4 text-green-500">{message}</p>}
 
       <div className="mt-6 w-full max-w-xs flex flex-col">
@@ -114,8 +93,17 @@ export default function MockAuthPage() {
           className="input-field p-2 border rounded-md mt-2"
         />
 
-        <button onClick={handleSubmit} className="mt-4 btn-primary w-full">
-          {authType === "login" ? "Login" : "Register"}
+        <button
+          onClick={() => handleSubmit("register")}
+          className="mt-4 btn-primary w-full"
+        >
+          Register
+        </button>
+        <button
+          onClick={() => handleSubmit("login")}
+          className="mt-2 btn-secondary w-full"
+        >
+          Login
         </button>
       </div>
     </div>
