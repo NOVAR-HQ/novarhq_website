@@ -9,6 +9,7 @@ interface PortfolioPost {
   id: string;
   title: string;
   description: string;
+  creator?: string; // Added creator field
   imageUrl?: string;
   link?: string;
 }
@@ -25,7 +26,7 @@ export default function PortfolioPage() {
         );
         const fetchedProjects: PortfolioPost[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...(doc.data() as Omit<PortfolioPost, "id">),
+          ...doc.data() as Omit<PortfolioPost, "id">, // Fetching all fields, including `creator`
         }));
         setProjects(fetchedProjects);
       } catch (error) {
@@ -102,6 +103,7 @@ export default function PortfolioPage() {
                 />
               )}
               <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
+              {project.creator && <p className="text-secondary">By {project.creator}</p>} {/* Display creator's name */}
               <p className="mt-2">{project.description}</p>
             </motion.a>
           ))

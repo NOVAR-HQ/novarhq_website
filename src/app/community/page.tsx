@@ -9,6 +9,7 @@ interface CommunityPost {
   id: string;
   title: string;
   description: string;
+  creator?: string; // Added creator field
   imageUrl?: string;
 }
 
@@ -46,7 +47,7 @@ export default function CommunityPage() {
         );
         const fetchedPosts: CommunityPost[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...(doc.data() as Omit<CommunityPost, "id">),
+          ...doc.data() as Omit<CommunityPost, "id">, // Fetching all fields, including `creator`
         }));
         setFirebasePosts(fetchedPosts);
       } catch (error) {
@@ -102,7 +103,7 @@ export default function CommunityPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
       >
-        <h1 className="text-4xl font-semibold mb-6 text-center text-accent">Your Featured Projects:</h1>
+        <h1 className="text-4xl font-semibold mb-6 text-center text-accent"> Featured Projects:</h1>
 
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 gap-8"
@@ -162,6 +163,7 @@ export default function CommunityPage() {
                   />
                 )}
                 <h3 className="text-2xl font-bold">{post.title}</h3>
+                {post.creator && <p className="text-secondary">By {post.creator}</p>} {/* Display creator's name */}
                 <p className="mt-2">{post.description}</p>
               </motion.div>
             ))
