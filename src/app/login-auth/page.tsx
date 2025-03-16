@@ -12,6 +12,10 @@ export default function MockAuthPage() {
   const router = useRouter();
 
   const validateInput = () => {
+    if (!email.endsWith("@gmail.com")) {
+      alert("Only @gmail.com email addresses are allowed.");
+      return false;
+    }
     if (!email.includes("@") || !email.includes(".")) {
       alert("Please enter a valid email address.");
       return false;
@@ -65,7 +69,7 @@ export default function MockAuthPage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6">
       <h1 className="text-4xl font-bold text-[var(--novar-yellow)] text-center">
-        Mock Login & Register
+        Google Login:
       </h1>
 
       {message && <p className="mt-4 text-green-500">{message}</p>}
