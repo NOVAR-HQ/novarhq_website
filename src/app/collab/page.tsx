@@ -1,122 +1,100 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { db } from "@/firebase/firebaseConfig";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
-export default function MockAuthPage() {
-  const [authType, setAuthType] = useState<"login" | "register">("login"); // Toggle state
+export default function CollabPage() {
+  const [formType, setFormType] = useState("collaboration");
+  const [commissionType, setCommissionType] = useState("Advertisement");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [message, setMessage] = useState("");
-  const router = useRouter();
+  const [details, setDetails] = useState("");
 
-  const validateInput = () => {
-    if (!email.includes("@") || !email.includes(".")) {
-      alert("Please enter a valid email address.");
-      return false;
-    }
-    if (phone.length < 8 || isNaN(Number(phone))) {
-      alert("Phone number must be at least 8 digits long.");
-      return false;
-    }
-    return true;
-  };
-
-  const handleSubmit = async () => {
-    if (!validateInput()) return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const formData = {
+      name,
+      email,
+      details,
+      type: formType, // Sørger for at type = "collaboration" eller "commission"
+      commissionType: formType === "commission" ? commissionType : null, // Kun for commissions
+      timestamp: new Date(),
+    };
 
     try {
-      const usersRef = collection(db, "mock_users");
-
-      if (authType === "login") {
-        // Check if user exists in Firestore
-        const q = query(usersRef, where("email", "==", email));
-        const querySnapshot = await getDocs(q);
-
-        if (querySnapshot.empty) {
-          alert("No account found. Please register.");
-          return;
-        }
-
-        alert("Login successful! Redirecting to Novar HQ...");
-        router.push("/"); // Redirect to Novar main page
-        return;
-      }
-
-      // Register User
-      await addDoc(usersRef, {
-        email,
-        password, // ⚠️ UNHASHED - FOR TESTING ONLY
-        phone,
-        createdAt: new Date().toISOString(),
-      });
-
-      setMessage("Thanks for signing up!");
+      await addDoc(collection(db, "forms"), formData);
+      alert("Form submitted successfully!");
+      setName("");
       setEmail("");
-      setPassword("");
-      setPhone("");
+      setDetails("");
+      setCommissionType("Advertisement");
     } catch (error) {
-      console.error("Error saving user data:", error);
-      setMessage("Something went wrong. Try again.");
+      console.error("Error submitting form:", error);
+      alert("Failed to submit form.");
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6">
-      <h1 className="text-4xl font-bold text-[var(--novar-yellow)] text-center">
-        Mock Login & Register
-      </h1>
+    <div className="min-h-screen py-20 px-6 bg-primary text-primary">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-5xl font-bold mb-6">Collab & Commission</h2>
+        <p className="text-lg text-secondary">
+          Want to work with Novar? Choose whether you want to collaborate or request a commission.
+        </p>
 
-      {/* Toggle Buttons */}
-      <div className="mt-6 flex justify-center space-x-4">
-        <button
-          onClick={() => setAuthType("login")}
-          className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
-            authType === "login" ? "btn-primary" : "btn-inactive"
-          }`}
-        >
-          Login
-        </button>
-        <button
-          onClick={() => setAuthType("register")}
-          className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
-            authType === "register" ? "btn-primary" : "btn-inactive"
-          }`}
-        >
-          Register
-        </button>
+        {/* Toggle Buttons */}
+        <div className="mt-6 flex justify-center space-x-4">
+          <button
+            onClick={() => setFormType("collaboration")}
+            className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
+              formType === "collaboration" ? "btn-primary" : "btn-inactive"
+            }`}
+          >
+            Collaboration Form
+          </button>
+          <button
+            onClick={() => setFormType("commission")}
+            className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
+              formType === "commission" ? "btn-primary" : "btn-inactive"
+            }`}
+          >
+            Commission Form
+          </button>
+        </div>
       </div>
 
-      {message && <p className="mt-4 text-green-500">{message}</p>}
+      {/* Forms */}
+      <div className="max-w-3xl mx-auto mt-10 box">
+        <form onSubmit={handleSubmit}>
+          <h2 className="text-3xl font-semibold mb-4 text-accent">
+            {formType === "collaboration" ? "Collaboration Form" : "Commission Form"}
+          </h2>
 
-      <div className="mt-6 w-full max-w-xs flex flex-col">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="input-field p-2 border rounded-md mt-2"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="input-field p-2 border rounded-md mt-2"
-        />
-        <input
-          type="tel"
-          placeholder="Phone Number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="input-field p-2 border rounded-md mt-2"
-        />
+          <label className="block mb-2 text-lg">Your Name</label>
+          <input type="text" className="input-field mb-4" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} required />
 
-        <button onClick={handleSubmit} className="mt-4 btn-primary w-full">
-          {authType === "login" ? "Login" : "Register"}
-        </button>
+          <label className="block mb-2 text-lg">Your Email</label>
+          <input type="email" className="input-field mb-4" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+
+          {formType === "commission" && (
+            <>
+              <label className="block mb-2 text-lg">Type of Commission</label>
+              <select className="input-field mb-4" value={commissionType} onChange={(e) => setCommissionType(e.target.value)} required>
+                <option value="Advertisement">Advertisement</option>
+                <option value="Photoshoot">Photoshoot</option>
+                <option value="Short Film">Short Film</option>
+                <option value="3D Printing">3D Printing</option>
+                <option value="Prop Making">Prop Making</option>
+              </select>
+            </>
+          )}
+
+          <label className="block mb-2 text-lg">Details</label>
+          <textarea className="input-field mb-4" rows={4} placeholder="Describe what you need" value={details} onChange={(e) => setDetails(e.target.value)} required></textarea>
+
+          <button type="submit" className="w-full mt-4 btn-primary">Submit</button>
+        </form>
       </div>
     </div>
   );
