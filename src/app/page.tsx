@@ -201,7 +201,7 @@ export default function Home() {
               alt={latestPortfolioPost.title}
               width={600}
               height={400}
-              className="w-full h-120 object-cover mb-4"
+              className="w-full h-48 object-cover mb-4"
             />
             <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
             <p className="mt-2">{latestPortfolioPost.description}</p>
@@ -227,7 +227,7 @@ export default function Home() {
               alt={latestCommunityPost.title}
               width={600}
               height={400}
-              className="w-full h-120 object-cover mb-4"
+              className="w-full h-48 object-cover mb-4"
             />
             <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
             <p className="mt-2">{latestCommunityPost.description}</p>
