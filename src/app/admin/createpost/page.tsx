@@ -8,10 +8,10 @@ import { uploadToFirebaseStorage } from "@/utils/uploadImage"; // Import fixed u
 export default function CreatePostPage() {
   const router = useRouter();
   const [title, setTitle] = useState<string>("");
-  const [creator, setCreator] = useState<string>(""); // New field for creator
+  const [creator, setCreator] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [link, setLink] = useState<string>("");
-  const [category, setCategory] = useState<string>("community");
+  const [category, setCategory] = useState<string>("portfolio"); // Default to portfolio
   const [image, setImage] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -29,21 +29,23 @@ export default function CreatePostPage() {
         console.log("Image uploaded successfully:", imageUrl);
       }
 
-      console.log("Adding post to Firestore...");
-      const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
+      // Ensure category is stored as an array
+      const categories = category === "community" ? ["portfolio", "community"] : ["portfolio"];
 
-      await addDoc(collection(db, collectionPath), {
+      console.log("Adding post to Firestore...");
+      await addDoc(collection(db, "posts"), {
         title,
-        creator, // Store the creator's name
+        creator,
         description,
         link: link || null,
         imageUrl: imageUrl || null,
+        category: categories, // Store as an array
         timestamp: serverTimestamp(),
       });
 
       console.log("Post added successfully!");
       setTitle("");
-      setCreator(""); // Reset creator field
+      setCreator("");
       setDescription("");
       setLink("");
       setImage(null);
@@ -104,8 +106,8 @@ export default function CreatePostPage() {
             onChange={(e) => setCategory(e.target.value)}
             className="input-field mb-4"
           >
-            <option value="community">Community</option>
             <option value="portfolio">Portfolio</option>
+            <option value="community">Community</option>
           </select>
 
           <label className="block mb-2">Upload Image:</label>

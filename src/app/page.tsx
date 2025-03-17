@@ -5,7 +5,7 @@ import { FaInstagram, FaYoutube, FaGithub, FaArrowDown } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { db } from "@/firebase/firebaseConfig"; // Firestore
-import { collection, query, orderBy, limit, getDocs, DocumentData } from "firebase/firestore";
+import { collection, query, where, orderBy, limit, getDocs, DocumentData } from "firebase/firestore";
 
 interface Post {
   id: string;
@@ -33,22 +33,15 @@ export default function Home() {
   useEffect(() => {
     const fetchLatestPosts = async () => {
       try {
-        const communityQuery = query(collection(db, "community_posts"), orderBy("timestamp", "desc"), limit(1));
-        const communitySnapshot = await getDocs(communityQuery);
-        if (!communitySnapshot.empty) {
-          const doc = communitySnapshot.docs[0];
-          const data = doc.data() as DocumentData;
-          if (data.title && data.description) {
-            setLatestCommunityPost({
-              id: doc.id,
-              title: data.title,
-              description: data.description,
-              imageUrl: data.imageUrl ?? "/placeholder.png",
-              link: "/community"
-            });
-          }
-        }
-        const portfolioQuery = query(collection(db, "portfolio_posts"), orderBy("timestamp", "desc"), limit(1));
+        console.log("Fetching latest portfolio and community posts...");
+
+        // Fetch latest Portfolio Post (includes community posts too)
+        const portfolioQuery = query(
+          collection(db, "posts"),
+          where("category", "array-contains", "portfolio"),
+          orderBy("timestamp", "desc"),
+          limit(1)
+        );
         const portfolioSnapshot = await getDocs(portfolioQuery);
         if (!portfolioSnapshot.empty) {
           const doc = portfolioSnapshot.docs[0];
@@ -63,10 +56,35 @@ export default function Home() {
             });
           }
         }
+
+        // Fetch latest Community Post
+        const communityQuery = query(
+          collection(db, "posts"),
+          where("category", "array-contains", "community"),
+          orderBy("timestamp", "desc"),
+          limit(1)
+        );
+        const communitySnapshot = await getDocs(communityQuery);
+        if (!communitySnapshot.empty) {
+          const doc = communitySnapshot.docs[0];
+          const data = doc.data() as DocumentData;
+          if (data.title && data.description) {
+            setLatestCommunityPost({
+              id: doc.id,
+              title: data.title,
+              description: data.description,
+              imageUrl: data.imageUrl ?? "/placeholder.png",
+              link: "/community"
+            });
+          }
+        }
+
+        console.log("Fetched latest posts successfully.");
       } catch (error) {
         console.error("Error fetching latest posts:", error);
       }
     };
+
     fetchLatestPosts();
   }, []);
 
@@ -116,7 +134,6 @@ export default function Home() {
           Creativity meets Technology
         </motion.p>
 
-        
         {/* Social Media Icons */}
         <motion.div 
           className="mt-6 flex space-x-6" 
@@ -149,6 +166,23 @@ export default function Home() {
           </motion.button>
         )}
       </motion.section>
+
+{/* About Section */}
+<motion.section 
+        className="py-20 px-6 text-center"
+        initial={{ opacity: 0, y: 50 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 1, delay: 0.7 }}
+      >
+
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
+        <p className="mt-4 max-w-3xl mx-auto text-secondary">
+          Learn more about Novar&apos;s mission.
+        </p>
+        <Link href="/about" className="mt-6 inline-block btn-primary">
+          Learn More
+        </Link>
+</motion.section>
 
       {/* Portfolio Section */}
       <motion.section 
@@ -217,24 +251,6 @@ export default function Home() {
           Get Involved
         </Link>
       </motion.section>
-
-
-{/* About Section */}
-	<motion.section 
-        className="py-20 px-6 text-center"
-        initial={{ opacity: 0, y: 50 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.7 }}
-      >
-
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Learn more about Novar&apos;s mission.
-        </p>
-        <Link href="/about" className="mt-6 inline-block btn-primary">
-          Learn More
-        </Link>
-</motion.section>
     </motion.div>
   );
 }

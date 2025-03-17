@@ -12,11 +12,12 @@ interface PostData {
   description: string;
   link?: string;
   imageUrl?: string;
+  category: string[];
 }
 
 export default function AdminPosts() {
   const [posts, setPosts] = useState<PostData[]>([]);
-  const [category, setCategory] = useState<string>("community");
+  const [category, setCategory] = useState<string>("all");
   const [loading, setLoading] = useState<boolean>(true);
   const [editingPost, setEditingPost] = useState<PostData | null>(null);
   const [newTitle, setNewTitle] = useState<string>("");
@@ -30,12 +31,17 @@ export default function AdminPosts() {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
-        const querySnapshot = await getDocs(collection(db, collectionPath));
-        const fetchedPosts: PostData[] = querySnapshot.docs.map((doc) => ({
+        const querySnapshot = await getDocs(collection(db, "posts"));
+        let fetchedPosts: PostData[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...(doc.data() as Omit<PostData, "id">),
         }));
+
+        // Filter based on selected category
+        if (category !== "all") {
+          fetchedPosts = fetchedPosts.filter((post) => post.category.includes(category));
+        }
+
         setPosts(fetchedPosts);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -46,12 +52,12 @@ export default function AdminPosts() {
     fetchPosts();
   }, [category]);
 
+  // 🛑 Delete Post Function
   const handleDelete = async (postId: string, imageUrl?: string) => {
     if (!confirm("Are you sure you want to delete this post?")) return;
 
     try {
-      const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
-      await deleteDoc(doc(db, collectionPath, postId));
+      await deleteDoc(doc(db, "posts", postId));
 
       if (imageUrl) {
         const imageRef = ref(storage, imageUrl);
@@ -66,14 +72,16 @@ export default function AdminPosts() {
     }
   };
 
+  // ✏️ Open Edit Modal
   const handleEdit = (post: PostData) => {
     setEditingPost(post);
-    setNewTitle(post.title || "");
-    setNewCreator(post.creator || "");
-    setNewDescription(post.description || "");
+    setNewTitle(post.title);
+    setNewCreator(post.creator);
+    setNewDescription(post.description);
     setNewLink(post.link || "");
   };
 
+  // ✅ Save Edited Post
   const handleUpdate = async () => {
     if (!editingPost) return;
     setUploading(true);
@@ -81,6 +89,7 @@ export default function AdminPosts() {
     try {
       let updatedImageUrl = editingPost.imageUrl;
 
+      // 🔄 If new image is selected, upload it & delete old one
       if (newImage) {
         if (editingPost.imageUrl) {
           const oldImageRef = ref(storage, editingPost.imageUrl);
@@ -92,8 +101,7 @@ export default function AdminPosts() {
         updatedImageUrl = await getDownloadURL(uploadTask.ref);
       }
 
-      const collectionPath = category === "community" ? "community_posts" : "portfolio_posts";
-      await updateDoc(doc(db, collectionPath, editingPost.id), {
+      await updateDoc(doc(db, "posts", editingPost.id), {
         title: newTitle,
         creator: newCreator,
         description: newDescription,
@@ -106,16 +114,15 @@ export default function AdminPosts() {
           post.id === editingPost.id
             ? {
                 ...post,
-                title: newTitle || post.title,
-                creator: newCreator || post.creator,
-                description: newDescription || post.description,
-                link: newLink || post.link || "",
+                title: newTitle,
+                creator: newCreator,
+                description: newDescription,
+                link: newLink || "",
                 imageUrl: updatedImageUrl || post.imageUrl,
               }
             : post
         )
       );
-      
 
       alert("Post updated successfully!");
       setEditingPost(null);
@@ -138,32 +145,20 @@ export default function AdminPosts() {
           onChange={(e) => setCategory(e.target.value)}
           className="input-field px-3 py-2 border rounded-md w-40"
         >
-          <option value="community">Community Posts</option>
-          <option value="portfolio">Portfolio Posts</option>
+          <option value="all">All Posts</option>
+          <option value="community">Community</option>
+          <option value="portfolio">Portfolio</option>
         </select>
       </div>
 
-      {loading ? (
-        <p>Loading posts...</p>
-      ) : posts.length === 0 ? (
-        <p>No posts found.</p>
-      ) : (
+      {loading ? <p>Loading posts...</p> : posts.length === 0 ? <p>No posts found.</p> : (
         <div className="w-full max-w-3xl">
           {posts.map((post) => (
             <div key={post.id} className="box mb-4 p-4">
-              {post.imageUrl && (
-                <Image
-                  src={post.imageUrl}
-                  alt={post.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-48 object-cover mb-4"
-                />
-              )}
+              {post.imageUrl && <Image src={post.imageUrl} alt={post.title} width={600} height={400} className="w-full h-48 object-cover mb-4" />}
               <h2 className="text-xl font-bold">{post.title}</h2>
               <p className="text-secondary">By {post.creator}</p>
               <p className="mt-2">{post.description}</p>
-              <p className="text-sm text-gray-400">{post.link ? `Link: ${post.link}` : "No link"}</p>
               <div className="mt-2 flex space-x-4">
                 <button onClick={() => handleEdit(post)} className="btn-primary">
                   Edit
@@ -179,56 +174,62 @@ export default function AdminPosts() {
 
       {editingPost && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg max-w-lg">
-            <h2 className="text-2xl font-bold mb-4">Edit Post</h2>
+  <div className="bg-[var(--novar-blue-light)] p-6 rounded-lg max-w-lg text-white shadow-lg">
+    <h2 className="text-2xl font-bold mb-4 text-[var(--novar-yellow)]">Edit Post</h2>
 
-            <label className="block mb-2">Title:</label>
-            <input
-              type="text"
-              value={newTitle}
-              onChange={(e) => setNewTitle(e.target.value)}
-              className="input-field mb-4"
-              required
-            />
+    <label className="block mb-2 text-gray-300">Title:</label>
+    <input
+      type="text"
+      value={newTitle}
+      onChange={(e) => setNewTitle(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+      required
+    />
 
-            <label className="block mb-2">Creator:</label>
-            <input
-              type="text"
-              value={newCreator}
-              onChange={(e) => setNewCreator(e.target.value)}
-              className="input-field mb-4"
-              required
-            />
+    <label className="block mb-2 text-gray-300">Creator:</label>
+    <input
+      type="text"
+      value={newCreator}
+      onChange={(e) => setNewCreator(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+      required
+    />
 
-            <label className="block mb-2">Description:</label>
-            <textarea
-              value={newDescription}
-              onChange={(e) => setNewDescription(e.target.value)}
-              className="input-field mb-4"
-              required
-            />
+    <label className="block mb-2 text-gray-300">Description:</label>
+    <textarea
+      value={newDescription}
+      onChange={(e) => setNewDescription(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+      required
+    />
 
-            <label className="block mb-2">Link (Optional):</label>
-            <input
-              type="text"
-              value={newLink}
-              onChange={(e) => setNewLink(e.target.value)}
-              className="input-field mb-4"
-            />
+    <label className="block mb-2 text-gray-300">Link (Optional):</label>
+    <input
+      type="text"
+      value={newLink}
+      onChange={(e) => setNewLink(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+    />
 
-            <label className="block mb-2">Replace Image (Optional):</label>
-            <input type="file" accept="image/*" onChange={(e) => setNewImage(e.target.files?.[0] || null)} className="input-field mb-4" />
+    <label className="block mb-2 text-gray-300">Replace Image (Optional):</label>
+    <input 
+      type="file" 
+      accept="image/*" 
+      onChange={(e) => setNewImage(e.target.files?.[0] || null)} 
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+    />
 
-            <div className="flex justify-between">
-              <button onClick={handleUpdate} className="btn-primary" disabled={uploading}>
-                {uploading ? "Updating..." : "Update"}
-              </button>
-              <button onClick={() => setEditingPost(null)} className="btn-inactive">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="flex justify-between mt-4">
+      <button onClick={handleUpdate} className="bg-[var(--novar-yellow)] text-black px-4 py-2 rounded-md font-bold hover:bg-yellow-500" disabled={uploading}>
+        {uploading ? "Updating..." : "Update"}
+      </button>
+      <button onClick={() => setEditingPost(null)} className="bg-gray-600 text-white px-4 py-2 rounded-md font-bold hover:bg-gray-700">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+
       )}
     </div>
   );
