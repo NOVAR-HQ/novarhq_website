@@ -62,7 +62,7 @@ export default function CommunityPage() {
           projects.map((project) => (
             <div
               key={project.id}
-              className="box cursor-pointer rounded-lg shadow-lg overflow-hidden bg-[#03405f] p-4 text-white"
+              className="box cursor-pointer rounded-lg overflow-hidden bg-[#03405f] p-4 text-white"
               onClick={() => setSelectedPost(project)}
             >
               <Image
