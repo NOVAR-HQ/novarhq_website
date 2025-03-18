@@ -185,56 +185,65 @@ export default function Home() {
 </motion.section>
 
       {/* Portfolio Section */}
-      <motion.section 
-        className="py-20 px-6 text-center"
-        initial={{ opacity: 0, y: 50 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
-        <p className="text-lg text-secondary">Explore Novar&apos;s past, present, and future projects.</p>
+<motion.section 
+  className="py-20 px-6 text-center"
+  initial={{ opacity: 0, y: 50 }} 
+  animate={{ opacity: 1, y: 0 }} 
+  transition={{ duration: 1, delay: 0.5 }}
+>
+  <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
+  <p className="text-lg text-secondary">Explore Novar&apos;s past, present, and future projects.</p>
 
-        {latestPortfolioPost && (
-          <div className="box has-link block mx-auto mt-6 max-w-3xl">
-            <Image 
-              src={latestPortfolioPost.imageUrl}
-              alt={latestPortfolioPost.title}
-              width={600}
-              height={400}
-              className="w-full h-48 object-cover mb-4"
-            />
-            <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
-            <p className="mt-2">{latestPortfolioPost.description}</p>
-            <Link href="/portfolio" className="mt-4 inline-block btn-primary">View More</Link>
-          </div>
-        )}
-      </motion.section>
+  {latestPortfolioPost && (
+    <div className="box has-link block mx-auto mt-6 max-w-3xl">
+      <Image 
+        src={latestPortfolioPost.imageUrl}
+        alt={latestPortfolioPost.title}
+        width={600}
+        height={400}
+        className="w-full h-48 object-cover mb-4"
+      />
+      <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
+      <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">
+        {latestPortfolioPost.description.length > 100
+          ? `${latestPortfolioPost.description.substring(0, 100)}...`
+          : latestPortfolioPost.description}
+      </p>
+      <Link href="/portfolio" className="mt-4 inline-block btn-primary">View More</Link>
+    </div>
+  )}
+</motion.section>
 
-      {/* Community Section */}
-      <motion.section 
-        className="py-20 px-6 text-center"
-        initial={{ opacity: 0, y: 50 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.7 }}
-      >
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
-        <p className="text-lg text-secondary">Join Novar&apos;s creative community and share your projects.</p>
+{/* Community Section */}
+<motion.section 
+  className="py-20 px-6 text-center"
+  initial={{ opacity: 0, y: 50 }} 
+  animate={{ opacity: 1, y: 0 }} 
+  transition={{ duration: 1, delay: 0.7 }}
+>
+  <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
+  <p className="text-lg text-secondary">Join Novar&apos;s creative community and share your projects.</p>
 
-        {latestCommunityPost && (
-          <div className="box has-link block mx-auto mt-6 max-w-3xl">
-            <Image 
-              src={latestCommunityPost.imageUrl}
-              alt={latestCommunityPost.title}
-              width={600}
-              height={400}
-              className="w-full h-48 object-cover mb-4"
-            />
-            <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
-            <p className="mt-2">{latestCommunityPost.description}</p>
-            <Link href="/community" className="mt-4 inline-block btn-primary">View More</Link>
-          </div>
-        )}
-      </motion.section>
+  {latestCommunityPost && (
+    <div className="box has-link block mx-auto mt-6 max-w-3xl">
+      <Image 
+        src={latestCommunityPost.imageUrl}
+        alt={latestCommunityPost.title}
+        width={600}
+        height={400}
+        className="w-full h-48 object-cover mb-4"
+      />
+      <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
+      <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">
+        {latestCommunityPost.description.length > 100
+          ? `${latestCommunityPost.description.substring(0, 100)}...`
+          : latestCommunityPost.description}
+      </p>
+      <Link href="/community" className="mt-4 inline-block btn-primary">View More</Link>
+    </div>
+  )}
+</motion.section>
+
 
     {/* Collab & Commission Section */}
 <motion.section
