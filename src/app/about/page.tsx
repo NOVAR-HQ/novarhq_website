@@ -25,7 +25,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Novar bridges the gap between art and technology, providing curious minds with tools, knowledge, and collaboration to turn their ideas into reality. Whether it’s film, cosplay, engineering, or design, Novar is a space where creativity has no limits and where learning happens through practical projects.
+          Novar bridges the gap between art and technology, providing curious minds with tools, knowledge, and collaboration to turn their ideas into reality. Whether it&apos;s film, cosplay, engineering, or design, Novar is a space where creativity has no limits and where learning happens through practical projects.
         </motion.p>
 
         <motion.p 
@@ -34,7 +34,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          Too often, young creatives are discouraged from pursuing artistic passions because they’re seen as impractical or unprofitable, while those in tech often face rigid, theory-heavy learning that lacks creative freedom. But art and technology aren’t opposites—they fuel each other. The most groundbreaking ideas come from the intersection of these fields. That’s why Novar exists: to provide a space for experimentation, collaboration, and skill-building, where learning is both engaging and accessible.
+          Too often, young creatives are discouraged from pursuing artistic passions because they&apos;re seen as impractical or unprofitable, while those in tech often face rigid, theory-heavy learning that lacks creative freedom. But art and technology aren&apos;t opposites—they fuel each other. The most groundbreaking ideas come from the intersection of these fields. That&apos;s why Novar exists: to provide a space for experimentation, collaboration, and skill-building, where learning is both engaging and accessible.
         </motion.p>
       </motion.div>
 
@@ -53,7 +53,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          Novar comes from a personal dream—to create the space I needed growing up. Like many, I was told my hobbies weren’t “worth it,” and I lacked access to the tools that could push my skills further. We couldn’t afford expensive equipment, and there wasn’t a community where I could experiment freely. But I kept going, exploring both fields, and discovered how powerful their combination can be—not just for creating things, but for shaping perspectives, solving problems, and pushing boundaries.
+          Novar comes from a personal dream—to create the space I needed growing up. Like many, I was told my hobbies weren&apos;t “worth it,” and I lacked access to the tools that could push my skills further. We couldn&apos;t afford expensive equipment, and there wasn&apos;t a community where I could experiment freely. But I kept going, exploring both fields, and discovered how powerful their combination can be—not just for creating things, but for shaping perspectives, solving problems, and pushing boundaries.
         </motion.p>
 
         <motion.p 
@@ -89,7 +89,7 @@ export default function AboutPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.4 }}
       >
-        <h2 className="text-4xl font-semibold mb-6">Novar’s Core Values</h2>
+        <h2 className="text-4xl font-semibold mb-6">Novar&apos;s Core Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-secondary">
         <motion.div
             className="p-6 box"
@@ -118,7 +118,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 2.2 }}
           >
             <h2 className="text-xl font-bold text-accent">Building a Supportive Community</h2>
-            <p className="mt-2">Novar isn’t just about projects; it’s about people. It’s a space where creators uplift each other, share ideas, and push each other forward.</p>
+            <p className="mt-2">Novar isn&apos;t just about projects; it&apos;s about people. It&apos;s a space where creators uplift each other, share ideas, and push each other forward.</p>
           </motion.div>
 
           <motion.div
@@ -142,10 +142,10 @@ export default function AboutPage() {
       >
         <h2 className="text-4xl font-semibold mb-6">The Future of Novar</h2>
         <p className="text-lg text-secondary">
-          Novar is more than just a brand—it’s a movement. A space where creativity and technology fuel each other, shaping new possibilities with every project.
-          Whether you're an artist, a maker, or someone with a wild idea, Novar is here to help bring it to life.
+          Novar is more than just a brand—it&apos;s a movement. A space where creativity and technology fuel each other, shaping new possibilities with every project.
+          Whether you&apos;re an artist, a maker, or someone with a wild idea, Novar is here to help bring it to life.
         </p>
-        <p className="mt-4 italic">Let’s build the future together!</p>
+        <p className="mt-4 italic">Let&apos;s build the future together!</p>
       </motion.div>
     </motion.div>
   );
