@@ -9,7 +9,7 @@ export default function AdminNavbar() {
   const [isOpen, setIsOpen] = useState(false); // State for hamburger menu
 
   return (
-    <nav className="bg-[var(--navbar-bg)] text-white py-3 px-6 fixed top-0 w-full z-50 shadow-md flex items-center justify-between">
+    <nav className="bg-[var(--navbar-bg)] text-white py-3 px-6 fixed top-0 w-full z-40 shadow-md flex items-center justify-between">
       {/* Novar Banner - Links to Admin Page */}
       <Link href="/admin" className="flex items-center">
         <Image src="/novar-banner.png" alt="Novar Banner" width={150} height={40} />

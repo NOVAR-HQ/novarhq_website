@@ -12,7 +12,7 @@ export default function Navbar() {
 
   return (
     <motion.nav 
-      className="fixed w-full top-0 shadow-md z-50 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]"
+      className="fixed w-full top-0 shadow-md z-40 flex justify-between items-center px-6 py-3 bg-[var(--navbar-bg)]"
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       transition={{ duration: 0.8, delay: 0.8 }} // Slightly faster transition

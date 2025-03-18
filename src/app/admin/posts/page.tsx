@@ -37,7 +37,6 @@ export default function AdminPosts() {
           ...(doc.data() as Omit<PostData, "id">),
         }));
 
-        // Filter based on selected category
         if (category !== "all") {
           fetchedPosts = fetchedPosts.filter((post) => post.category.includes(category));
         }
@@ -52,7 +51,6 @@ export default function AdminPosts() {
     fetchPosts();
   }, [category]);
 
-  // 🛑 Delete Post Function
   const handleDelete = async (postId: string, imageUrl?: string) => {
     if (!confirm("Are you sure you want to delete this post?")) return;
 
@@ -72,7 +70,6 @@ export default function AdminPosts() {
     }
   };
 
-  // ✏️ Open Edit Modal
   const handleEdit = (post: PostData) => {
     setEditingPost(post);
     setNewTitle(post.title);
@@ -81,7 +78,6 @@ export default function AdminPosts() {
     setNewLink(post.link || "");
   };
 
-  // ✅ Save Edited Post
   const handleUpdate = async () => {
     if (!editingPost) return;
     setUploading(true);
@@ -89,7 +85,6 @@ export default function AdminPosts() {
     try {
       let updatedImageUrl = editingPost.imageUrl;
 
-      // 🔄 If new image is selected, upload it & delete old one
       if (newImage) {
         if (editingPost.imageUrl) {
           const oldImageRef = ref(storage, editingPost.imageUrl);
@@ -173,63 +168,39 @@ export default function AdminPosts() {
       )}
 
       {editingPost && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-  <div className="bg-[var(--novar-blue-light)] p-6 rounded-lg max-w-lg text-white shadow-lg">
-    <h2 className="text-2xl font-bold mb-4 text-[var(--novar-yellow)]">Edit Post</h2>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
+          <div className="bg-[var(--novar-blue-light)] p-6 rounded-lg max-w-lg w-full text-white shadow-lg relative">
+            <button
+              className="absolute top-2 right-2 text-2xl font-bold text-gray-300 hover:text-white"
+              onClick={() => setEditingPost(null)}
+            >
+              ✖
+            </button>
 
-    <label className="block mb-2 text-gray-300">Title:</label>
-    <input
-      type="text"
-      value={newTitle}
-      onChange={(e) => setNewTitle(e.target.value)}
-      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
-      required
-    />
+            <h2 className="text-2xl font-bold mb-4 text-[var(--novar-yellow)]">Edit Post</h2>
 
-    <label className="block mb-2 text-gray-300">Creator:</label>
-    <input
-      type="text"
-      value={newCreator}
-      onChange={(e) => setNewCreator(e.target.value)}
-      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
-      required
-    />
+            <label className="block mb-2 text-gray-300">Title:</label>
+            <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}
+              className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2" required />
 
-    <label className="block mb-2 text-gray-300">Description:</label>
-    <textarea
-      value={newDescription}
-      onChange={(e) => setNewDescription(e.target.value)}
-      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
-      required
-    />
+            <label className="block mb-2 text-gray-300">Creator:</label>
+            <input type="text" value={newCreator} onChange={(e) => setNewCreator(e.target.value)}
+              className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2" required />
 
-    <label className="block mb-2 text-gray-300">Link (Optional):</label>
-    <input
-      type="text"
-      value={newLink}
-      onChange={(e) => setNewLink(e.target.value)}
-      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
-    />
+            <label className="block mb-2 text-gray-300">Description:</label>
+            <textarea value={newDescription} onChange={(e) => setNewDescription(e.target.value)}
+              className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2" required />
 
-    <label className="block mb-2 text-gray-300">Replace Image (Optional):</label>
-    <input 
-      type="file" 
-      accept="image/*" 
-      onChange={(e) => setNewImage(e.target.files?.[0] || null)} 
-      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
-    />
-
-    <div className="flex justify-between mt-4">
-      <button onClick={handleUpdate} className="bg-[var(--novar-yellow)] text-black px-4 py-2 rounded-md font-bold hover:bg-yellow-500" disabled={uploading}>
-        {uploading ? "Updating..." : "Update"}
-      </button>
-      <button onClick={() => setEditingPost(null)} className="bg-gray-600 text-white px-4 py-2 rounded-md font-bold hover:bg-gray-700">
-        Cancel
-      </button>
-    </div>
-  </div>
-</div>
-
+            <div className="flex justify-between mt-4">
+              <button onClick={handleUpdate} className="bg-[var(--novar-yellow)] text-black px-4 py-2 rounded-md font-bold hover:bg-yellow-500" disabled={uploading}>
+                {uploading ? "Updating..." : "Update"}
+              </button>
+              <button onClick={() => setEditingPost(null)} className="bg-gray-600 text-white px-4 py-2 rounded-md font-bold hover:bg-gray-700">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
