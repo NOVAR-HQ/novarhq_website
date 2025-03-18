@@ -16,6 +16,7 @@ interface CommunityPost {
 export default function CommunityPage() {
   const [projects, setProjects] = useState<CommunityPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [selectedPost, setSelectedPost] = useState<CommunityPost | null>(null);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -53,6 +54,7 @@ export default function CommunityPage() {
         </p>
       </div>
 
+      {/* Grid Layout */}
       <div className="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading ? (
           <p className="text-center text-lg">Loading projects...</p>
@@ -60,26 +62,64 @@ export default function CommunityPage() {
           <p className="text-center text-lg">No community projects available.</p>
         ) : (
           projects.map((project) => (
-            <a
+            <div
               key={project.id}
-              href={project.link ?? "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="box has-link block"
+              className="box cursor-pointer rounded-lg shadow-lg overflow-hidden bg-[#03405f] p-4 text-white"
+              onClick={() => setSelectedPost(project)}
             >
               <Image
                 src={project.imageUrl && project.imageUrl.trim() !== "" ? project.imageUrl : "/placeholder.png"}
                 alt={project.title}
                 width={600}
                 height={400}
-                className="w-full h-48 object-cover mb-4"
+                className="w-full h-48 object-cover rounded-lg mb-4"
               />
-              <h3 className="text-2xl font-bold text-accent">{project.title}</h3>
-              <p className="mt-2">{project.description}</p>
-            </a>
+              <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
+              <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">{project.description}</p>
+              <p className="text-blue-400 font-semibold mt-2">View More</p>
+            </div>
           ))
         )}
       </div>
+
+      {/* MODAL */}
+      {selectedPost && (
+        <div 
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4"
+          onClick={() => setSelectedPost(null)} // Closes modal when clicking outside
+        >
+          <div 
+            className="bg-[#03405f] text-white p-6 rounded-lg w-full max-w-lg max-h-[90vh] overflow-y-auto relative shadow-lg"
+            onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside
+          >
+            <button
+              className="absolute top-2 right-2 text-xl font-bold text-gray-300 hover:text-white"
+              onClick={() => setSelectedPost(null)}
+            >
+              ✖
+            </button>
+            <Image
+              src={selectedPost.imageUrl ? selectedPost.imageUrl : "/placeholder.png"}
+              alt={selectedPost.title}
+              width={600}
+              height={400}
+              className="w-full h-56 object-cover rounded-md mb-4"
+            />
+            <h2 className="text-3xl font-bold mb-2 text-[var(--novar-yellow)]">{selectedPost.title}</h2>
+            <p className="text-lg mb-4">{selectedPost.description}</p>
+            {selectedPost.link && (
+              <a
+                href={selectedPost.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 underline font-semibold"
+              >
+                Learn More:
+              </a>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
