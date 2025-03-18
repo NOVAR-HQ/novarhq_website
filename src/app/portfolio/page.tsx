@@ -16,12 +16,12 @@ export default function PortfolioPage() {
   const [projects, setProjects] = useState<PortfolioPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedPost, setSelectedPost] = useState<PortfolioPost | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     const fetchProjects = async () => {
       setLoading(true);
       try {
-        console.log("Fetching portfolio posts...");
         const querySnapshot = await getDocs(
           query(
             collection(db, "posts"),
@@ -33,7 +33,6 @@ export default function PortfolioPage() {
           id: doc.id,
           ...(doc.data() as Omit<PortfolioPost, "id">),
         }));
-        console.log("Fetched portfolio posts:", fetchedProjects);
         setProjects(fetchedProjects);
       } catch (error) {
         console.error("Error fetching portfolio projects:", error);
@@ -44,6 +43,12 @@ export default function PortfolioPage() {
     fetchProjects();
   }, []);
 
+  // Filter posts based on search input
+  const filteredProjects = projects.filter((project) =>
+    project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    project.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-5xl mx-auto text-center">
@@ -51,19 +56,28 @@ export default function PortfolioPage() {
         <p className="text-lg text-secondary">
           Explore Novar&apos;s projects across cosplay, filmmaking, coding, and more.
         </p>
+
+        {/* Search Input */}
+<input
+  type="text"
+  placeholder="Search projects..."
+  value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
+  className="w-full max-w-lg p-3 mt-6 rounded-md bg-white text-black border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--novar-yellow)]"
+/>
       </div>
 
       {/* Grid Layout */}
-      <div className="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="mt-8 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading ? (
           <p className="text-center text-lg">Loading projects...</p>
-        ) : projects.length === 0 ? (
-          <p className="text-center text-lg">No projects available.</p>
+        ) : filteredProjects.length === 0 ? (
+          <p className="text-center text-lg">No matching projects found.</p>
         ) : (
-          projects.map((project) => (
+          filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="box cursor-pointer rounded-lg overflow-hidden bg-[#03405f] p-4 text-white"
+              className="box cursor-pointer rounded-lg shadow-lg overflow-hidden bg-[#03405f] p-4 text-white"
               onClick={() => setSelectedPost(project)}
             >
               <Image

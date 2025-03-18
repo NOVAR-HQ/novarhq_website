@@ -17,6 +17,7 @@ export default function CommunityPage() {
   const [projects, setProjects] = useState<CommunityPost[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedPost, setSelectedPost] = useState<CommunityPost | null>(null);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -43,6 +44,12 @@ export default function CommunityPage() {
     fetchProjects();
   }, []);
 
+  // Filter posts based on search input
+  const filteredProjects = projects.filter((project) =>
+    project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    project.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-5xl mx-auto text-center">
@@ -50,16 +57,25 @@ export default function CommunityPage() {
         <p className="text-lg text-secondary">
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
+
+        {/* Search Input */}
+        <input
+          type="text"
+          placeholder="Search community projects..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full max-w-lg p-3 mt-6 rounded-md bg-white text-black border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--novar-yellow)]"
+        />
       </div>
 
       {/* Grid Layout */}
-      <div className="mt-16 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="mt-8 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading ? (
           <p className="text-center text-lg">Loading projects...</p>
-        ) : projects.length === 0 ? (
-          <p className="text-center text-lg">No community projects available.</p>
+        ) : filteredProjects.length === 0 ? (
+          <p className="text-center text-lg">No matching projects found.</p>
         ) : (
-          projects.map((project) => (
+          filteredProjects.map((project) => (
             <div
               key={project.id}
               className="box cursor-pointer rounded-lg overflow-hidden bg-[#03405f] p-4 text-white"
