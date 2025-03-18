@@ -83,6 +83,12 @@ nav {
   font-family: var(--font-primary);
 }
 
+.blurred-overlay {
+  backdrop-filter: blur(10px);  /* Adjust blur strength */
+  background-color: rgba(0, 0, 0, 0.2);  /* Light dimming effect */
+}
+
+
 /* Footer Styling - Now Same as Background */
 footer {
   background-color: var(--novar-blue); /* Matches page background */

@@ -167,41 +167,73 @@ export default function AdminPosts() {
         </div>
       )}
 
-      {editingPost && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
-          <div className="bg-[var(--novar-blue-light)] p-6 rounded-lg max-w-lg w-full text-white shadow-lg relative">
-            <button
-              className="absolute top-2 right-2 text-2xl font-bold text-gray-300 hover:text-white"
-              onClick={() => setEditingPost(null)}
-            >
-              ✖
-            </button>
+{editingPost && (
+  <div className="fixed inset-0 flex items-center justify-center blurred-overlay z-[110] p-4">
+    <div className="bg-[var(--novar-blue-light)] p-6 rounded-lg max-w-lg w-full text-white shadow-lg relative">
+      <button
+        className="absolute top-2 right-2 text-2xl font-bold text-gray-300 hover:text-white"
+        onClick={() => setEditingPost(null)}
+      >
+        ✖
+      </button>
 
-            <h2 className="text-2xl font-bold mb-4 text-[var(--novar-yellow)]">Edit Post</h2>
+      <h2 className="text-2xl font-bold mb-4 text-[var(--novar-yellow)]">Edit Post</h2>
 
-            <label className="block mb-2 text-gray-300">Title:</label>
-            <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}
-              className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2" required />
+    <label className="block mb-2 text-gray-300">Title:</label>
+    <input
+      type="text"
+      value={newTitle}
+      onChange={(e) => setNewTitle(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+      required
+    />
 
-            <label className="block mb-2 text-gray-300">Creator:</label>
-            <input type="text" value={newCreator} onChange={(e) => setNewCreator(e.target.value)}
-              className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2" required />
+    <label className="block mb-2 text-gray-300">Creator:</label>
+    <input
+      type="text"
+      value={newCreator}
+      onChange={(e) => setNewCreator(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+      required
+    />
 
-            <label className="block mb-2 text-gray-300">Description:</label>
-            <textarea value={newDescription} onChange={(e) => setNewDescription(e.target.value)}
-              className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2" required />
+    <label className="block mb-2 text-gray-300">Description:</label>
+    <textarea
+      value={newDescription}
+      onChange={(e) => setNewDescription(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+      required
+    />
 
-            <div className="flex justify-between mt-4">
-              <button onClick={handleUpdate} className="bg-[var(--novar-yellow)] text-black px-4 py-2 rounded-md font-bold hover:bg-yellow-500" disabled={uploading}>
-                {uploading ? "Updating..." : "Update"}
-              </button>
-              <button onClick={() => setEditingPost(null)} className="bg-gray-600 text-white px-4 py-2 rounded-md font-bold hover:bg-gray-700">
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+    <label className="block mb-2 text-gray-300">Link (Optional):</label>
+    <input
+      type="text"
+      value={newLink}
+      onChange={(e) => setNewLink(e.target.value)}
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+    />
+
+    <label className="block mb-2 text-gray-300">Replace Image (Optional):</label>
+    <input 
+      type="file" 
+      accept="image/*" 
+      onChange={(e) => setNewImage(e.target.files?.[0] || null)} 
+      className="input-field mb-4 bg-[var(--novar-blue)] text-white border border-gray-500 rounded-md p-2"
+    />
+
+    <div className="flex justify-between mt-4">
+      <button onClick={handleUpdate} className="bg-[var(--novar-yellow)] text-black px-4 py-2 rounded-md font-bold hover:bg-yellow-500" disabled={uploading}>
+        {uploading ? "Updating..." : "Update"}
+      </button>
+      <button onClick={() => setEditingPost(null)} className="bg-gray-600 text-white px-4 py-2 rounded-md font-bold hover:bg-gray-700">
+        Cancel
+
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
