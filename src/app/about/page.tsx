@@ -29,25 +29,6 @@ export default function AboutPage() {
         </motion.p>
       </motion.div>
 
-      {/* Why Novar? */}
-      <motion.div
-        className="max-w-4xl mx-auto mt-12"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-      >
-        <h2 className="text-4xl font-semibold text-center mb-6">Why Novar?</h2>
-
-        <motion.p 
-          className="text-lg text-secondary text-left"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          Too often, young creatives are discouraged from pursuing artistic passions because they&apos;re seen as impractical, sometimes forcing them into theory-heavy learning that stifles creativity. But art and technology aren&apos;t opposites —they fuel each other. The most groundbreaking innovations emerge from their intersection.
-        </motion.p>
-      </motion.div>
-
       {/* What Novar Offers */}
       <motion.div
         className="max-w-4xl mx-auto mt-12 text-center"
@@ -117,20 +98,23 @@ export default function AboutPage() {
         </div>
       </motion.div>
 
-{/* Team Image */}
+{/* Why Novar? */}
 <motion.div
-        className="flex justify-center mt-10"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 1.2 }}
+        className="max-w-4xl mx-auto mt-12"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
       >
-        <Image 
-          src="/novar-team.jpg" 
-          alt="Novar Team" 
-          width={700} 
-          height={400} 
-          className="rounded-lg shadow-box" 
-        />
+        <h2 className="text-4xl font-semibold text-center mb-6">Why Novar?</h2>
+
+        <motion.p 
+          className="text-lg text-secondary text-left"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          Too often, young creatives are discouraged from pursuing artistic passions because they&apos;re seen as impractical, sometimes forcing them into theory-heavy learning that stifles creativity. But art and technology aren&apos;t opposites —they fuel each other. The most groundbreaking innovations emerge from their intersection.
+        </motion.p>
       </motion.div>
 
       {/* Core Values Section */}
@@ -164,6 +148,22 @@ export default function AboutPage() {
           </motion.div>
       
         </div>
+      </motion.div>
+
+{/* Team Image */}
+<motion.div
+        className="flex justify-center mt-10"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
+      >
+        <Image 
+          src="/novar-team.jpg" 
+          alt="Novar Team" 
+          width={700} 
+          height={400} 
+          className="rounded-lg shadow-box" 
+        />
       </motion.div>
 
       {/* Future Section */}
