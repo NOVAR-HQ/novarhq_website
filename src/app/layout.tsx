@@ -5,7 +5,7 @@ import BackToTopButton from "@/components/BackToTopButton"; // Import Back to To
 
 export const metadata = {
   title: "Novar HQ",
-  description: "Innovasjon møter kreativitet – NovarHQ",
+  description: "Art meets Technology – NovarHQ",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
