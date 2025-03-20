@@ -117,6 +117,22 @@ export default function AboutPage() {
         </div>
       </motion.div>
 
+{/* Team Image */}
+<motion.div
+        className="flex justify-center mt-10"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 1.2 }}
+      >
+        <Image 
+          src="/novar-team.jpg" 
+          alt="Novar Team" 
+          width={700} 
+          height={400} 
+          className="rounded-lg shadow-box" 
+        />
+      </motion.div>
+
       {/* Core Values Section */}
       <motion.div
         className="mt-16 max-w-4xl mx-auto text-center"
