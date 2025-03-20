@@ -67,15 +67,6 @@ export default function PortfolioPage() {
       );
     }
   };
- {/* Search Input */}
- <input
- type="text"
- placeholder="Search projects..."
- value={searchQuery}
- onChange={(e) => setSearchQuery(e.target.value)}
- className="w-full max-w-lg p-3 mt-6 rounded-md bg-white text-black border border-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--novar-yellow)]"
-/>
-
   return (
     <div className="min-h-screen py-20 px-6 bg-primary text-primary">
       <div className="max-w-5xl mx-auto text-center">

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image"; // Make sure this import is at the top
 import { db } from "@/firebase/firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { uploadToFirebaseStorage } from "@/utils/uploadImage"; // Funksjon for bildeopplasting
@@ -147,11 +148,13 @@ const handleRemoveImage = (index: number) => {
     <div className="grid grid-cols-3 gap-2">
       {images.map((img, idx) => (
         <div key={idx} className="relative">
-          <img
-            src={URL.createObjectURL(img)}
-            alt="preview"
-            className="w-full rounded-md"
-          />
+          <Image
+          src={URL.createObjectURL(img)}
+          alt="preview"
+          width={200} // Set a reasonable width
+          height={200} // Set a reasonable height
+          className="w-full rounded-md object-cover"
+        />
           <button
             className="absolute top-0 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
             onClick={() => handleRemoveImage(idx)}
