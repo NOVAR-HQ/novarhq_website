@@ -8,10 +8,10 @@
   --discord-blue: #5865F2; /* Official Discord Color */
 
   /* Novar Theme Colors */
-  --novar-blue: #072f43; /* Main background color */
-  --novar-blue-light: #072f43; /* Slightly lighter blue for boxes */
+  --novar-blue: #05212f; /* Main background color */
+  --novar-blue-light: #05212f; /* Same blue for boxes */
   --novar-yellow: #fbce07; /* Brand yellow */
-  --navbar-bg: #0e202a ; /* Navbar color */
+  --navbar-bg: #09141a ; /* Navbar color */
 
   /* Input & Button Colors */
   --input-bg: #022c43; /* Dark Blue Input Fields */
