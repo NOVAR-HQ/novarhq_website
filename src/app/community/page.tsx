@@ -27,7 +27,7 @@ export default function PortfolioPage() {
         const querySnapshot = await getDocs(
           query(
             collection(db, "posts"),
-            where("category", "array-contains", "portfolio"),
+            where("category", "array-contains", "community"),
             orderBy("timestamp", "desc")
           )
         );

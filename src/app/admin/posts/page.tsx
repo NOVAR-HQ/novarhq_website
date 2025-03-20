@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { db, storage } from "@/firebase/firebaseConfig";
-import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc, updateDoc, orderBy, query } from "firebase/firestore";
 import { ref, deleteObject, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Image from "next/image";
 
@@ -31,7 +31,11 @@ export default function AdminPosts() {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const querySnapshot = await getDocs(collection(db, "posts"));
+        // 🔹 Fetch posts ordered by timestamp (latest first)
+        const querySnapshot = await getDocs(
+          query(collection(db, "posts"), orderBy("timestamp", "desc"))
+        );
+
         let fetchedPosts: PostData[] = querySnapshot.docs.map((doc) => {
           const data = doc.data();
           return {
@@ -312,7 +316,6 @@ export default function AdminPosts() {
     </div>
   </div>
 )}
-
     </div>
   );
 }
