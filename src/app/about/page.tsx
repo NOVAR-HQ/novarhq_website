@@ -20,7 +20,7 @@ export default function AboutPage() {
         <h2 className="text-5xl font-bold text-center mb-6">About Novar</h2>
 
         <motion.p 
-          className="text-lg text-secondary text-left"
+          className="text-lg text-secondary text-center"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -108,7 +108,7 @@ export default function AboutPage() {
         <h2 className="text-4xl font-semibold text-center mb-6">Why Novar?</h2>
 
         <motion.p 
-          className="text-lg text-secondary text-left"
+          className="text-lg text-secondary text-center"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
