@@ -177,7 +177,7 @@ export default function AboutPage() {
         <p className="text-lg text-secondary">
           Novar is more than just a brand—it&apos;s a movement. A space where art and technology fuel each other, shaping new possibilities with every project. Whether you&apos;re an artist, a maker, or someone with a bold idea, Novar is here to help bring YOUR vision to life.
         </p>
-        <p className="mt-4 text-2xl font-bold italic">Let&apos;s build the future together!</p>
+        <p className="mt-4 text-[var(--novar-yellow)] font-bold italic">Let&apos;s build the future together!</p>
       </motion.div>
     </motion.div>
   );
