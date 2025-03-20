@@ -51,7 +51,11 @@ export default function Home() {
             id: doc.id,
             title: data.title,
             description: data.description,
-            images: data.images && data.images.length > 0 ? data.images : ["/placeholder.png"], // Fix here
+            images: Array.isArray(data.images) && data.images.length > 0 
+              ? data.images 
+              : data.imageUrl 
+                ? [data.imageUrl] 
+                : ["/placeholder.png"], // 🔥 Ensures correct image handling
             link: "/portfolio",
           });
         }
@@ -71,7 +75,11 @@ export default function Home() {
             id: doc.id,
             title: data.title,
             description: data.description,
-            images: data.images && data.images.length > 0 ? data.images : ["/placeholder.png"], // Fix here
+            images: Array.isArray(data.images) && data.images.length > 0 
+              ? data.images 
+              : data.imageUrl 
+                ? [data.imageUrl] 
+                : ["/placeholder.png"], // 🔥 Ensures correct image handling
             link: "/community",
           });
         }
@@ -162,7 +170,7 @@ export default function Home() {
                 alt={post.title}
                 width={600}
                 height={400}
-                className="w-full h-[300px] object-cover rounded-lg mb-4" // Matching portfolio crop ratio
+                className="w-full aspect-[16/9] object-cover rounded-lg mb-4" // 🔥 Fixed cropping issue
               />
               <h3 className="text-2xl font-bold text-accent">{post.title}</h3>
               <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">
