@@ -7,11 +7,12 @@ import Link from "next/link";
 import { db } from "@/firebase/firebaseConfig"; // Firestore
 import { collection, query, where, orderBy, limit, getDocs, DocumentData } from "firebase/firestore";
 
+// Updated interface to support multiple images
 interface Post {
   id: string;
   title: string;
   description: string;
-  imageUrl: string;
+  images: string[]; // Fixed to use an array of images
   link: string;
 }
 
@@ -46,15 +47,13 @@ export default function Home() {
         if (!portfolioSnapshot.empty) {
           const doc = portfolioSnapshot.docs[0];
           const data = doc.data() as DocumentData;
-          if (data.title && data.description) {
-            setLatestPortfolioPost({
-              id: doc.id,
-              title: data.title,
-              description: data.description,
-              imageUrl: data.imageUrl ?? "/placeholder.png",
-              link: "/portfolio"
-            });
-          }
+          setLatestPortfolioPost({
+            id: doc.id,
+            title: data.title,
+            description: data.description,
+            images: data.images && data.images.length > 0 ? data.images : ["/placeholder.png"], // Fix here
+            link: "/portfolio",
+          });
         }
 
         // Fetch latest Community Post
@@ -68,15 +67,13 @@ export default function Home() {
         if (!communitySnapshot.empty) {
           const doc = communitySnapshot.docs[0];
           const data = doc.data() as DocumentData;
-          if (data.title && data.description) {
-            setLatestCommunityPost({
-              id: doc.id,
-              title: data.title,
-              description: data.description,
-              imageUrl: data.imageUrl ?? "/placeholder.png",
-              link: "/community"
-            });
-          }
+          setLatestCommunityPost({
+            id: doc.id,
+            title: data.title,
+            description: data.description,
+            images: data.images && data.images.length > 0 ? data.images : ["/placeholder.png"], // Fix here
+            link: "/community",
+          });
         }
 
         console.log("Fetched latest posts successfully.");
@@ -103,12 +100,7 @@ export default function Home() {
       transition={{ duration: 1 }}
     >
       {/* Hero Section */}
-      <motion.section 
-        className="h-screen flex flex-col items-center justify-center text-center relative" 
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        transition={{ duration: 1.5 }}
-      >
+      <motion.section className="h-screen flex flex-col items-center justify-center text-center relative">
         <Link href="/" className="flex justify-center">
           <motion.div 
             initial={{ opacity: 0, scale: 0.8, y: -50 }} 
@@ -125,29 +117,17 @@ export default function Home() {
             />
           </motion.div>
         </Link>
-        <motion.p 
-          className="text-2xl mt-4" 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
-          transition={{ duration: 1 }}
-        >
-          Creativity meets Technology
-        </motion.p>
+        <motion.p className="text-2xl mt-4">Creativity meets Technology</motion.p>
 
         {/* Social Media Icons */}
-        <motion.div 
-          className="mt-6 flex space-x-6" 
-          initial={{ opacity: 0, y: 30 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 1.5, delay: 0.7 }}
-        >
-          <a href="https://github.com/NOVAR-HQ" target="_blank" rel="noopener noreferrer">
+        <motion.div className="mt-6 flex space-x-6">
+          <a href="https://github.com/NOVAR-HQ" target="_blank">
             <FaGithub className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
           </a>
-          <a href="https://instagram.com/novarhq" target="_blank" rel="noopener noreferrer">
+          <a href="https://instagram.com/novarhq" target="_blank">
             <FaInstagram className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
           </a>
-          <a href="https://youtube.com/@novarhq" target="_blank" rel="noopener noreferrer">
+          <a href="https://youtube.com/@novarhq" target="_blank">
             <FaYoutube className="text-white hover:text-[var(--novar-yellow)] text-3xl" />
           </a>
         </motion.div>
@@ -158,108 +138,45 @@ export default function Home() {
             onClick={handleScrollDown}
             className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-[var(--novar-yellow)] text-white p-3 rounded-full shadow-md animate-bounce"
             aria-label="Scroll Down"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 2 }}
           >
             <FaArrowDown className="text-xl" />
           </motion.button>
         )}
       </motion.section>
 
-{/* About Section */}
-<motion.section 
-        className="py-20 px-6 text-center"
-        initial={{ opacity: 0, y: 50 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.7 }}
-      >
+      {/* Sections */}
+      {[
+        { title: "About Novar", link: "/about", text: "Learn more about Novar's mission." },
+        { title: "Portfolio", link: "/portfolio", text: "Explore Novar's past, present, and future projects.", post: latestPortfolioPost },
+        { title: "Community", link: "/community", text: "Join Novar's creative community and share your projects.", post: latestCommunityPost },
+        { title: "Collab & Commission", link: "/collab", text: "Want to work with Novar or need Novar's help? Let's create together!" },
+      ].map(({ title, link, text, post }, idx) => (
+        <motion.section key={idx} className="py-20 px-6 text-center">
+          <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">{title}</h1>
+          <p className="text-lg text-secondary">{text}</p>
 
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">About Novar</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Learn more about Novar&apos;s mission.
-        </p>
-        <Link href="/about" className="mt-6 inline-block btn-primary">
-          Learn More
-        </Link>
-</motion.section>
+          {post && (
+            <div className="box has-link block mx-auto mt-6 max-w-3xl">
+              <Image 
+                src={post.images[0]}
+                alt={post.title}
+                width={600}
+                height={400}
+                className="w-full h-[300px] object-cover rounded-lg mb-4" // Matching portfolio crop ratio
+              />
+              <h3 className="text-2xl font-bold text-accent">{post.title}</h3>
+              <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">
+                {post.description.length > 100
+                  ? `${post.description.substring(0, 100)}...`
+                  : post.description}
+              </p>
+              <Link href={link} className="mt-4 inline-block btn-primary">View More</Link>
+            </div>
+          )}
 
-      {/* Portfolio Section */}
-<motion.section 
-  className="py-20 px-6 text-center"
-  initial={{ opacity: 0, y: 50 }} 
-  animate={{ opacity: 1, y: 0 }} 
-  transition={{ duration: 1, delay: 0.5 }}
->
-  <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Portfolio</h1>
-  <p className="text-lg text-secondary">Explore Novar&apos;s past, present, and future projects.</p>
-
-  {latestPortfolioPost && (
-    <div className="box has-link block mx-auto mt-6 max-w-3xl">
-      <Image 
-        src={latestPortfolioPost.imageUrl}
-        alt={latestPortfolioPost.title}
-        width={600}
-        height={400}
-        className="w-full h-48 object-cover mb-4"
-      />
-      <h3 className="text-2xl font-bold text-accent">{latestPortfolioPost.title}</h3>
-      <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">
-        {latestPortfolioPost.description.length > 100
-          ? `${latestPortfolioPost.description.substring(0, 100)}...`
-          : latestPortfolioPost.description}
-      </p>
-      <Link href="/portfolio" className="mt-4 inline-block btn-primary">View More</Link>
-    </div>
-  )}
-</motion.section>
-
-{/* Community Section */}
-<motion.section 
-  className="py-20 px-6 text-center"
-  initial={{ opacity: 0, y: 50 }} 
-  animate={{ opacity: 1, y: 0 }} 
-  transition={{ duration: 1, delay: 0.7 }}
->
-  <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Community</h1>
-  <p className="text-lg text-secondary">Join Novar&apos;s creative community and share your projects.</p>
-
-  {latestCommunityPost && (
-    <div className="box has-link block mx-auto mt-6 max-w-3xl">
-      <Image 
-        src={latestCommunityPost.imageUrl}
-        alt={latestCommunityPost.title}
-        width={600}
-        height={400}
-        className="w-full h-48 object-cover mb-4"
-      />
-      <h3 className="text-2xl font-bold text-accent">{latestCommunityPost.title}</h3>
-      <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">
-        {latestCommunityPost.description.length > 100
-          ? `${latestCommunityPost.description.substring(0, 100)}...`
-          : latestCommunityPost.description}
-      </p>
-      <Link href="/community" className="mt-4 inline-block btn-primary">View More</Link>
-    </div>
-  )}
-</motion.section>
-
-
-    {/* Collab & Commission Section */}
-<motion.section
-      className="py-20 px-6 text-center"
-        initial={{ opacity: 0, y: 50 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 1, delay: 0.7 }}
-      >
-        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Collab & Commission</h1>
-        <p className="mt-4 max-w-3xl mx-auto text-secondary">
-          Want to work with Novar or need Novar&apos;s help? Let’s create together!
-        </p>
-        <Link href="/collab" className="mt-6 inline-block btn-primary">
-          Get Involved
-        </Link>
-      </motion.section>
+          {!post && <Link href={link} className="mt-6 inline-block btn-primary">Learn More</Link>}
+        </motion.section>
+      ))}
     </motion.div>
   );
 }

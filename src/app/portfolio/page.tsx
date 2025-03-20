@@ -152,14 +152,14 @@ export default function PortfolioPage() {
           />
           {/* Previous Button */}
           <button
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[var(--novar-yellow)] text-white px-3 py-1 rounded-full"
             onClick={handlePrevImage}
           >
             ◀
           </button>
           {/* Next Button */}
           <button
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-3 py-1 rounded-full"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[var(--novar-yellow)] text-white px-3 py-1 rounded-full"
             onClick={handleNextImage}
           >
             ▶
