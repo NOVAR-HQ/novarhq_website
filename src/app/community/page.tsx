@@ -58,7 +58,18 @@ export default function CommunityPage() {
         <p className="text-lg text-secondary">
           Join our Discord community to share your projects, collaborate, inspire others, and get inspired by others!
         </p>
+{/* Discord Link - Now Styled with Discord Blue */}
+<div className="mt-6 flex justify-center">
+         <a 
+         href="https://discord.gg/gGufQ9p7Ak"
+         target="_blank" 
+         rel="noopener noreferrer"
 
+          className="bg-[var(--discord-blue)] hover:brightness-110 px-4 py-2 rounded-lg text-white font-bold flex items-center space-x-2 w-fit">
+          <Image src="/discord-icon.png" alt="Discord" width={20} height={20} />
+          <span>Join Our Discord</span>
+      </a>
+    </div>
         {/* Search Input */}
         <input
           type="text"
@@ -92,7 +103,7 @@ export default function CommunityPage() {
               <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
               <p className="text-sm text-gray-300">By {project.creator}</p> {/* Display Creator */}
               <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">{project.description}</p>
-              <p className="text-blue-400 font-semibold mt-2">View More</p>
+              <p className="text-blue-400 font-semibold mt-2">Read More</p>
             </div>
           ))
         )}
@@ -131,7 +142,7 @@ export default function CommunityPage() {
                 rel="noopener noreferrer"
                 className="text-blue-400 underline font-semibold"
               >
-                View More
+                Learn More
               </a>
             )}
           </div>

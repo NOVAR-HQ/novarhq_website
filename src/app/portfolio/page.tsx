@@ -92,7 +92,7 @@ export default function PortfolioPage() {
               <h3 className="text-2xl font-bold text-[var(--novar-yellow)]">{project.title}</h3>
               <p className="text-sm text-gray-300">By {project.creator}</p> {/* Display Creator */}
               <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">{project.description}</p>
-              <p className="text-blue-400 font-semibold mt-2">View More</p>
+              <p className="text-blue-400 font-semibold mt-2">Read More</p>
             </div>
           ))
         )}
@@ -131,7 +131,7 @@ export default function PortfolioPage() {
                 rel="noopener noreferrer"
                 className="text-blue-400 underline font-semibold"
               >
-                View More
+                Learn More
               </a>
             )}
           </div>
