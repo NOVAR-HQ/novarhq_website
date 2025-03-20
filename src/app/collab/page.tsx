@@ -74,8 +74,8 @@ export default function CollabPage() {
           <label className="block mb-2 text-lg">Your Name</label>
           <input type="text" className="input-field mb-4" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} required />
 
-          <label className="block mb-2 text-lg">Your Email</label>
-          <input type="email" className="input-field mb-4" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <label className="block mb-2 text-lg">Your E-mail</label>
+          <input type="email" className="input-field mb-4" placeholder="Enter your e-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
           {formType === "commission" && (
             <>

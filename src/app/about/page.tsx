@@ -25,16 +25,7 @@ export default function AboutPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Novar bridges the gap between art and technology, providing curious minds with tools, knowledge, and collaboration to turn their ideas into reality. Whether it&apos;s film, cosplay, engineering, or design, Novar is a space where creativity has no limits and where learning happens through practical projects.
-        </motion.p>
-
-        <motion.p 
-          className="text-lg text-secondary text-left mt-4"
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          Too often, young creatives are discouraged from pursuing artistic passions because they&apos;re seen as impractical or unprofitable, while those in tech often face rigid, theory-heavy learning that lacks creative freedom. But art and technology aren&apos;t opposites—they fuel each other. The most groundbreaking ideas come from the intersection of these fields. That&apos;s why Novar exists: to provide a space for experimentation, collaboration, and skill-building, where learning is both engaging and accessible.
+          Novar is where art meets technology —where curious minds gain the tools, knowledge, and community to transform ideas into reality. Whether it&apos;s film, cosplay, engineering, or design, Novar is a space where creativity has no limits and learning happens through hands-on projects.
         </motion.p>
       </motion.div>
 
@@ -53,33 +44,77 @@ export default function AboutPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          Novar comes from a personal dream—to create the space I needed growing up. Like many, I was told my hobbies weren&apos;t “worth it,” and I lacked access to the tools that could push my skills further. We couldn&apos;t afford expensive equipment, and there wasn&apos;t a community where I could experiment freely. But I kept going, exploring both fields, and discovered how powerful their combination can be—not just for creating things, but for shaping perspectives, solving problems, and pushing boundaries.
-        </motion.p>
-
-        <motion.p 
-          className="text-lg text-secondary text-left mt-4"
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 1 }}
-        >
-          Novar is my way of building that missing space—a community where artists and innovators can develop their skills, explore new possibilities, and bring their ideas to life.
+          Too often, young creatives are discouraged from pursuing artistic passions because they&apos;re seen as impractical, sometimes forcing them into theory-heavy learning that stifles creativity. But art and technology aren&apos;t opposites —they fuel each other. The most groundbreaking innovations emerge from their intersection.
         </motion.p>
       </motion.div>
 
-      {/* Team Image */}
+      {/* What Novar Offers */}
       <motion.div
-        className="flex justify-center mt-10"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 1.2 }}
+        className="max-w-4xl mx-auto mt-12 text-center"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1 }}
       >
-        <Image 
-          src="/novar-team.jpg" 
-          alt="Novar Team" 
-          width={700} 
-          height={400} 
-          className="rounded-lg shadow-box" 
-        />
+        <h2 className="text-4xl font-semibold text-center mb-6">
+          What Novar Offers
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-secondary">
+          <motion.div
+            className="p-6 box"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+          >
+            <h2 className="text-xl font-bold text-accent">
+            Community & Collaboration
+            </h2>
+            <p className="mt-2">
+            A space where thinkers and creators alike connect, share ideas, and collaborate on innovative projects.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="p-6 box"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.4 }}
+          >
+            <h2 className="text-xl font-bold text-accent">
+            Prop-Making & Cosplay
+            </h2>
+            <p className="mt-2">
+            High-quality custom props, costumes, and wearable tech that blend craftsmanship with innovation.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="p-6 box"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.6 }}
+          >
+            <h2 className="text-xl font-bold text-accent">
+            Filmmaking & Visual Arts
+            </h2>
+            <p className="mt-2">
+            Film production, photoshoot and post-production to bring ideas to life through film.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="p-6 box"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.8 }}
+          >
+            <h2 className="text-xl font-bold text-accent">
+              Workshops & Tutorials
+            </h2>
+            <p className="mt-2">
+            Hands-on workshops, tutorials, and guides that teach cosplay, filmmaking, prop-making, and tech integration.
+            </p>
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* Core Values Section */}
@@ -89,47 +124,29 @@ export default function AboutPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.4 }}
       >
-        <h2 className="text-4xl font-semibold mb-6">Novar&apos;s Core Values</h2>
+        <h2 className="text-4xl font-semibold mb-6">Novar&apos;s Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-secondary">
-        <motion.div
-            className="p-6 box"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 2 }}
-          >
-            <h2 className="text-xl font-bold text-accent">Accessible Learning</h2>
-            <p className="mt-2">Knowledge and tools should be available to everyone, not just those who can afford expensive resources. Novar is about sharing skills, making education engaging, and breaking down barriers to entry.</p>
+          
+        <motion.div className="p-6 box" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+            <h2 className="text-xl font-bold text-accent">Collaborate</h2>
+            <p className="mt-2">The best ideas come from diverse minds working together. Novar fosters a space where artists, engineers, and makers combine skills to create something bigger than any one person.</p>
           </motion.div>
 
-          <motion.div
-            className="p-6 box"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.8 }}
-          >
-            <h2 className="text-xl font-bold text-accent">Innovation Through Collaboration</h2>
-            <p className="mt-2">The best ideas happen when artists, engineers, and makers work together. Novar fosters a space where different perspectives meet to create something bigger than any one person.</p>
+          <motion.div className="p-6 box" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+            <h2 className="text-xl font-bold text-accent">Create</h2>
+            <p className="mt-2">Novar isn&apos;t just about making projects —it&apos;s about building a movement. A space where creators inspire each other, push boundaries, and evolve into their best selves.</p>
           </motion.div>
 
-          <motion.div
-            className="p-6 box"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 2.2 }}
-          >
-            <h2 className="text-xl font-bold text-accent">Building a Supportive Community</h2>
-            <p className="mt-2">Novar isn&apos;t just about projects; it&apos;s about people. It&apos;s a space where creators uplift each other, share ideas, and push each other forward.</p>
+          <motion.div className="p-6 box" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+            <h2 className="text-xl font-bold text-accent">Innovate</h2>
+            <p className="mt-2">Exploration is at the heart of progress. Whether in film, cosplay, tech, or design, Novar encourages risk-taking, experimentation, and bold new ideas.</p>
           </motion.div>
-
-          <motion.div
-            className="p-6 box"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.6 }}
-          >
-            <h2 className="text-xl font-bold text-accent">Creativity Without Limits</h2>
-            <p className="mt-2">Whether through film, cosplay, technology, or design, Novar is a place to experiment, take risks, and explore new ideas.</p>
+          
+          <motion.div className="p-6 box" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}>
+            <h2 className="text-xl font-bold text-accent">Empower</h2>
+            <p className="mt-2">Creativity shouldn&apos;t be limited by resources. Novar provides knowledge, tools, and opportunities to help artists and innovators bring their ideas to life.</p>
           </motion.div>
+      
         </div>
       </motion.div>
 
@@ -140,10 +157,9 @@ export default function AboutPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 2.4 }}
       >
-        <h2 className="text-4xl font-semibold mb-6">The Future of Novar</h2>
+        <h2 className="text-4xl font-semibold mb-6">Join the Movement</h2>
         <p className="text-lg text-secondary">
-          Novar is more than just a brand—it&apos;s a movement. A space where creativity and technology fuel each other, shaping new possibilities with every project.
-          Whether you&apos;re an artist, a maker, or someone with a wild idea, Novar is here to help bring it to life.
+          Novar is more than just a brand—it&apos;s a movement. A space where art and technology fuel each other, shaping new possibilities with every project. Whether you&apos;re an artist, a maker, or someone with a bold idea, Novar is here to help bring YOUR vision to life.
         </p>
         <p className="mt-4 italic">Let&apos;s build the future together!</p>
       </motion.div>

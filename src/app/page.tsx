@@ -125,7 +125,7 @@ export default function Home() {
             />
           </motion.div>
         </Link>
-        <motion.p className="text-2xl mt-4">Creativity meets Technology</motion.p>
+        <motion.p className="text-2xl mt-4">Art meets Technology</motion.p>
 
         {/* Social Media Icons */}
         <motion.div className="mt-6 flex space-x-6">
@@ -170,7 +170,7 @@ export default function Home() {
                 alt={post.title}
                 width={600}
                 height={400}
-                className="w-full aspect-[16/9] object-cover rounded-lg mb-4" // 🔥 Fixed cropping issue
+                className="w-full aspect-[16/9] object-cover rounded-lg mb-4" //  Fixed cropping issue
               />
               <h3 className="text-2xl font-bold text-accent">{post.title}</h3>
               <p className="mt-2 text-ellipsis overflow-hidden whitespace-nowrap">
@@ -185,6 +185,14 @@ export default function Home() {
           {!post && <Link href={link} className="mt-6 inline-block btn-primary">Learn More</Link>}
         </motion.section>
       ))}
+       {/* Contact Us Section */}
+       <motion.section className="py-20 px-6 text-center">
+        <h1 className="text-5xl font-bold text-[var(--novar-yellow)]">Contact Us</h1>
+        <p className="text-lg text-secondary">Got questions or ideas? We&apos;d love to hear from you!</p>
+        <a href="mailto:yousef@novarhq.com" className="mt-6 inline-block btn-primary">
+          Send E-mail
+        </a>
+      </motion.section>
     </motion.div>
   );
 }

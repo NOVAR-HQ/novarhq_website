@@ -13,11 +13,11 @@ export default function MockAuthPage() {
 
   const validateInput = () => {
     if (!email.endsWith("@gmail.com")) {
-      alert("Only @gmail.com email addresses are allowed.");
+      alert("Only @gmail.com e-mail addresses are allowed.");
       return false;
     }
     if (!email.includes("@") || !email.includes(".")) {
-      alert("Please enter a valid email address.");
+      alert("Please enter a valid e-mail address.");
       return false;
     }
     if (phone.length < 8 || isNaN(Number(phone))) {

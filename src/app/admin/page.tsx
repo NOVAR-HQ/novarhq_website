@@ -29,7 +29,7 @@ export default function AdminPage() {
     try {
       const result = await signInWithPopup(auth, provider);
       if (!result.user.email?.endsWith("@novarhq.com")) {
-        alert("Only authorized emails are allowed, pleae contact Admin.");
+        alert("Only authorized e-mails are allowed, pleae contact Admin.");
         await signOut(auth);
       }
     } catch (error) {
